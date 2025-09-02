@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apresentação: O Custo da Falha</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow: hidden; /* Evita barras de rolagem */
+        }
+        .slide {
+            transition: opacity 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white flex flex-col justify-center items-center h-screen">
+
+    <!-- Container da Apresentação -->
+    <div id="presentation-container" class="w-full h-full relative">
+
+        <!-- Slide 1: Título -->
+        <div class="slide absolute w-full h-full flex flex-col justify-center items-center p-8 text-center bg-gray-900">
+            <h1 class="text-5xl md:text-7xl font-black text-red-500 mb-4">O Custo da Falha</h1>
+            <h2 class="text-3xl md:text-5xl font-bold mb-6">Quando o Software Para, o Mundo Para.</h2>
+            <p class="text-xl md:text-2xl text-gray-400">Uma introdução (brutalmente honesta) à importância de Teste e Qualidade.</p>
+            <p class="mt-4 text-sm text-gray-500">Baseado nos destaques do World Quality Report 2024-25</p>
+        </div>
+
+        <!-- Slide 2: Sobrevivência -->
+        <div class="slide absolute w-full h-full flex flex-col justify-center items-center p-8 text-center bg-gray-900 hidden">
+            <h2 class="text-4xl md:text-5xl font-bold mb-8">Qualidade Não é Opção, é Sobrevivência</h2>
+            <p class="text-2xl md:text-3xl mb-8 max-w-4xl">"Um software ruim não é um bug. É um desastre financeiro e de reputação."</p>
+            <ul class="text-left text-lg md:text-xl max-w-3xl space-y-4">
+                <li class="flex items-start"><span class="text-red-500 font-bold mr-3 text-2xl">!</span><div><strong>O Problema Central:</strong> 56% das organizações admitem que a Engenharia de Qualidade (QE) <strong>não é vista como uma atividade estratégica</strong>.</div></li>
+                <li class="flex items-start"><span class="text-red-500 font-bold mr-3 text-2xl">!</span><div><strong>A Consequência:</strong> Processos lentos, falhas em produção, perda de clientes e prejuízos milionários.</div></li>
+                <li class="flex items-start"><span class="text-red-500 font-bold mr-3 text-2xl">!</span><div><strong>Pense Nisso:</strong> Você usaria o app de um banco que trava no meio de um PIX? A qualidade impacta diretamente a receita e a confiança.</div></li>
+            </ul>
+        </div>
+
+        <!-- Slide 3: Complexidade -->
+        <div class="slide absolute w-full h-full flex flex-col justify-center items-center p-8 text-center bg-gray-900 hidden">
+            <h2 class="text-4xl md:text-5xl font-bold mb-8">O Campo de Batalha: A Complexidade Atual</h2>
+            <p class="text-2xl md:text-3xl mb-8 max-w-4xl">"O mundo do software ficou perigosamente complexo."</p>
+            <ul class="text-left text-lg md:text-xl max-w-3xl space-y-4">
+                <li class="flex items-start"><span class="text-yellow-400 font-bold mr-3 text-2xl">⚡</span><div><strong>Produtos Inteligentes:</strong> 21% dos orçamentos de teste já são para validar produtos "smart" (IoT, IA). Uma falha aqui pode ser a diferença entre uma casa inteligente e uma casa vulnerável.</div></li>
+                <li class="flex items-start"><span class="text-yellow-400 font-bold mr-3 text-2xl">⚡</span><div><strong>Dependência de Dados:</strong> 64% das empresas classificam a qualidade dos dados como "criticamente importante". Dado errado, decisão desastrosa.</div></li>
+                <li class="flex items-start"><span class="text-yellow-400 font-bold mr-3 text-2xl">⚡</span><div><strong>O Fantasma do Passado:</strong> 64% culpam <strong>arquiteturas legadas</strong> por não conseguirem automatizar testes. O software de ontem está a quebrar o negócio de hoje.</div></li>
+            </ul>
+        </div>
+
+        <!-- Slide 4: IA em Testes -->
+        <div class="slide absolute w-full h-full flex flex-col justify-center items-center p-8 text-center bg-gray-900 hidden">
+            <h2 class="text-4xl md:text-5xl font-bold mb-8">A Revolução da Inteligência Artificial em Testes</h2>
+            <p class="text-2xl md:text-3xl mb-8 max-w-4xl">"A IA não é mais o futuro. É o presente (e quem não usar, ficará para trás)."</p>
+            <ul class="text-left text-lg md:text-xl max-w-3xl space-y-4">
+                <li class="flex items-start"><span class="text-cyan-400 font-bold mr-3 text-2xl">▶</span><div><strong>Adoção em Massa:</strong> 68% das empresas já usam GenAI ativamente para atividades de qualidade.</div></li>
+                <li class="flex items-start"><span class="text-cyan-400 font-bold mr-3 text-2xl">▶</span><div><strong>O Dado Chocante:</strong> Empresas que <b>sequer exploravam</b> GenAI caíram de <b>31%</b> em 2023 para apenas <b>4%</b> em 2024. Ficar de fora não é uma opção.</div></li>
+                <li class="flex items-start"><span class="text-cyan-400 font-bold mr-3 text-2xl">▶</span><div><strong>O que a IA faz?</strong> Gera dados, analisa defeitos, cria relatórios e acelera a automação. Ela transforma o testador num profissional mais estratégico.</div></li>
+            </ul>
+        </div>
+
+        <!-- Slide 5: Habilidades -->
+        <div class="slide absolute w-full h-full flex flex-col justify-center items-center p-8 text-center bg-gray-900 hidden">
+            <h2 class="text-4xl md:text-5xl font-bold mb-8">As Habilidades que o Mercado Realmente Quer</h2>
+            <p class="text-2xl md:text-3xl mb-8 max-w-4xl">"O mercado não quer mais 'testadores'. Quer Engenheiros de Qualidade Full-Stack."</p>
+            <div class="text-left text-lg md:text-xl max-w-3xl">
+                <h3 class="font-bold text-green-400 text-2xl mb-4">Topo da Lista:</h3>
+                <ul class="space-y-2 list-disc list-inside">
+                    <li><strong>70%</strong> - Habilidades de Engenharia de Qualidade (estratégia, análise de risco).</li>
+                    <li><strong>66%</strong> - Habilidades em IA/ML e GenAI.</li>
+                    <li><strong>66%</strong> - Fundamentos de Nuvem.</li>
+                    <li><strong>66%</strong> - Análise de Dados e BI.</li>
+                </ul>
+                <p class="mt-6 text-gray-400"><strong>O que perdeu importância?</strong> Apenas saber codificar (57%) já não é o diferencial. O foco é usar a tecnologia de forma mais inteligente.</p>
+            </div>
+        </div>
+        
+        <!-- Slide 6: Sustentabilidade -->
+        <div class="slide absolute w-full h-full flex flex-col justify-center items-center p-8 text-center bg-gray-900 hidden">
+            <h2 class="text-4xl md:text-5xl font-bold mb-8">Sustentabilidade e Qualidade: A Conexão Oculta</h2>
+            <p class="text-2xl md:text-3xl mb-8 max-w-4xl">"Até o planeta sente o impacto de um software malfeito."</p>
+            <ul class="text-left text-lg md:text-xl max-w-3xl space-y-4">
+                <li class="flex items-start"><span class="text-green-500 font-bold mr-3 text-2xl">☘</span><div><strong>O Problema:</strong> Apenas <strong>25%</strong> das organizações medem o impacto ambiental do desenvolvimento de TI.</div></li>
+                <li class="flex items-start"><span class="text-green-500 font-bold mr-3 text-2xl">☘</span><div><strong>Performance é Ecologia:</strong> Um software otimizado consome menos CPU e energia, diminuindo a pegada de carbono.</div></li>
+                <li class="flex items-start"><span class="text-green-500 font-bold mr-3 text-2xl">☘</span><div><strong>Menos Desperdício:</strong> Testes eficientes evitam retrabalho, o que economiza horas de desenvolvimento e milhares de KWh.</div></li>
+            </ul>
+        </div>
+
+        <!-- Slide 7: Conclusão -->
+        <div class="slide absolute w-full h-full flex flex-col justify-center items-center p-8 text-center bg-gray-900 hidden">
+            <h2 class="text-4xl md:text-5xl font-bold mb-8">Conclusão: Por que esta disciplina é crucial para você?</h2>
+            <p class="text-2xl md:text-3xl mb-8 max-w-4xl font-bold text-red-500">Qualidade não é uma etapa. É a base de tudo.</p>
+            <ul class="text-left text-lg md:text-xl max-w-3xl space-y-4 mb-8">
+                <li class="flex items-start"><span class="text-white font-bold mr-3 text-2xl">✓</span><div><strong>O mercado está desesperado por si:</strong> A complexidade só aumenta, e a necessidade de garantir que tudo funcione é mais crítica do que nunca.</div></li>
+                <li class="flex items-start"><span class="text-white font-bold mr-3 text-2xl">✓</span><div><strong>Não se trata de achar bugs:</strong> Trata-se de <strong>prevenir desastres</strong>. É sobre estratégia e garantir que a tecnologia entregue valor real e seguro.</div></li>
+                <li class="flex items-start"><span class="text-white font-bold mr-3 text-2xl">✓</span><div><strong>Seu Papel:</strong> Vocês serão os profissionais que garantem que a tecnologia funcione no mundo real.</div></li>
+            </ul>
+            <p class="text-2xl md:text-3xl font-black text-yellow-400">A pergunta não é <b>SE</b> o software vai falhar, mas <b>QUANDO</b>. Esta disciplina prepara vocês para serem a solução.</p>
+        </div>
+
+    </div>
+
+    <!-- Navegação -->
+    <div class="fixed bottom-0 left-0 right-0 p-4 bg-gray-900 bg-opacity-50 flex justify-between items-center">
+        <button id="prevBtn" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg transition-opacity duration-300">Anterior</button>
+        <div id="slide-counter" class="text-lg font-semibold"></div>
+        <button id="nextBtn" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg transition-opacity duration-300">Próximo</button>
+    </div>
+
+    <script>
+        // Lógica da apresentação
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const slideCounter = document.getElementById('slide-counter');
+        
+        let currentSlide = 0;
+        const totalSlides = slides.length;
+
+        function showSlide(index) {
+            // Esconde todos os slides
+            slides.forEach((slide, i) => {
+                slide.classList.add('hidden');
+                slide.classList.remove('opacity-100');
+                slide.classList.add('opacity-0');
+            });
+
+            // Mostra o slide atual
+            const slideToShow = slides[index];
+            slideToShow.classList.remove('hidden');
+            // Força um reflow para a transição funcionar
+            void slideToShow.offsetWidth;
+            slideToShow.classList.remove('opacity-0');
+            slideToShow.classList.add('opacity-100');
+
+            // Atualiza o contador
+            slideCounter.textContent = `Slide ${index + 1} de ${totalSlides}`;
+
+            // Lógica dos botões
+            prevBtn.disabled = index === 0;
+            prevBtn.classList.toggle('opacity-50', index === 0);
+            prevBtn.classList.toggle('cursor-not-allowed', index === 0);
+
+            nextBtn.disabled = index === totalSlides - 1;
+            nextBtn.classList.toggle('opacity-50', index === totalSlides - 1);
+            nextBtn.classList.toggle('cursor-not-allowed', index === totalSlides - 1);
+        }
+
+        // Event Listeners
+        nextBtn.addEventListener('click', () => {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                showSlide(currentSlide);
+            }
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentSlide > 0) {
+                currentSlide--;
+                showSlide(currentSlide);
+            }
+        });
+        
+        // Teclas de seta
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') {
+                nextBtn.click();
+            } else if (e.key === 'ArrowLeft') {
+                prevBtn.click();
+            }
+        });
+
+        // Iniciar
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>

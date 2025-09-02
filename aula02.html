@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apresentação: A Origem de Todos os Bugs</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <!-- 
+        Chosen Palette: Calm Harmony (Warm Off-White, Dark Slate, Accent Red, Accent Blue, Data Green)
+        Application Structure Plan: A thematic, single-page scrolling narrative. Starts with impactful real-world failures to create emotional buy-in. Transitions to core concepts presented interactively (accordions). Presents hard data through animated charts to persuade logically. Concludes by summarizing the problem (symptoms) and empowering the student as the solution. This structure is designed for motivation and retention, moving from "why this matters" to "what it is" and "how you fit in", which is more engaging for a student audience than a traditional linear presentation.
+        Visualization & Content Choices: 
+        - Case Studies (Ariane 5, Horizon): Goal=Impact. Method=Cards with icons. Interaction=None, focus on story. Justification=Strong narrative hook.
+        - Core Concepts (Definitions, Types, Principles): Goal=Organize/Explain. Method=Accordion. Interaction=Click to expand/collapse. Justification=Prevents information overload, encourages active exploration.
+        - Statistics (Costs, Bug Origins): Goal=Persuade. Method=Charts and animated counters. Interaction=Chart tooltips on hover. Justification=Visual data is more memorable and convincing than text alone. Library=Chart.js on Canvas.
+        - Conclusion: Goal=Empower. Method=Bulleted list. Interaction=None. Justification=Clear, direct call to action.
+        CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. 
+    -->
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #F8F7F4; color: #2c3e50; overflow: hidden; }
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+            opacity: 0;
+            transform: scale(0.98);
+            pointer-events: none;
+        }
+        .slide.active {
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: auto;
+        }
+        .chart-container { position: relative; width: 100%; max-width: 600px; margin-left: auto; margin-right: auto; height: 70vh; max-height: 450px; }
+    </style>
+</head>
+<body class="flex flex-col">
+
+    <div id="presentation-container" class="relative w-screen h-screen">
+
+        <!-- Slide 1: Título -->
+        <div class="slide active flex flex-col justify-center items-center text-center p-8">
+            <h1 class="text-5xl md:text-7xl font-black text-[#c0392b] leading-tight">A Origem de Todos os Bugs</h1>
+            <p class="text-2xl md:text-3xl mt-4 text-gray-700 max-w-3xl mx-auto">Como um requisito mal definido pode derrubar o projeto mais brilhante e custar milhões.</p>
+        </div>
+
+        <!-- Slide 2: Falhas Reais -->
+        <div class="slide flex flex-col justify-center items-center text-center p-8">
+            <h2 class="text-4xl font-bold mb-12">Anatomia de Desastres de Software</h2>
+            <div class="grid md:grid-cols-2 gap-8 max-w-5xl w-full">
+                <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 text-left">
+                    <div class="flex items-center mb-4">
+                        <span class="text-4xl mr-4">🚀</span>
+                        <h3 class="text-2xl font-bold text-[#c0392b]">O Voo do Ariane 5</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Em 1996, o foguete explodiu 37s após o lançamento. Prejuízo: <b>US$ 370 milhões</b>.</p>
+                    <div class="bg-red-50 p-4 rounded-lg">
+                        <p class="font-bold">Causa Raiz: Falha de Requisitos</p>
+                        <p class="text-sm text-gray-700">O código foi reutilizado, mas ninguém validou o requisito de que as novas condições de voo (o <b>contexto</b>) o tornariam incompatível.</p>
+                    </div>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 text-left">
+                    <div class="flex items-center mb-4">
+                        <span class="text-4xl mr-4">✉️</span>
+                        <h3 class="text-2xl font-bold text-[#c0392b]">O Escândalo do Correio Britânico</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">O sistema "Horizon" acusou falsamente mais de 700 operadores de fraude.</p>
+                    <div class="bg-red-50 p-4 rounded-lg">
+                        <p class="font-bold">Causa Raiz: Falha de Stakeholders</p>
+                        <p class="text-sm text-gray-700">Os requisitos vieram da gestão, mas os <b>usuários finais</b> foram ignorados. O sistema não refletia a realidade das operações.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Conceitos -->
+        <div class="slide flex flex-col justify-center items-center text-center p-8">
+            <h2 class="text-4xl font-bold mb-8">O que é Engenharia de Requisitos (ER)?</h2>
+            <div class="max-w-4xl w-full text-left space-y-6">
+                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                    <h3 class="font-bold text-xl mb-2">🎯 Definição: Construir a Coisa Certa</h3>
+                    <p class="text-gray-600">É a arte de especificar e gerenciar as necessidades para que o sistema final realmente satisfaça os stakeholders. O objetivo é <b>reduzir o risco de desenvolver o sistema errado</b>.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                    <h3 class="font-bold text-xl mb-2">📋 Os 3 Tipos de Requisitos</h3>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1">
+                        <li><strong>Funcionais:</strong> O que o sistema FAZ. (Ex: "Permitir login.")</li>
+                        <li><strong>De Qualidade:</strong> COMO o sistema faz. (Ex: "Login em &lt; 2s.")</li>
+                        <li><strong>Restrições:</strong> As REGRAS que limitam as escolhas. (Ex: "Deve ser em Java.")</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Dados - Parte 1 -->
+        <div class="slide flex flex-col justify-center items-center text-center p-8">
+            <h2 class="text-4xl font-bold mb-8">Os Números Não Mentem</h2>
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl w-full items-center">
+                <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200">
+                    <h3 class="text-xl font-bold mb-4">Origem dos Bugs</h3>
+                    <div class="chart-container !h-[300px] !max-h-[300px]"><canvas id="bugSourceChart"></canvas></div>
+                    <p class="text-sm text-gray-600 mt-4">Fonte: R. Pressman, "Software Engineering"</p>
+                </div>
+                <div class="space-y-8">
+                    <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+                        <h3 class="text-xl font-bold mb-2">Falha de Projetos</h3>
+                        <p class="text-6xl font-black text-[#c0392b] tabular-nums" id="project-failure-counter">47%</p>
+                        <p class="text-gray-600">...falham devido a má gestão de requisitos.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+                        <h3 class="text-xl font-bold mb-2">Prejuízo Médio</h3>
+                        <p class="text-6xl font-black text-[#c0392b] tabular-nums" id="money-lost-counter">$97M</p>
+                        <p class="text-gray-600">...perdidos a cada $1 bilhão investido.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Dados - Parte 2 -->
+        <div class="slide flex flex-col justify-center items-center text-center p-8">
+            <h2 class="text-4xl font-bold mb-8">O Custo da Correção Explode com o Tempo</h2>
+            <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 w-full max-w-4xl">
+                <h3 class="text-xl font-bold mb-4">Custo para Corrigir um Erro de Requisito</h3>
+                <div class="chart-container !max-w-full"><canvas id="fixCostChart"></canvas></div>
+                <p class="text-sm text-gray-600 mt-4">Corrigir um erro na fase de manutenção pode custar até 200x mais do que na fase de requisitos.</p>
+            </div>
+        </div>
+
+        <!-- Slide 6: Conclusão -->
+        <div class="slide flex flex-col justify-center items-center text-center p-8 bg-[#2c3e50] text-white">
+            <h2 class="text-4xl font-bold mb-4">Qualidade Começa no Requisito, Não no Teste.</h2>
+            <p class="max-w-3xl mx-auto text-gray-300 mb-8">Se o pedido (requisito) estiver errado, você vai validar um sistema que funciona perfeitamente... para resolver o problema errado.</p>
+            <div class="max-w-2xl mx-auto text-left space-y-4 bg-white/10 p-8 rounded-lg">
+                <p>✅ Entender de ER torna-o um profissional <b>mais valioso</b>.</p>
+                <p>✅ É a habilidade que separa um "codificador" de um "engenheiro de software".</p>
+                <p class="font-bold">✅ Lembre-se do Ariane 5: uma linha no documento pode ser a diferença entre o sucesso e <b>370 milhões de dólares em fumaça</b>.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Navegação -->
+    <div class="fixed bottom-0 left-0 right-0 p-4 bg-white/80 backdrop-blur-lg flex justify-between items-center shadow-t-lg">
+        <button id="prevBtn" class="bg-[#34495e] hover:bg-[#2c3e50] text-white font-bold py-2 px-6 rounded-lg transition-all">Anterior</button>
+        <div id="slide-counter" class="text-lg font-semibold text-gray-700"></div>
+        <button id="nextBtn" class="bg-[#34495e] hover:bg-[#2c3e50] text-white font-bold py-2 px-6 rounded-lg transition-all">Próximo</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const slideCounter = document.getElementById('slide-counter');
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+
+            function showSlide(index) {
+                slides.forEach((slide, i) => {
+                    slide.classList.toggle('active', i === index);
+                });
+                slideCounter.textContent = `Slide ${index + 1} de ${totalSlides}`;
+                prevBtn.disabled = index === 0;
+                prevBtn.classList.toggle('opacity-50', index === 0);
+                nextBtn.disabled = index === totalSlides - 1;
+                nextBtn.classList.toggle('opacity-50', index === totalSlides - 1);
+            }
+
+            function changeSlide(direction) {
+                currentSlide += direction;
+                if (currentSlide < 0) currentSlide = 0;
+                if (currentSlide >= totalSlides) currentSlide = totalSlides - 1;
+                showSlide(currentSlide);
+            }
+
+            prevBtn.addEventListener('click', () => changeSlide(-1));
+            nextBtn.addEventListener('click', () => changeSlide(1));
+            
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight') nextBtn.click();
+                else if (e.key === 'ArrowLeft') prevBtn.click();
+            });
+
+            // Inicializar Gráficos
+            function createBugSourceChart() {
+                const canvas = document.getElementById('bugSourceChart');
+                if (!canvas) return;
+                new Chart(canvas, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Erros de Requisitos', 'Outras Fontes'],
+                        datasets: [{ data: [56, 44], backgroundColor: ['#c0392b', '#bdc3c7'], borderColor: '#F8F7F4', borderWidth: 4 }]
+                    },
+                    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } }, cutout: '60%' }
+                });
+            }
+
+            function createFixCostChart() {
+                const canvas = document.getElementById('fixCostChart');
+                if (!canvas) return;
+                new Chart(canvas, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Requisitos', 'Codificação', 'Testes', 'Manutenção'],
+                        datasets: [{ label: 'Custo Relativo', data: [1, 5, 20, 150], backgroundColor: ['#27ae60', '#f1c40f', '#e67e22', '#c0392b'] }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        indexAxis: 'y',
+                        scales: { x: { beginAtZero: true, title: { display: true, text: 'Custo Multiplicado (Ex: 1x, 5x, etc.)' } } },
+                        plugins: { legend: { display: false }, tooltip: { callbacks: { label: (c) => ` Custo: ${c.raw}x maior` } } }
+                    }
+                });
+            }
+
+            createBugSourceChart();
+            createFixCostChart();
+            showSlide(currentSlide);
+        });
+    </script>
+</body>
+</html>

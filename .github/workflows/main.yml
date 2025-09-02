@@ -1,0 +1,19 @@
+name: Validação HTML
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  html-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+      - name: Validar HTML
+        uses: ricardofbarros/htmlhint-action@v1.0.0
+        with:
+          htmlhintConfig: ''
+          htmlFiles: '**/*.html'

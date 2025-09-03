@@ -12,8 +12,17 @@ jobs:
     steps:
       - name: Checkout código
         uses: actions/checkout@v4
-      - name: Validar HTML
-        uses: ricardofbarros/htmlhint-action@v1.0.0
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
         with:
-          htmlhintConfig: ''
-          htmlFiles: '**/*.html'
+          node-version: '20'
+          cache: 'npm'
+      - name: Instalar htmlhint
+        run: |
+          npm init -y > /dev/null 2>&1
+          npm install --save-dev htmlhint@latest
+      - name: Executar htmlhint
+        run: npx htmlhint "**/*.html"
+      - name: Publicar artefato de relatório (opcional se gerar futuramente)
+        if: failure()
+        run: echo "Falhas encontradas pelo htmlhint"

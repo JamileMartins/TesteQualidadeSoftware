@@ -16,10 +16,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
-      - name: Instalar htmlhint
+      - name: Instalar htmlhint (config rápida sem cache)
         run: |
-          npm init -y > /dev/null 2>&1
+          npm init -y
           npm install --save-dev htmlhint@latest
       - name: Executar htmlhint
         run: npx htmlhint "**/*.html"

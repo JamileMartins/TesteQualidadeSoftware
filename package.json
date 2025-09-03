@@ -1,0 +1,8 @@
+{
+  "name": "html-lint",
+  "version": "1.0.0",
+  "description": "Configuração para workflow de validação HTML com htmlhint",
+  "devDependencies": {
+    "htmlhint": "^0.16.0"
+  }
+}

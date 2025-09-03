@@ -41,8 +41,8 @@
     </style>
 </head>
 <body class="flex flex-col">
+    <button onclick="window.location.href='index.html'" style="position:fixed;top:20px;right:20px;z-index:1000;" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-opacity duration-300">Voltar para a tela principal</button>
 
-    <button onclick="window.location.href='index.html'" style="position:fixed;top:20px;right:20px;z-index:1000;" class="bg-slate-600 hover:bg-slate-700 text-white font-bold py-2 px-6 rounded-lg transition-all">Voltar para a tela principal</button>
     <div id="presentation-container" class="relative w-screen h-screen">
 
         <!-- Slide 1: Título -->
@@ -79,67 +79,159 @@
                 </div>
             </div>
         </div>
-
-        <!-- Slide 3: Conceitos -->
+        
+        <!-- Slide 3: O que é Qualidade? -->
         <div class="slide flex flex-col justify-center items-center text-center p-8">
-            <h2 class="text-4xl font-bold mb-8">O que é Engenharia de Requisitos (ER)?</h2>
-            <div class="max-w-4xl w-full text-left space-y-6">
-                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
-                    <h3 class="font-bold text-xl mb-2">🎯 Definição: Construir a Coisa Certa</h3>
-                    <p class="text-gray-600">É a arte de especificar e gerenciar as necessidades para que o sistema final realmente satisfaça os stakeholders. O objetivo é <b>reduzir o risco de desenvolver o sistema errado</b>.</p>
+            <h2 class="text-4xl font-bold mb-8">O que é Qualidade de Software?</h2>
+            <div class="max-w-3xl bg-white p-8 rounded-xl shadow-lg border border-gray-200">
+                 <blockquote class="text-3xl font-bold text-center text-[#2c3e50]">
+                    "Qualidade é conformidade aos requisitos."
+                </blockquote>
+                <p class="text-right text-lg text-gray-500 mt-2">- Philip Crosby, 1992</p>
+                <p class="text-center text-xl mt-6">A qualidade de um software é a medida de quão bem o comportamento <b>observado</b> corresponde ao comportamento <b>especificado</b> (os requisitos).</p>
+            </div>
+        </div>
+
+        <!-- Slide 4: Erro, Defeito, Falha -->
+        <div class="slide flex flex-col justify-center items-center text-center p-8">
+            <h2 class="text-4xl font-bold mb-8">A Anatomia de um Problema</h2>
+             <div class="max-w-4xl w-full bg-white p-8 rounded-xl shadow-lg border border-gray-200">
+                <div class="flex flex-col md:flex-row justify-around items-center space-y-4 md:space-y-0">
+                    <div class="text-center">
+                        <p class="text-6xl">👤</p>
+                        <h3 class="text-xl font-bold mt-2">Erro Humano</h3>
+                        <p>Uma pessoa comete um erro...</p>
+                    </div>
+                    <div class="text-4xl text-gray-400">➡️</div>
+                    <div class="text-center">
+                        <p class="text-6xl">🐞</p>
+                        <h3 class="text-xl font-bold mt-2">Defeito (Bug)</h3>
+                        <p>...que cria um defeito no software...</p>
+                    </div>
+                    <div class="text-4xl text-gray-400">➡️</div>
+                    <div class="text-center">
+                        <p class="text-6xl">💣</p>
+                        <h3 class="text-xl font-bold mt-2">Falha</h3>
+                        <p>...que pode causar uma falha na operação.</p>
+                    </div>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
-                    <h3 class="font-bold text-xl mb-2">📋 Os 3 Tipos de Requisitos</h3>
-                    <ul class="list-disc list-inside text-gray-600 space-y-1">
-                        <li><strong>Funcionais:</strong> O que o sistema FAZ. (Ex: "Permitir login.")</li>
-                        <li><strong>De Qualidade:</strong> COMO o sistema faz. (Ex: "Login em &lt; 2s.")</li>
-                        <li><strong>Restrições:</strong> As REGRAS que limitam as escolhas. (Ex: "Deve ser em Java.")</li>
-                    </ul>
+                <p class="mt-8 text-lg"><strong>O objetivo do teste é encontrar o DEFEITO antes que ele vire uma FALHA.</strong></p>
+            </div>
+        </div>
+
+        <!-- Slide 5: Abordagem de Teste -->
+        <div class="slide flex flex-col justify-center items-center text-center p-8">
+            <h2 class="text-4xl font-bold mb-8">Qual é a Mentalidade Correta para Testar?</h2>
+            <div class="grid md:grid-cols-2 gap-8 max-w-5xl">
+                <div class="bg-red-50 p-8 rounded-xl border border-red-200">
+                    <h3 class="text-2xl font-bold text-red-800 mb-4">Abordagem Tradicional (Errada)</h3>
+                    <p class="text-lg"><strong>Meta:</strong> Mostrar que o sistema funciona.</p>
+                    <p class="text-lg"><strong>Critério de Sucesso:</strong> Sistema sem falhas.</p>
+                    <p class="text-xl font-bold mt-4"><strong>Resultado:</strong> Sistema com defeitos ocultos.</p>
+                </div>
+                <div class="bg-green-50 p-8 rounded-xl border border-green-200">
+                    <h3 class="text-2xl font-bold text-green-800 mb-4">Abordagem Moderna (Correta)</h3>
+                    <p class="text-lg"><strong>Meta:</strong> Encontrar defeitos.</p>
+                    <p class="text-lg"><strong>Critério de Sucesso:</strong> Encontrar falhas.</p>
+                    <p class="text-xl font-bold mt-4"><strong>Resultado:</strong> Sistema com menos defeitos.</p>
+                </div>
+            </div>
+            <p class="mt-8 text-xl max-w-3xl">Desenvolvedores devem provar que o sistema funciona. <strong>Testadores devem provar que ele não funciona.</strong></p>
+        </div>
+        
+        <!-- Slide 6: Introdução aos 7 Princípios -->
+        <div class="slide flex flex-col justify-center items-center text-center p-8">
+             <h2 class="text-4xl font-bold mb-8">Os 7 Princípios Fundamentais do Teste</h2>
+             <div class="max-w-4xl w-full space-y-6">
+                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 text-left">
+                    <h3 class="font-bold text-xl mb-2">1. Teste demonstra a presença de defeitos</h3>
+                    <p class="text-gray-600">O teste pode mostrar que existem bugs, mas <strong>não pode provar que não existem mais bugs</strong>. Nenhum defeito encontrado não significa um software perfeito.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 text-left">
+                    <h3 class="font-bold text-xl mb-2">2. Teste exaustivo é impossível</h3>
+                    <p class="text-gray-600">Testar todas as combinações de entradas e condições é inviável. Por isso, usamos <strong>análise de risco e prioridades</strong> para focar os esforços onde realmente importa.</p>
                 </div>
             </div>
         </div>
 
-        <!-- Slide 4: Dados - Parte 1 -->
+        <!-- Slide 7: Princípio 3 - Teste Antecipado -->
         <div class="slide flex flex-col justify-center items-center text-center p-8">
-            <h2 class="text-4xl font-bold mb-8">Os Números Não Mentem</h2>
-            <div class="grid md:grid-cols-2 gap-8 max-w-4xl w-full items-center">
-                    <button onclick="window.location.href='index.html'" style="position:fixed;top:20px;right:20px;z-index:1000;" class="bg-[#34495e] hover:bg-[#2c3e50] text-white font-bold py-2 px-6 rounded-lg transition-all">Voltar para a tela principal</button>
-                <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200">
-                    <h3 class="text-xl font-bold mb-4">Origem dos Bugs</h3>
-                    <div class="chart-container !h-[300px] !max-h-[300px]"><canvas id="bugSourceChart"></canvas></div>
-                    <p class="text-sm text-gray-600 mt-4">Fonte: R. Pressman, "Software Engineering"</p>
-                </div>
-                <div class="space-y-8">
-                    <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
-                        <h3 class="text-xl font-bold mb-2">Falha de Projetos</h3>
-                        <p class="text-6xl font-black text-[#c0392b] tabular-nums" id="project-failure-counter">47%</p>
-                        <p class="text-gray-600">...falham devido a má gestão de requisitos.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
-                        <h3 class="text-xl font-bold mb-2">Prejuízo Médio</h3>
-                        <p class="text-6xl font-black text-[#c0392b] tabular-nums" id="money-lost-counter">$97M</p>
-                        <p class="text-gray-600">...perdidos a cada $1 bilhão investido.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 5: Dados - Parte 2 -->
-        <div class="slide flex flex-col justify-center items-center text-center p-8">
-            <h2 class="text-4xl font-bold mb-8">O Custo da Correção Explode com o Tempo</h2>
+            <h2 class="text-4xl font-bold mb-8">Princípio 3: Teste Antecipado (A Regra de Ouro)</h2>
             <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 w-full max-w-4xl">
-                <h3 class="text-xl font-bold mb-4">Custo para Corrigir um Erro de Requisito</h3>
-                <div class="chart-container !max-w-full"><canvas id="fixCostChart"></canvas></div>
-                <p class="text-sm text-gray-600 mt-4">Corrigir um erro na fase de manutenção pode custar até 200x mais do que na fase de requisitos.</p>
+                <h3 class="text-xl font-bold mb-4">Custo para Corrigir um Erro por Fase (Regra 10 de Myers)</h3>
+                <div class="chart-container !h-[400px] !max-h-[400px]"><canvas id="fixCostChart"></canvas></div>
+                <p class="text-sm text-gray-600 mt-4">Começar a testar cedo (nos requisitos!) é a decisão financeira mais inteligente que um projeto pode tomar.</p>
+            </div>
+        </div>
+        
+        <!-- Slide 8: Origem dos Erros -->
+        <div class="slide flex flex-col justify-center items-center text-center p-8">
+            <h2 class="text-4xl font-bold mb-8">Onde a Maioria dos Erros Nasce?</h2>
+            <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 w-full max-w-lg">
+                <h3 class="text-xl font-bold mb-4">Introdução de Erros por Etapa do Desenvolvimento</h3>
+                <div class="chart-container !h-[350px] !max-h-[350px]"><canvas id="bugSourceChart"></canvas></div>
+                <p class="text-sm text-gray-600 mt-4">Fonte: James Martin</p>
+                <p class="text-lg font-bold mt-4 text-[#c0392b]">Mais da metade dos erros são introduzidos na fase de REQUISITOS!</p>
+            </div>
+        </div>
+        
+        <!-- Slide 9: Princípio 4 e 5 -->
+        <div class="slide flex flex-col justify-center items-center text-center p-8">
+             <h2 class="text-4xl font-bold mb-8">Os 7 Princípios Fundamentais (cont.)</h2>
+             <div class="max-w-4xl w-full space-y-6">
+                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 text-left">
+                    <h3 class="font-bold text-xl mb-2">4. Agrupamento de Defeitos</h3>
+                    <p class="text-gray-600">Um número pequeno de módulos geralmente contém a maioria dos defeitos. Achar esses "clusters" otimiza o esforço de teste.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 text-left">
+                    <h3 class="font-bold text-xl mb-2">5. Paradoxo do Pesticida</h3>
+                    <p class="text-gray-600">Repetir os mesmos testes várias vezes para de encontrar novos defeitos. É preciso revisar e criar novos casos de teste para encontrar novos "insetos".</p>
+                </div>
             </div>
         </div>
 
-        <!-- Slide 6: Conclusão -->
+        <!-- Slide 10: Princípio 6 e 7 -->
+        <div class="slide flex flex-col justify-center items-center text-center p-8">
+             <h2 class="text-4xl font-bold mb-8">Os 7 Princípios Fundamentais (final)</h2>
+             <div class="max-w-4xl w-full space-y-6">
+                 <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 text-left">
+                    <h3 class="font-bold text-xl mb-2">6. Teste depende do contexto</h3>
+                    <p class="text-gray-600">A forma de testar um e-commerce é diferente de testar um software de avião. O contexto (risco, tecnologia, mercado) dita a estratégia de teste.</p>
+                </div>
+                 <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 text-left">
+                    <h3 class="font-bold text-xl mb-2">7. A Ilusão da Ausência de Defeitos</h3>
+                    <p class="text-gray-600">Entregar um software sem bugs que não atende às necessidades do usuário é inútil. O objetivo final não é "zero bugs", é "atender aos requisitos e agregar valor".</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 11: Sumário dos 7 Princípios -->
+        <div class="slide flex flex-col justify-center items-center text-center p-8">
+            <h2 class="text-4xl font-bold mb-8">Resumo: Os 7 Princípios do Teste</h2>
+            <div class="max-w-3xl w-full bg-white p-8 rounded-xl shadow-lg border border-gray-200">
+                <ul class="text-left text-xl space-y-3">
+                    <li><span class="font-bold text-blue-600">1.</span> Teste demonstra a <b>presença</b> de defeitos.</li>
+                    <li><span class="font-bold text-blue-600">2.</span> Teste <b>exaustivo</b> é impossível.</li>
+                    <li><span class="font-bold text-blue-600">3.</span> Teste <b>antecipado</b> economiza recursos.</li>
+                    <li><span class="font-bold text-blue-600">4.</span> Defeitos se <b>agrupam</b> em certas áreas.</li>
+                    <li><span class="font-bold text-blue-600">5.</span> Testes repetidos perdem a eficácia (<b>Paradoxo do Pesticida</b>).</li>
+                    <li><span class="font-bold text-blue-600">6.</span> O teste depende do <b>contexto</b>.</li>
+                    <li><span class="font-bold text-blue-600">7.</span> Ausência de erros não garante um produto <b>útil</b>.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 12: Conclusão Parte 1 -->
         <div class="slide flex flex-col justify-center items-center text-center p-8 bg-[#2c3e50] text-white">
-            <h2 class="text-4xl font-bold mb-4">Qualidade Começa no Requisito, Não no Teste.</h2>
-            <p class="max-w-3xl mx-auto text-gray-300 mb-8">Se o pedido (requisito) estiver errado, você vai validar um sistema que funciona perfeitamente... para resolver o problema errado.</p>
-            <div class="max-w-2xl mx-auto text-left space-y-4 bg-white/10 p-8 rounded-lg">
-                <p>✅ Entender de ER torna-o um profissional <b>mais valioso</b>.</p>
+            <h2 class="text-4xl font-bold mb-4">Qualidade Começa no Requisito.</h2>
+            <p class="max-w-3xl mx-auto text-gray-300 text-2xl">Se o pedido (requisito) estiver errado, você vai validar um sistema que funciona perfeitamente... para resolver o problema errado.</p>
+        </div>
+        
+        <!-- Slide 13: Conclusão Parte 2 -->
+        <div class="slide flex flex-col justify-center items-center text-center p-8 bg-[#2c3e50] text-white">
+             <h2 class="text-4xl font-bold mb-8">O seu papel neste cenário:</h2>
+            <div class="max-w-3xl mx-auto text-left text-xl space-y-4 bg-white/10 p-8 rounded-lg">
+                <p>✅ Entender de ER e Teste torna-o um profissional <b>completo e valioso</b>.</p>
                 <p>✅ É a habilidade que separa um "codificador" de um "engenheiro de software".</p>
                 <p class="font-bold">✅ Lembre-se do Ariane 5: uma linha no documento pode ser a diferença entre o sucesso e <b>370 milhões de dólares em fumaça</b>.</p>
             </div>
@@ -148,7 +240,7 @@
     </div>
 
     <!-- Navegação -->
-    <div class="fixed bottom-0 left-0 right-0 p-4 bg-white/80 backdrop-blur-lg flex justify-between items-center shadow-t-lg">
+    <div class="fixed bottom-0 left-0 right-0 p-4 bg-white/80 backdrop-blur-lg flex justify-between items-center shadow-t-lg border-t border-gray-200">
         <button id="prevBtn" class="bg-[#34495e] hover:bg-[#2c3e50] text-white font-bold py-2 px-6 rounded-lg transition-all">Anterior</button>
         <div id="slide-counter" class="text-lg font-semibold text-gray-700"></div>
         <button id="nextBtn" class="bg-[#34495e] hover:bg-[#2c3e50] text-white font-bold py-2 px-6 rounded-lg transition-all">Próximo</button>
@@ -189,43 +281,82 @@
                 else if (e.key === 'ArrowLeft') prevBtn.click();
             });
 
-            // Inicializar Gráficos
-            function createBugSourceChart() {
-                const canvas = document.getElementById('bugSourceChart');
-                if (!canvas) return;
-                new Chart(canvas, {
-                    type: 'doughnut',
-                    data: {
-                        labels: ['Erros de Requisitos', 'Outras Fontes'],
-                        datasets: [{ data: [56, 44], backgroundColor: ['#c0392b', '#bdc3c7'], borderColor: '#F8F7F4', borderWidth: 4 }]
-                    },
-                    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } }, cutout: '60%' }
-                });
-            }
+            // --- GRÁFICOS ---
+            let fixCostChartInstance, bugSourceChartInstance;
 
             function createFixCostChart() {
                 const canvas = document.getElementById('fixCostChart');
                 if (!canvas) return;
-                new Chart(canvas, {
+                if (fixCostChartInstance) fixCostChartInstance.destroy();
+                fixCostChartInstance = new Chart(canvas, {
                     type: 'bar',
                     data: {
-                        labels: ['Requisitos', 'Codificação', 'Testes', 'Manutenção'],
-                        datasets: [{ label: 'Custo Relativo', data: [1, 5, 20, 150], backgroundColor: ['#27ae60', '#f1c40f', '#e67e22', '#c0392b'] }]
+                        labels: ['Requisitos', 'Projeto', 'Codificação', 'Testes de Unidade', 'Testes de Sistema', 'Operação'],
+                        datasets: [{ 
+                            label: 'Custo Relativo', 
+                            data: [1, 4.5, 10, 27.5, 50, 520], // Média dos intervalos
+                            backgroundColor: ['#2ecc71', '#f1c40f', '#e67e22', '#d35400', '#c0392b', '#8e44ad']
+                         }]
                     },
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
-                        indexAxis: 'y',
-                        scales: { x: { beginAtZero: true, title: { display: true, text: 'Custo Multiplicado (Ex: 1x, 5x, etc.)' } } },
-                        plugins: { legend: { display: false }, tooltip: { callbacks: { label: (c) => ` Custo: ${c.raw}x maior` } } }
+                        scales: { 
+                            y: { 
+                                beginAtZero: true, 
+                                type: 'logarithmic',
+                                ticks: {
+                                    callback: function(value, index, values) {
+                                        if (value === 1 || value === 10 || value === 100 || value === 1000) {
+                                            return value + 'x';
+                                        }
+                                    }
+                                }
+                            },
+                             x: {
+                                grid: { display: false }
+                             }
+                        },
+                        plugins: { 
+                            legend: { display: false }, 
+                            tooltip: { callbacks: { label: (c) => ` Custo: ~${c.raw}x maior` } }
+                        }
                     }
                 });
             }
 
-            createBugSourceChart();
+            function createBugSourceChart() {
+                 const canvas = document.getElementById('bugSourceChart');
+                if (!canvas) return;
+                if (bugSourceChartInstance) bugSourceChartInstance.destroy();
+                bugSourceChartInstance = new Chart(canvas, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Requisitos', 'Design', 'Construção (Código)', 'Outros'],
+                        datasets: [{ 
+                            data: [56, 27, 7, 10], 
+                            backgroundColor: ['#c0392b', '#e67e22', '#f1c40f', '#bdc3c7'], 
+                            borderColor: '#F8F7F4', 
+                            borderWidth: 5 
+                        }]
+                    },
+                    options: { 
+                        responsive: true, 
+                        maintainAspectRatio: false, 
+                        plugins: { 
+                            legend: { position: 'bottom' } 
+                        }, 
+                        cutout: '60%' 
+                    }
+                });
+            }
+
+
             createFixCostChart();
+            createBugSourceChart();
             showSlide(currentSlide);
         });
     </script>
 </body>
 </html>
+

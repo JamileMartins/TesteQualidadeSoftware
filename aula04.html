@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apresentação: Processo e Gestão de Requisitos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #F8F7F4; color: #2c3e50; overflow: hidden; }
+        .slide {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
+            opacity: 0; transform: scale(0.98); pointer-events: none;
+        }
+        .slide.active { opacity: 1; transform: scale(1); pointer-events: auto; }
+        .highlight { color: #2980b9; }
+        .card { background-color: white; border-radius: 0.75rem; padding: 1.5rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); border: 1px solid #e5e7eb; }
+    </style>
+</head>
+<body class="flex flex-col">
+    <a href="index.html" class="fixed top-4 right-4 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg shadow-md transition-colors z-50">
+        Voltar para a tela principal
+    </a>
+
+    <div id="presentation-container" class="relative w-screen h-screen">
+
+        <!-- Slide 1: Título -->
+        <div class="slide active flex flex-col justify-center items-center text-center p-8">
+            <p class="text-xl font-bold text-gray-500 mb-2">CPRE - Capítulos 5, 6 & 7</p>
+            <h1 class="text-5xl md:text-6xl font-black text-[#2980b9] leading-tight">Do Caos ao Controle</h1>
+            <p class="text-2xl md:text-3xl mt-4 text-gray-700 max-w-3xl mx-auto">Como Processos, Gestão e Ferramentas evitam que os projetos de software implodam.</p>
+        </div>
+
+        <!-- Slide 2: A Situação -->
+        <div class="slide flex flex-col justify-center items-center text-center p-8">
+            <h2 class="text-4xl font-bold mb-8">Já temos os requisitos. E agora?</h2>
+            <div class="max-w-4xl text-xl text-left space-y-4">
+                <p>Nas aulas anteriores, aprendemos a <b class="highlight">elicitar, analisar e documentar</b> requisitos.</p>
+                <p>Mas os requisitos não são estáticos. Eles <b class="highlight">mudam</b>. Os stakeholders <b class="highlight">discordam</b>. O mercado <b class="highlight">evolui</b>.</p>
+                <p class="mt-6 p-4 bg-yellow-100 border-l-4 border-yellow-500 rounded-r-lg">Sem uma estrutura para gerir esta complexidade, o projeto entra em colapso. É aqui que entram os Processos e a Gestão de Requisitos.</p>
+            </div>
+        </div>
+        
+        <!-- Slide 3: Capítulo 5 - Processo e Estrutura -->
+        <div class="slide flex flex-col justify-center items-center text-center p-8">
+            <p class="text-lg font-bold text-gray-500">Capítulo 5</p>
+            <h2 class="text-4xl font-bold mb-8">Processo de ER: Não existe "processo único"</h2>
+            <p class="max-w-3xl text-xl mb-8">Um processo de Engenharia de Requisitos (ER) deve ser <b class="highlight">adaptado</b> ao projeto. A escolha depende de fatores cruciais:</p>
+            <div class="grid md:grid-cols-3 gap-6 max-w-6xl">
+                <div class="card"><b class="block text-lg">Stakeholders</b> Estão sempre disponíveis ou só no início do projeto?</div>
+                <div class="card"><b class="block text-lg">Complexidade</b> É um sistema crítico (ex: aviação) ou apenas um MVP para validar uma ideia?</div>
+                <div class="card"><b class="block text-lg">Volatilidade</b> Os requisitos são estáveis ou espera-se que mudem constantemente?</div>
+            </div>
+        </div>
+
+        <!-- Slide 4: As 3 Dimensões do Processo -->
+        <div class="slide flex flex-col justify-center items-center p-8">
+            <h2 class="text-4xl font-bold text-center mb-8">As 3 Dimensões para Configurar o seu Processo</h2>
+            <div class="max-w-6xl w-full space-y-6">
+                <div class="card flex items-center">
+                    <div class="w-1/3 text-lg font-bold">Tempo</div>
+                    <div class="w-2/3 grid grid-cols-2 gap-4">
+                        <div><b class="highlight">Sequencial (Cascata)</b><p class="text-sm">Requisitos definidos no início. Pouca flexibilidade.</p></div>
+                        <div><b class="highlight">Iterativo (Ágil)</b><p class="text-sm">Requisitos evoluem em ciclos. Alta flexibilidade.</p></div>
+                    </div>
+                </div>
+                <div class="card flex items-center">
+                    <div class="w-1/3 text-lg font-bold">Finalidade</div>
+                    <div class="w-2/3 grid grid-cols-2 gap-4">
+                        <div><b class="highlight">Prescritivo</b><p class="text-sm">A especificação é um contrato rígido. Tudo deve ser implementado.</p></div>
+                        <div><b class="highlight">Exploratório</b><p class="text-sm">Os objetivos são conhecidos, mas os requisitos são descobertos.</p></div>
+                    </div>
+                </div>
+                <div class="card flex items-center">
+                    <div class="w-1/3 text-lg font-bold">Alvo</div>
+                    <div class="w-2/3 grid grid-cols-2 gap-4">
+                        <div><b class="highlight">Cliente Específico</b><p class="text-sm">Software sob medida para um único cliente.</p></div>
+                        <div><b class="highlight">Orientado ao Mercado</b><p class="text-sm">Produto para um segmento de mercado (ex: App na Play Store).</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Combinações Típicas de Processos -->
+        <div class="slide flex flex-col justify-center items-center p-8">
+            <h2 class="text-4xl font-bold text-center mb-8">Exemplos de Processos no Mundo Real</h2>
+            <div class="grid md:grid-cols-3 gap-6 max-w-6xl w-full">
+                <div class="card">
+                    <h3 class="font-bold text-xl mb-2 highlight">Processo Contratual</h3>
+                    <p class="mb-2"><b>Combinação:</b> Sequencial + Prescritivo + Cliente Específico.</p>
+                    <p class="text-sm"><b>Cenário Típico:</b> Projetos governamentais, outsourcing com escopo fixo. A documentação (SRS) é a base do contrato.</p>
+                </div>
+                <div class="card border-2 border-blue-500 ring-4 ring-blue-100">
+                    <h3 class="font-bold text-xl mb-2 highlight">Processo Participativo (Ágil)</h3>
+                    <p class="mb-2"><b>Combinação:</b> Iterativo + Exploratório + Cliente Específico.</p>
+                    <p class="text-sm"><b>Cenário Típico:</b> Uma equipe Scrum desenvolve um sistema interno, com o Product Owner (cliente) colaborando diariamente.</p>
+                </div>
+                <div class="card">
+                    <h3 class="font-bold text-xl mb-2 highlight">Processo de Produto</h3>
+                    <p class="mb-2"><b>Combinação:</b> Iterativo + Exploratório + Orientado ao Mercado.</p>
+                    <p class="text-sm"><b>Cenário Típico:</b> Uma startup a construir um novo SaaS (<em>Software as a Service</em>). Os requisitos evoluem com o feedback dos primeiros utilizadores (beta testers).</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 6: Capítulo 6 - Gestão de Requisitos -->
+        <div class="slide flex flex-col justify-center items-center text-center p-8">
+            <p class="text-lg font-bold text-gray-500">Capítulo 6</p>
+            <h2 class="text-4xl font-bold mb-8">Gestão de Requisitos: A Arte de Manter a Sanidade</h2>
+            <p class="max-w-3xl text-xl">Gerir requisitos é o processo contínuo de <b class="highlight">armazenar, alterar e rastrear</b> os requisitos ao longo do tempo. É o sistema imune do projeto contra o caos.</p>
+        </div>
+
+        <!-- Slide 7: Ciclo de Vida do Requisito -->
+        <div class="slide flex flex-col justify-center items-center p-8">
+            <h2 class="text-4xl font-bold text-center mb-8">Prática 1: Gestão do Ciclo de Vida</h2>
+            <p class="text-xl text-center max-w-3xl mb-8">Um requisito não é apenas "feito". Ele tem um ciclo de vida, e cada estado importa.</p>
+            <div class="card max-w-4xl w-full">
+                <p class="text-center font-bold mb-4">Exemplo de um Fluxo de Estado Simples:</p>
+                <div class="flex justify-between items-center text-center text-sm md:text-base">
+                    <div class="p-2 bg-gray-200 rounded-lg"><b>Rascunho</b></div>
+                    <div class="text-gray-400 font-bold">➡️</div>
+                    <div class="p-2 bg-blue-100 rounded-lg"><b>Em Revisão</b></div>
+                    <div class="text-gray-400 font-bold">➡️</div>
+                    <div class="p-2 bg-green-100 rounded-lg"><b>Aprovado</b></div>
+                    <div class="text-gray-400 font-bold">➡️</div>
+                    <div class="p-2 bg-yellow-100 rounded-lg"><b>Implementado</b></div>
+                    <div class="text-gray-400 font-bold">➡️</div>
+                    <div class="p-2 bg-purple-100 rounded-lg"><b>Verificado</b></div>
+                </div>
+                <p class="text-sm text-center mt-6"><b>No dia a dia:</b> Em ferramentas como Jira ou Azure DevOps, isto é o "workflow" de uma User Story. Saber o estado de cada requisito evita que a equipe trabalhe em itens não aprovados ou teste funcionalidades que ainda estão em rascunho.</p>
+            </div>
+        </div>
+
+        <!-- Slide 8: Versionamento e Baselines -->
+        <div class="slide flex flex-col justify-center items-center p-8">
+            <h2 class="text-4xl font-bold text-center mb-8">Prática 2: Controle de Versão e Baselines</h2>
+            <div class="grid md:grid-cols-2 gap-8 max-w-5xl">
+                <div class="card">
+                    <h3 class="font-bold text-xl mb-2 highlight">Controle de Versão</h3>
+                    <p>Assim como o código (`git`), os requisitos precisam de versões. Cada mudança gera uma nova versão, permitindo rastrear o histórico e reverter se necessário.</p>
+                    <p class="text-sm mt-4"><b>No dia a dia:</b> "Porque é que esta regra de cálculo mudou? Quem a aprovou?" O histórico de versões da página no Confluence ou do item no Jira responde a isso.</p>
+                </div>
+                <div class="card">
+                    <h3 class="font-bold text-xl mb-2 highlight">Baseline</h3>
+                    <p>É uma "fotografia" estável e aprovada de um conjunto de requisitos num determinado momento (ex: "baseline da Versão 1.0").</p>
+                    <p class="text-sm mt-4"><b>No dia a dia:</b> Antes de iniciar uma Sprint ou uma nova fase de desenvolvimento, cria-se uma baseline. Qualquer mudança a partir desse ponto precisa de seguir um processo formal de gestão de mudança, protegendo a equipe do "scope creep" (aumento descontrolado do escopo).</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 9: Rastreabilidade (Parte 1) -->
+        <div class="slide flex flex-col justify-center items-center p-8">
+            <h2 class="text-4xl font-bold text-center mb-8">Prática 3: Rastreabilidade - O Fio de Ouro da Qualidade</h2>
+            <p class="text-xl text-center max-w-4xl mb-8">Rastreabilidade é a capacidade de seguir a vida de um requisito, para a frente e para trás, conectando-o a tudo o que lhe diz respeito.</p>
+            <div class="grid grid-cols-2 gap-8 max-w-4xl text-lg">
+                <div class="card">
+                    <h3 class="font-bold mb-2">Para Trás (Origem)</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li>Qual <b class="highlight">objetivo de negócio</b> justifica este requisito?</li>
+                        <li>Qual <b class="highlight">stakeholder</b> o solicitou?</li>
+                        <li>De qual <b class="highlight">documento fonte</b> ele veio?</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3 class="font-bold mb-2">Para a Frente (Implementação)</h3>
+                     <ul class="list-disc list-inside space-y-2">
+                        <li>Qual <b class="highlight">User Story</b> ou item de backlog o detalha?</li>
+                        <li>Qual <b class="highlight">parte do código</b> o implementa?</li>
+                        <li>Qual <b class="highlight">caso de teste</b> o valida?</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Rastreabilidade (Parte 2) -->
+        <div class="slide flex flex-col justify-center items-center p-8">
+            <h2 class="text-4xl font-bold text-center mb-8">Rastreabilidade na Prática</h2>
+             <div class="card w-full max-w-5xl text-center">
+                <p class="font-bold mb-4">Exemplo de uma Cadeia de Rastreabilidade:</p>
+                <div class="flex flex-col md:flex-row justify-center items-center space-y-2 md:space-y-0 md:space-x-2 text-sm">
+                    <div class="p-3 bg-gray-100 rounded-lg"><b>Objetivo de Negócio</b><p>"Aumentar vendas em 10%"</p></div>
+                    <div class="font-bold text-gray-400">🔗</div>
+                    <div class="p-3 bg-blue-100 rounded-lg"><b>Requisito</b><p>"Permitir pagamento com MB WAY"</p></div>
+                    <div class="font-bold text-gray-400">🔗</div>
+                    <div class="p-3 bg-yellow-100 rounded-lg"><b>User Story #123</b></div>
+                    <div class="font-bold text-gray-400">🔗</div>
+                    <div class="p-3 bg-purple-100 rounded-lg"><b>Código (Commit XYZ)</b></div>
+                    <div class="font-bold text-gray-400">🔗</div>
+                    <div class="p-3 bg-green-100 rounded-lg"><b>Caso de Teste #456</b></div>
+                </div>
+                 <p class="text-sm text-center mt-6"><b>No dia a dia:</b> Quando um teste falha, a rastreabilidade permite identificar qual requisito e objetivo de negócio foram impactados. Quando o negócio questiona a necessidade de uma funcionalidade, a rastreabilidade mostra qual objetivo ela suporta.</p>
+            </div>
+        </div>
+
+        <!-- Slide 11: Gestão de Mudança -->
+        <div class="slide flex flex-col justify-center items-center p-8">
+            <h2 class="text-4xl font-bold text-center mb-8">Prática 4: Lidar com a Mudança</h2>
+            <p class="text-xl text-center max-w-4xl mb-8">Mudar um requisito não é só "editar o texto". Exige um processo para avaliar o impacto.</p>
+            <div class="grid md:grid-cols-2 gap-8 max-w-5xl">
+                 <div class="card">
+                    <h3 class="font-bold text-xl mb-2 highlight">Abordagem Formal (Cascata)</h3>
+                    <p>A mudança é proposta através de um "Pedido de Mudança" (Change Request). Um comité (<b class="highlight">Change Control Board - CCB</b>) reúne-se para analisar o impacto no custo, prazo e risco antes de aprovar ou rejeitar.</p>
+                </div>
+                 <div class="card">
+                    <h3 class="font-bold text-xl mb-2 highlight">Abordagem Ágil</h3>
+                    <p>A mudança é adicionada como um novo item no <b class="highlight">Product Backlog</b>. O <b class="highlight">Product Owner</b> é o responsável por a priorizar contra os outros itens. A mudança não interrompe a Sprint atual; entra na fila para uma Sprint futura.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12: Priorização -->
+        <div class="slide flex flex-col justify-center items-center p-8">
+            <h2 class="text-4xl font-bold text-center mb-8">Prática 5: Priorização</h2>
+            <p class="text-xl text-center max-w-4xl mb-8">Nenhuma equipe tem recursos infinitos. Priorizar é decidir "o que fazer agora".</p>
+             <div class="card w-full max-w-3xl">
+                <h3 class="font-bold text-xl mb-4 text-center highlight">Técnica Simples: MoSCoW</h3>
+                <div class="grid grid-cols-2 gap-4 text-left">
+                    <div><b>M - Must-Have:</b> Essencial. Sem isto, a entrega não tem valor.</div>
+                    <div><b>S - Should-Have:</b> Importante, mas não vital. A solução funciona sem isto.</div>
+                    <div><b>C - Could-Have:</b> Desejável, mas de baixo impacto. "Nice to have".</div>
+                    <div><b>W - Won't-Have (this time):</b> Não será feito nesta entrega, mas pode ser considerado no futuro.</div>
+                </div>
+                <p class="text-sm text-center mt-6"><b>No dia a dia:</b> Durante o planeamento de uma Sprint ou de uma Release, classificar os itens com MoSCoW ajuda a focar a equipe no que realmente agrega valor e a gerir as expectativas dos stakeholders.</p>
+            </div>
+        </div>
+
+        <!-- Slide 13: Atributos e Visualizações -->
+        <div class="slide flex flex-col justify-center items-center p-8">
+             <h2 class="text-4xl font-bold text-center mb-8">Prática 6: Atributos e Visualizações</h2>
+             <p class="text-xl text-center max-w-4xl mb-8">Metadados que enriquecem os requisitos e permitem filtrá-los de forma inteligente.</p>
+             <div class="card w-full max-w-3xl">
+                <h3 class="font-bold text-xl mb-2 highlight">Atributos</h3>
+                <p>São "etiquetas" ou campos associados a um requisito: Prioridade, Risco, Sprint, Módulo Afetado, Autor, Fonte (Stakeholder), etc.</p>
+                <h3 class="font-bold text-xl mt-4 mb-2 highlight">Visualizações (Views)</h3>
+                <p>São simplesmente filtros aplicados sobre os atributos para criar listas úteis.</p>
+                <p class="text-sm mt-4"><b>No dia a dia:</b>
+                    <li>"Mostre-me todos os requisitos com <b>Prioridade 'Alta'</b> para o <b>Módulo 'Pagamentos'</b>."</li>
+                    <li>"Crie um relatório com todos os requisitos solicitados pelo <b>Stakeholder 'Marketing'</b>."</li>
+                </p>
+            </div>
+        </div>
+
+        <!-- Slide 14: Capítulo 7 - Ferramentas de Suporte -->
+        <div class="slide flex flex-col justify-center items-center text-center p-8">
+            <p class="text-lg font-bold text-gray-500">Capítulo 7</p>
+            <h2 class="text-4xl font-bold mb-8">Ferramentas: Automatizar o Controle</h2>
+            <p class="max-w-3xl text-xl">Usar as práticas anteriores em ficheiros Word ou Excel é possível, mas insustentável em projetos reais. As ferramentas existem para suportar o <b class="highlight">processo</b>.</p>
+        </div>
+        
+        <!-- Slide 15: Tipos de Ferramentas -->
+        <div class="slide flex flex-col justify-center items-center p-8">
+            <h2 class="text-4xl font-bold text-center mb-8">Tipos de Ferramentas de ER</h2>
+            <div class="grid md:grid-cols-3 gap-6 max-w-6xl w-full">
+                <div class="card">
+                    <h3 class="font-bold text-xl mb-2 highlight">Gestão de Requisitos</h3>
+                    <p class="text-sm">Focadas em armazenar, rastrear e gerir o ciclo de vida. São a "base de dados" dos requisitos.</p>
+                </div>
+                <div class="card">
+                    <h3 class="font-bold text-xl mb-2 highlight">Modelagem</h3>
+                    <p class="text-sm">Ajudam a criar diagramas (UML, BPMN) para visualizar processos e estruturas, complementando a documentação textual.</p>
+                </div>
+                <div class="card">
+                    <h3 class="font-bold text-xl mb-2 highlight">Colaboração e Documentação</h3>
+                    <p class="text-sm">Plataformas para criar e partilhar conhecimento, como wikis, onde a documentação mais detalhada pode residir.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 16: Ferramentas do Mundo Real (Parte 1) -->
+        <div class="slide flex flex-col justify-center items-center p-8">
+            <h2 class="text-4xl font-bold text-center mb-8">Exemplos de Ferramentas no Mercado (1/2)</h2>
+            <div class="max-w-4xl w-full space-y-6">
+                <div class="card">
+                    <h3 class="font-bold text-lg highlight">Para Ambientes Ágeis (Foco em Backlog)</h3>
+                    <p class="text-sm"><b><a href="https://www.atlassian.com/software/jira" target="_blank" class="underline">Jira</a>:</b> O padrão da indústria para gestão de tarefas e backlogs. Excelente para rastreabilidade de User Stories.</p>
+                    <p class="text-sm mt-2"><b><a href="https://azure.microsoft.com/en-us/products/devops" target="_blank" class="underline">Azure DevOps</a>:</b> A solução integrada da Microsoft. Combina gestão, repositórios de código e pipelines de CI/CD.</p>
+                </div>
+                <div class="card">
+                    <h3 class="font-bold text-lg highlight">Para Documentação e Colaboração</h3>
+                    <p class="text-sm"><b><a href="https://www.atlassian.com/software/confluence" target="_blank" class="underline">Confluence</a>:</b> Uma wiki corporativa que se integra perfeitamente com o Jira, ideal para a documentação detalhada que não cabe numa User Story.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 17: Ferramentas do Mundo Real (Parte 2) -->
+        <div class="slide flex flex-col justify-center items-center p-8">
+            <h2 class="text-4xl font-bold text-center mb-8">Exemplos de Ferramentas no Mercado (2/2)</h2>
+            <div class="max-w-4xl w-full space-y-6">
+                <div class="card">
+                     <h3 class="font-bold text-lg highlight">Para Gestão Formal (Foco em Documento)</h3>
+                    <p class="text-sm"><b><a href="https://www.jamasoftware.com/platform/jama-connect" target="_blank" class="underline">Jama Connect</a> / <a href="https://www.ibm.com/products/requirements-management-doors-next" target="_blank" class="underline">IBM DOORS Next</a>:</b> Ferramentas robustas para indústrias reguladas (automobilística, médica) que exigem rastreabilidade rigorosa e gestão de baselines complexas.</p>
+                </div>
+                <div class="card">
+                    <h3 class="font-bold text-lg highlight">Para Modelação Visual</h3>
+                    <p class="text-sm"><b><a href="https://www.lucidchart.com" target="_blank" class="underline">Lucidchart</a> / <a href="https://app.diagrams.net/" target="_blank" class="underline">draw.io</a>:</b> Ferramentas para criar diagramas de fluxo, UML, BPMN, etc., que ajudam a visualizar e a validar os requisitos de forma colaborativa.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 18: Como Introduzir Ferramentas -->
+        <div class="slide flex flex-col justify-center items-center text-center p-8">
+            <h2 class="text-4xl font-bold mb-8">A Regra de Ouro das Ferramentas</h2>
+            <div class="card max-w-3xl w-full">
+                <p class="text-3xl font-black text-red-600">O Processo vem ANTES da Ferramenta.</p>
+                <p class="text-xl mt-4">Uma ferramenta não vai resolver um processo caótico. Ela vai apenas <b class="highlight">automatizar o caos</b>.</p>
+                <ol class="text-left list-decimal list-inside mt-6 space-y-2">
+                    <li><b>Defina o seu processo:</b> Como vai gerir mudanças? Como vai priorizar?</li>
+                    <li><b>Identifique os problemas:</b> Onde é que o seu processo manual está falhando?</li>
+                    <li><b>Escolha uma ferramenta que resolva esses problemas.</b></li>
+                    <li><b>Comece com um projeto piloto</b> antes de a impor a toda a organização.</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Slide 19: Conclusão -->
+        <div class="slide flex flex-col justify-center items-center text-center p-8 bg-[#2c3e50] text-white">
+            <h2 class="text-4xl font-bold mb-8">Resumo da Ópera</h2>
+            <div class="max-w-3xl mx-auto text-left text-xl space-y-4">
+                <p><b class="text-blue-300">Processo (Cap. 5):</b> É o mapa. Adapte-o ao terreno do seu projeto (ágil, cascata, etc.).</p>
+                <p><b class="text-blue-300">Gestão (Cap. 6):</b> São as regras de trânsito. Rastreabilidade, controle de versão e gestão de mudanças mantêm o projeto a andar de forma segura.</p>
+                <p><b class="text-blue-300">Ferramentas (Cap. 7):</b> É o veículo. Escolha um que se adeque ao seu mapa e às suas regras, não o contrário.</p>
+            </div>
+        </div>
+
+        <!-- Slide 20: Mensagem Final -->
+        <div class="slide flex flex-col justify-center items-center text-center p-8 bg-[#2c3e50] text-white">
+             <h2 class="text-4xl font-bold mb-8">A sua Missão como Engenheiro de Software</h2>
+            <div class="max-w-3xl mx-auto text-2xl">
+                <p>Uma boa gestão de requisitos não é burocracia.</p>
+                <p class="mt-6 font-black text-yellow-300 text-3xl">É o mecanismo que impede os projetos de falharem sob o peso da complexidade e da mudança inevitável.</p>
+                <p class="mt-8">O seu trabalho não é apenas construir o software, mas garantir que o software certo é construído, e que ele pode evoluir de forma controlada.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Navegação -->
+    <div class="fixed bottom-0 left-0 right-0 p-4 bg-white/80 backdrop-blur-lg flex justify-between items-center shadow-t-lg border-t border-gray-200">
+        <button id="prevBtn" class="bg-[#34495e] hover:bg-[#2c3e50] text-white font-bold py-2 px-6 rounded-lg transition-all">Anterior</button>
+        <div id="slide-counter" class="text-lg font-semibold text-gray-700"></div>
+        <button id="nextBtn" class="bg-[#34495e] hover:bg-[#2c3e50] text-white font-bold py-2 px-6 rounded-lg transition-all">Próximo</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const slideCounter = document.getElementById('slide-counter');
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+
+            function showSlide(index) {
+                slides.forEach((slide, i) => {
+                    slide.classList.toggle('active', i === index);
+                });
+                slideCounter.textContent = `Slide ${index + 1} de ${totalSlides}`;
+                prevBtn.disabled = index === 0;
+                prevBtn.classList.toggle('opacity-50', index === 0);
+                nextBtn.disabled = index === totalSlides - 1;
+                nextBtn.classList.toggle('opacity-50', index === totalSlides - 1);
+            }
+
+            function changeSlide(direction) {
+                currentSlide += direction;
+                if (currentSlide < 0) currentSlide = 0;
+                if (currentSlide >= totalSlides) currentSlide = totalSlides - 1;
+                showSlide(currentSlide);
+            }
+
+            prevBtn.addEventListener('click', () => changeSlide(-1));
+            nextBtn.addEventListener('click', () => changeSlide(1));
+            
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight' && !nextBtn.disabled) nextBtn.click();
+                else if (e.key === 'ArrowLeft' && !prevBtn.disabled) prevBtn.click();
+            });
+
+            showSlide(currentSlide);
+        });
+    </script>
+</body>
+</html>
+

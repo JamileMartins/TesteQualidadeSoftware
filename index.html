@@ -32,10 +32,16 @@
         <main>
         <!-- Seção de Aulas -->
         <section class="mb-16">
-            <h2 class="text-3xl font-bold text-slate-900 mb-8">Aulas</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-3xl font-bold text-slate-900">Aulas</h2>
+                <div class="flex space-x-2">
+                    <button id="sort-desc" class="bg-slate-200 text-slate-700 font-semibold py-2 px-4 rounded-lg hover:bg-slate-300 transition-colors">Mais Recentes</button>
+                    <button id="sort-asc" class="bg-slate-200 text-slate-700 font-semibold py-2 px-4 rounded-lg hover:bg-slate-300 transition-colors">Mais Antigos</button>
+                </div>
+            </div>
+            <div id="aulas-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                 <!-- ... Cards das aulas existentes ... -->
-                <div class="bg-white rounded-xl shadow-lg p-8 flex flex-col hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+                <div class="bg-white rounded-xl shadow-lg p-8 flex flex-col hover:shadow-2xl hover:-translate-y-2 transition-all duration-300" data-date="2025-08-19">
                     <div class="flex justify-between items-center">
                         <span class="font-semibold text-sm text-red-600">Aula 1</span>
                         <span class="text-xs text-gray-500">19/08/2025</span>
@@ -53,7 +59,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="bg-white rounded-xl shadow-lg p-8 flex flex-col hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+                <div class="bg-white rounded-xl shadow-lg p-8 flex flex-col hover:shadow-2xl hover:-translate-y-2 transition-all duration-300" data-date="2025-08-26">
                     <div class="flex justify-between items-center">
                         <span class="font-semibold text-sm text-blue-600">Aula 2</span>
                         <span class="text-xs text-gray-500">26/08/2025</span>
@@ -71,7 +77,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="bg-white rounded-xl shadow-lg p-8 flex flex-col hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+                <div class="bg-white rounded-xl shadow-lg p-8 flex flex-col hover:shadow-2xl hover:-translate-y-2 transition-all duration-300" data-date="2025-09-02">
                     <div class="flex justify-between items-center">
                         <span class="font-semibold text-sm text-green-600">Aula 3</span>
                         <span class="text-xs text-gray-500">02/09/2025</span>
@@ -89,7 +95,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="bg-white rounded-xl shadow-lg p-8 flex flex-col hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+                <div class="bg-white rounded-xl shadow-lg p-8 flex flex-col hover:shadow-2xl hover:-translate-y-2 transition-all duration-300" data-date="2025-09-09">
                     <div class="flex justify-between items-center">
                         <span class="font-semibold text-sm text-purple-600">Aula 4</span>
                         <span class="text-xs text-gray-500">09/09/2025</span>
@@ -128,5 +134,41 @@
         </footer>
     </div>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const sortDescBtn = document.getElementById('sort-desc');
+            const sortAscBtn = document.getElementById('sort-asc');
+            const aulasGrid = document.getElementById('aulas-grid');
+
+            const sortCards = (order) => {
+                const cards = Array.from(aulasGrid.children);
+                cards.sort((a, b) => {
+                    const dateA = new Date(a.dataset.date);
+                    const dateB = new Date(b.dataset.date);
+                    return order === 'desc' ? dateB - dateA : dateA - dateB;
+                });
+                cards.forEach(card => aulasGrid.appendChild(card));
+            };
+
+            sortDescBtn.addEventListener('click', () => {
+                sortCards('desc');
+                sortDescBtn.classList.add('bg-blue-600', 'text-white');
+                sortDescBtn.classList.remove('bg-slate-200', 'text-slate-700');
+                sortAscBtn.classList.remove('bg-blue-600', 'text-white');
+                sortAscBtn.classList.add('bg-slate-200', 'text-slate-700');
+            });
+
+            sortAscBtn.addEventListener('click', () => {
+                sortCards('asc');
+                sortAscBtn.classList.add('bg-blue-600', 'text-white');
+                sortAscBtn.classList.remove('bg-slate-200', 'text-slate-700');
+                sortDescBtn.classList.remove('bg-blue-600', 'text-white');
+                sortDescBtn.classList.add('bg-slate-200', 'text-slate-700');
+            });
+
+            // Initial sort
+            sortDescBtn.click();
+        });
+    </script>
 </body>
 </html>

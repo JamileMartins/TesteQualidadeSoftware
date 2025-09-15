@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apresentação: Fundamentos e Ciclo de Vida do Teste</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #F8F7F4; color: #2c3e50; overflow: hidden; }
+        .slide {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
+            opacity: 0; transform: scale(0.98); pointer-events: none;
+        }
+        .slide.active { opacity: 1; transform: scale(1); pointer-events: auto; }
+        .highlight { color: #2980b9; }
+        .card { background-color: white; border-radius: 0.75rem; padding: 1.5rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); border: 1px solid #e5e7eb; }
+        #gemini-modal.hidden { display: none; }
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border-left-color: #2980b9;
+            animation: spin 1s ease infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="flex flex-col">
+    <button onclick="window.location.href='index.html'" style="position:fixed;top:20px;right:20px;z-index:1000;" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg shadow-md transition-colors">Voltar para a tela principal</button>
+
+    <div id="presentation-container" class="relative w-screen h-screen">
+
+        <!-- ... slides 1 a 22 permanecem os mesmos ... -->
+        <div class="slide active flex flex-col justify-center items-center text-center p-8">
+            <p class="text-xl font-bold text-gray-500 mb-2">Aula 05 | CTFL 4.0 - Capítulo 1 & Seção 2.1</p>
+            <h1 class="text-5xl md:text-6xl font-black text-[#2980b9] leading-tight slide-title">Fundamentos do Teste</h1>
+            <p class="text-2xl md:text-3xl mt-4 text-gray-700 max-w-3xl mx-auto">O que é, por que fazemos e como o teste se encaixa no ciclo de vida do desenvolvimento.</p>
+        </div>
+        <div class="slide flex flex-col justify-center items-center p-8">
+            <h2 class="text-4xl font-bold text-center mb-8 slide-title">Agenda da Aula</h2>
+            <div class="card max-w-2xl w-full text-left">
+                <ul class="text-xl space-y-4 list-disc list-inside">
+                    <li><b class="highlight">O Que é Teste?</b> (Objetivos, Teste vs. Depuração)</li>
+                    <li><b class="highlight">Por Que Testar é Necessário?</b> (Sucesso, QA vs. QC, Causa-Raiz)</li>
+                    <li><b class="highlight">Os 7 Princípios Fundamentais do Teste</b></li>
+                    <li><b class="highlight">O Processo de Teste</b> (Atividades, Papéis e Habilidades)</li>
+                    <li><b class="highlight">Teste e o Ciclo de Vida de Desenvolvimento</b> (SDLC)</li>
+                </ul>
+            </div>
+        </div>
+        <div class="slide flex flex-col justify-center items-center text-center p-8">
+            <h2 class="text-4xl font-bold mb-8 slide-title">Afinal, o que é Teste de Software?</h2>
+            <div class="card max-w-4xl text-xl text-left space-y-4">
+                <p>Teste <b class="highlight">não é apenas executar o programa</b>. É um conjunto de atividades para descobrir defeitos e avaliar a qualidade dos artefactos de software.</p>
+                <p class="mt-4 p-4 bg-blue-50 border-l-4 border-blue-500 rounded-r-lg">O teste envolve tanto a <b>Verificação</b> (o sistema atende aos requisitos?) quanto a <b>Validação</b> (o sistema atende às necessidades do utilizador?).</p>
+            </div>
+        </div>
+        <div class="slide flex flex-col justify-center items-center p-8">
+            <h2 class="text-4xl font-bold text-center mb-8 slide-title">Por que Testamos? Objetivos Principais</h2>
+            <div class="max-w-4xl w-full grid md:grid-cols-2 gap-6 text-lg">
+                <div class="card">Detectar falhas e defeitos.</div>
+                <div class="card">Verificar se os requisitos foram atendidos.</div>
+                <div class="card">Reduzir o nível de risco de falha em produção.</div>
+                <div class="card">Fornecer informação para a tomada de decisão.</div>
+                <div class="card">Avaliar produtos de trabalho (requisitos, código, etc.).</div>
+                <div class="card">Criar confiança na qualidade do produto.</div>
+            </div>
+        </div>
+        <div class="slide flex flex-col justify-center items-center p-8">
+            <h2 class="text-4xl font-bold text-center mb-8 slide-title">Teste vs. Depuração</h2>
+            <div class="max-w-5xl w-full grid md:grid-cols-2 gap-8 text-center">
+                <div class="card">
+                    <h3 class="font-bold text-2xl mb-4 highlight">Teste</h3>
+                    <p class="text-5xl mb-4">🕵️</p>
+                    <p class="text-lg">Atividade de <b class="highlight">encontrar falhas</b>. Mostra que um problema existe.</p>
+                    <p class="mt-4 text-sm text-gray-500">Realizado por testadores (ou desenvolvedores).</p>
+                </div>
+                <div class="card">
+                    <h3 class="font-bold text-2xl mb-4 highlight">Depuração</h3>
+                    <p class="text-5xl mb-4">👨‍⚕️</p>
+                    <p class="text-lg">Atividade de <b class="highlight">encontrar a causa-raiz</b> de uma falha (o defeito) e corrigi-la.</p>
+                     <p class="mt-4 text-sm text-gray-500">Realizado por desenvolvedores.</p>
+                </div>
+            </div>
+        </div>
+        <div class="slide flex flex-col justify-center items-center p-8">
+            <h2 class="text-4xl font-bold text-center mb-8 slide-title">Por que o Teste é Indispensável?</h2>
+            <div class="max-w-4xl text-xl space-y-6">
+                <p>Um erro humano (engano) ➡️ gera um defeito (bug) no código ➡️ que, quando executado, causa uma falha no sistema.</p>
+                <div class="card text-center">
+                    <p>O teste é um meio económico de <b class="highlight">detectar defeitos antes que eles se tornem falhas</b> para o utilizador final, contribuindo diretamente para o sucesso do projeto.</p>
+                </div>
+                 <div class="card text-center bg-yellow-50 border-yellow-400">
+                    <p>Além disso, o teste pode ser um requisito contratual, legal ou regulatório. Em muitas indústrias (financeira, saúde, aviação), <b class="highlight">não testar é ilegal</b>.</p>
+                </div>
+            </div>
+        </div>
+        <div class="slide flex flex-col justify-center items-center p-8">
+            <h2 class="text-4xl font-bold text-center mb-8 slide-title">Garantia da Qualidade (QA) vs. Controle de Qualidade (QC)</h2>
+             <div class="max-w-5xl w-full grid md:grid-cols-2 gap-8 text-center">
+                <div class="card">
+                    <h3 class="font-bold text-2xl mb-4 highlight">Garantia da Qualidade (QA)</h3>
+                    <p class="text-lg">Focada em <b class="highlight">processos</b>. É <b class="highlight">preventiva</b>. Garante que os processos corretos são seguidos para evitar defeitos.</p>
+                    <p class="mt-4 text-sm text-gray-500">Ex: Definir padrões de codificação, realizar auditorias de processo.</p>
+                </div>
+                <div class="card border-2 border-blue-500 ring-4 ring-blue-100">
+                    <h3 class="font-bold text-2xl mb-4 highlight">Controle de Qualidade (QC)</h3>
+                    <p class="text-lg">Focado no <b class="highlight">produto</b>. É <b class="highlight">corretivo</b>. Encontra defeitos no produto final.</p>
+                     <p class="mt-4 text-sm text-gray-500"><b>O Teste de Software é a principal atividade de QC.</b></p>
+                </div>
+            </div>
+        </div>
+        <div class="slide flex flex-col justify-center items-center p-8 text-center">
+             <h2 class="text-4xl font-bold slide-title">Os 7 Princípios Fundamentais do Teste</h2>
+             <p class="mt-4 text-xl text-gray-600">Diretrizes gerais que se aplicam a todos os testes.</p>
+        </div>
+        <div class="slide flex flex-col justify-center items-center p-8">
+             <h2 class="text-3xl font-bold text-center mb-8 slide-title">Princípios 1 & 2</h2>
+             <div class="max-w-4xl w-full space-y-6">
+                <div class="card text-left">
+                    <h3 class="font-bold text-xl mb-2">1. Teste demonstra a presença de defeitos, não a ausência</h3>
+                    <p class="text-gray-600">O teste pode mostrar que existem bugs, mas <strong>não pode provar que não existem mais bugs</strong>. Nenhum defeito encontrado não significa um software perfeito.</p>
+                </div>
+                <div class="card text-left">
+                    <h3 class="font-bold text-xl mb-2">2. Teste exaustivo é impossível</h3>
+                    <p class="text-gray-600">Testar todas as combinações de entradas e condições é inviável. Por isso, usamos <strong>análise de risco e prioridades</strong> para focar os esforços onde realmente importa.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide flex flex-col justify-center items-center p-8">
+             <h2 class="text-3xl font-bold text-center mb-8 slide-title">Princípio 3: Teste Antecipado</h2>
+             <div class="card max-w-3xl text-center">
+                 <p class="text-lg">Encontrar e corrigir um defeito durante a fase de <b class="highlight">requisitos</b> é ordens de magnitude mais barato do que corrigi-lo em <b class="highlight">produção</b>.</p>
+                 <p class="mt-4 text-sm">Esta é a justificação económica mais forte para a abordagem <b>Shift-Left</b>.</p>
+                 <p class="mt-4 text-sm text-gray-500">Referência: A "Regra de 10" de Myers, discutida na Aula 02.</p>
+             </div>
+        </div>
+
+        <div class="slide flex flex-col justify-center items-center p-8">
+             <h2 class="text-3xl font-bold text-center mb-8 slide-title">Princípios 4 & 5</h2>
+             <div class="max-w-4xl w-full space-y-6">
+                <div class="card text-left">
+                    <h3 class="font-bold text-xl mb-2">4. Agrupamento de Defeitos</h3>
+                    <p class="text-gray-600">Um número pequeno de módulos geralmente contém a maioria dos defeitos (Princípio de Pareto). Identificar esses "clusters" otimiza o esforço de teste.</p>
+                </div>
+                <div class="card text-left">
+                    <h3 class="font-bold text-xl mb-2">5. Paradoxo do Pesticida</h3>
+                    <p class="text-gray-600">Repetir os mesmos testes várias vezes deixa de encontrar novos defeitos. É preciso revisar e criar novos casos de teste para exercitar outras partes do software.</p>
+                </div>
+            </div>
+        </div>
+        <div class="slide flex flex-col justify-center items-center p-8">
+             <h2 class="text-3xl font-bold text-center mb-8 slide-title">Princípios 6 & 7</h2>
+             <div class="max-w-4xl w-full space-y-6">
+                 <div class="card text-left">
+                    <h3 class="font-bold text-xl mb-2">6. Teste depende do contexto</h3>
+                    <p class="text-gray-600">A forma de testar um e-commerce é diferente de testar o software de um pacemaker. O contexto (risco, tecnologia, mercado) dita a estratégia de teste.</p>
+                </div>
+                 <div class="card text-left">
+                    <h3 class="font-bold text-xl mb-2">7. A Ilusão da Ausência de Defeitos</h3>
+                    <p class="text-gray-600">Entregar um software sem bugs que não atende às necessidades do utilizador é inútil. O objetivo final não é "zero bugs", é "atender aos requisitos e agregar valor".</p>
+                </div>
+            </div>
+        </div>
+        <div class="slide flex flex-col justify-center items-center p-8">
+            <h2 class="text-4xl font-bold text-center mb-8 slide-title">O Processo de Teste: Um Ciclo de Engenharia</h2>
+            <p class="max-w-3xl text-xl text-center mb-8">O processo de teste é mais do que apenas executar: é um conjunto de 7 atividades principais, iterativas e sobrepostas.</p>
+             <div class="card max-w-5xl w-full">
+                <div class="text-xs md:text-sm flex flex-wrap justify-center items-center gap-2">
+                    <div class="p-2 bg-gray-200 rounded-lg"><b>1. Planejamento</b></div>
+                    <div class="font-bold">→</div>
+                    <div class="p-2 bg-blue-100 rounded-lg"><b>2. Monitorização e Controle</b></div>
+                    <div class="font-bold">→</div>
+                    <div class="p-2 bg-green-100 rounded-lg"><b>3. Análise</b></div>
+                    <div class="font-bold">→</div>
+                    <div class="p-2 bg-yellow-100 rounded-lg"><b>4. Modelagem</b></div>
+                    <div class="font-bold">→</div>
+                    <div class="p-2 bg-orange-100 rounded-lg"><b>5. Implementação</b></div>
+                    <div class="font-bold">→</div>
+                    <div class="p-2 bg-red-100 rounded-lg"><b>6. Execução</b></div>
+                    <div class="font-bold">→</div>
+                    <div class="p-2 bg-purple-100 rounded-lg"><b>7. Conclusão</b></div>
+                </div>
+             </div>
+        </div>
+        <div class="slide flex flex-col justify-center items-center p-8">
+            <h2 class="text-4xl font-bold text-center mb-8 slide-title">O Que Produzimos? O Testware</h2>
+            <p class="max-w-3xl text-xl text-center mb-8">"Testware" é o conjunto de todos os produtos de trabalho (documentos, scripts, etc.) criados durante o processo de teste.</p>
+            <div class="card max-w-4xl w-full">
+                <ul class="text-left text-lg space-y-3 list-disc list-inside">
+                    <li><b>Planejamento:</b> Plano de Teste, Registro de Riscos.</li>
+                    <li><b>Análise e Modelagem:</b> Condições de Teste, Casos de Teste.</li>
+                    <li><b>Implementação:</b> Scripts de Teste Automatizados, Dados de Teste, Suites de Teste.</li>
+                    <li><b>Execução:</b> Registros de Teste (Logs), Relatórios de Defeitos.</li>
+                    <li><b>Conclusão:</b> Relatório de Conclusão do Teste, Lições Aprendidas.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="slide flex flex-col justify-center items-center text-center p-8">
+            <h2 class="text-4xl font-bold mb-8 slide-title">Papéis, Habilidades e Mentalidade</h2>
+        </div>
+        <div class="slide flex flex-col justify-center items-center p-8">
+             <h2 class="text-3xl font-bold text-center mb-8 slide-title">Papéis Típicos no Teste</h2>
+             <div class="max-w-5xl w-full grid md:grid-cols-2 gap-8">
+                <div class="card">
+                    <h3 class="font-bold text-xl mb-2 highlight">Gerente de Teste / Líder de Teste</h3>
+                    <p>Responsável pelo planejamento, monitorização e controle. Define a estratégia, gere os recursos e comunica os resultados.</p>
+                </div>
+                 <div class="card">
+                    <h3 class="font-bold text-xl mb-2 highlight">Testador / Analista de Teste</h3>
+                    <p>Responsável pela análise, modelagem, implementação e execução. Cria os casos de teste, executa-os e reporta os defeitos.</p>
+                </div>
+            </div>
+             <p class="mt-8 text-lg">Em equipes ágeis, estas responsabilidades podem ser partilhadas pela equipe.</p>
+        </div>
+        <div class="slide flex flex-col justify-center items-center p-8">
+            <h2 class="text-3xl font-bold text-center mb-8 slide-title">Habilidades Genéricas Necessárias para Testar</h2>
+            <div class="card max-w-4xl w-full">
+                 <ul class="text-left text-lg space-y-3 list-disc list-inside">
+                    <li><b>Conhecimento sobre testes:</b> Entender os fundamentos, técnicas e processos.</li>
+                    <li><b>Meticulosidade e Curiosidade:</b> Ter atenção ao detalhe e uma vontade de explorar para encontrar defeitos ocultos.</li>
+                    <li><b>Boas habilidades de comunicação:</b> Reportar defeitos de forma clara, objetiva e construtiva.</li>
+                    <li><b>Pensamento analítico e crítico:</b> Questionar pressupostos e analisar problemas de forma lógica.</li>
+                    <li><b>Conhecimento técnico:</b> Entender a tecnologia subjacente para testar de forma mais eficiente (ex: usar ferramentas).</li>
+                    <li><b>Conhecimento do domínio:</b> Entender o negócio para criar cenários de teste realistas e relevantes.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="slide flex flex-col justify-center items-center p-8">
+            <h2 class="text-3xl font-bold text-center mb-8 slide-title">A Abordagem de Equipe Completa</h2>
+            <div class="card max-w-3xl text-center">
+                 <p class="text-2xl font-bold mb-4 highlight">"A qualidade é responsabilidade de todos."</p>
+                 <p class="text-lg">Qualquer membro da equipe com as competências necessárias pode contribuir para o teste. Desenvolvedores, testadores e analistas de negócio colaboram para garantir a qualidade.</p>
+                 <p class="mt-6 text-sm">Esta prática, vinda do Extreme Programming (XP), melhora a comunicação e cria sinergia.</p>
+            </div>
+        </div>
+        <div class="slide flex flex-col justify-center items-center p-8">
+            <h2 class="text-3xl font-bold text-center mb-8 slide-title">A Importância da Independência no Teste</h2>
+            <p class="text-xl text-center max-w-4xl mb-8">Um certo grau de independência torna o testador mais eficaz, pois evita o <b>viés de confirmação</b>.</p>
+            <div class="card w-full max-w-5xl text-center">
+                <p class="font-bold mb-4">Níveis de Independência (do menor para o maior):</p>
+                <div class="space-y-2">
+                    <p><b>1.</b> O desenvolvedor testa o seu próprio código. → <b class="text-red-500">Menos eficaz</b></p>
+                    <p><b>2.</b> Outro desenvolvedor da mesma equipe testa o código.</p>
+                    <p><b>3.</b> Um testador de uma equipe de teste independente testa o sistema.</p>
+                    <p><b>4.</b> Alguém de fora da organização (ex: um beta tester) testa o produto. → <b class="text-green-500">Mais eficaz</b></p>
+                </div>
+            </div>
+        </div>
+        <div class="slide flex flex-col justify-center items-center p-8">
+            <h2 class="text-4xl font-bold text-center mb-8 slide-title">O Viés de Confirmação</h2>
+            <p class="text-xl text-center max-w-4xl mb-8">É a tendência natural do cérebro humano de procurar, interpretar e lembrar de informações que <b class="highlight">confirmam as nossas crenças pré-existentes</b>, ignorando o que as contradiz.</p>
+            <div class="grid md:grid-cols-2 gap-8 max-w-5xl">
+                <div class="card">
+                    <h3 class="font-bold text-xl mb-2">Analogia: O "Pai do Código"</h3>
+                    <p>Um desenvolvedor vê o seu código como um "filho". Inconscientemente, ele vai testar os caminhos que <b class="highlight">espera que funcionem</b> (o "caminho feliz"), porque ele acredita na sua criação. Ele não tem a mentalidade de "quebrar" o próprio trabalho.</p>
+                </div>
+                <div class="card">
+                    <h3 class="font-bold text-xl mb-2">Exemplo Real: Apple Antennagate</h3>
+                    <p>No iPhone 4, segurar o smartphone de uma certa forma causava perda de sinal. Os engenheiros da Apple, provavelmente, testaram o aparelho de formas que <b class="highlight">confirmavam o seu bom design</b>. Um testador independente, sem esse viés, tem mais probabilidade de explorar usos "incorretos" e descobrir o problema.</p>
+                </div>
+            </div>
+        </div>
+        <div class="slide flex flex-col justify-center items-center text-center p-8">
+             <p class="text-lg font-bold text-gray-500">Seção 2.1</p>
+            <h2 class="text-4xl font-bold mb-8 slide-title">Teste e o Ciclo de Vida de Software (SDLC)</h2>
+            <p class="text-xl -mt-6 text-gray-500">(Software Development Life Cycle)</p>
+            <p class="text-xl text-center max-w-4xl mt-4">O teste não é uma fase isolada no final. As atividades de teste devem ser adaptadas e integradas ao modelo de desenvolvimento escolhido.</p>
+        </div>
+        <div class="slide flex flex-col justify-center items-center p-8">
+            <h2 class="text-4xl font-bold text-center mb-8 slide-title">Como o SDLC Impacta o Teste?</h2>
+            <div class="grid md:grid-cols-2 gap-8 max-w-5xl">
+                 <div class="card">
+                    <h3 class="font-bold text-xl mb-2 highlight">Modelo Sequencial (Cascata)</h3>
+                    <p>O teste dinâmico ocorre tarde no processo. O foco inicial é em <b>testes estáticos</b> (revisões de requisitos e design). A automação é mais difícil de implementar precocemente.</p>
+                </div>
+                 <div class="card">
+                    <h3 class="font-bold text-xl mb-2 highlight">Modelo Iterativo/Incremental (Ágil)</h3>
+                    <p>O teste ocorre em todas as iterações (Sprints). Há um foco enorme em <b>automação de testes de regressão</b> para garantir que as novas funcionalidades não quebram as existentes.</p>
+                </div>
+            </div>
+        </div>
+        <div class="slide flex flex-col justify-center items-center p-8">
+             <h2 class="text-4xl font-bold text-center mb-8 slide-title">Boas Práticas de Teste em QUALQUER Ciclo de Vida</h2>
+             <div class="card w-full max-w-3xl">
+                <ul class="text-left text-xl space-y-4 list-disc list-inside">
+                    <li>Para cada atividade de desenvolvimento, existe uma atividade de teste correspondente.</li>
+                    <li>A análise e o projeto de testes começam o mais cedo possível.</li>
+                    <li>Os testadores participam nas revisões dos produtos de trabalho (requisitos, design) desde o início.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="slide flex flex-col justify-center items-center p-8">
+            <h2 class="text-4xl font-bold text-center mb-8 slide-title">A Abordagem "Shift-Left"</h2>
+            <p class="text-xl text-center max-w-4xl mb-8">"Shift-Left" significa, literalmente, "deslocar para a esquerda" as atividades de teste no cronograma do projeto, ou seja, <b>começar a testar o mais cedo possível</b>.</p>
+             <div class="card w-full max-w-4xl">
+                 <h3 class="font-bold text-xl mb-4 text-center highlight">Exemplos de "Shift-Left" na Prática</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-left text-sm">
+                    <p>✅ Escrever casos de teste antes de o código ser escrito.</p>
+                    <p>✅ Envolver os testadores na revisão dos requisitos.</p>
+                    <p>✅ Realizar testes de performance a nível de componente.</p>
+                    <p>✅ Automatizar testes unitários como parte do processo de CI/CD.</p>
+                </div>
+            </div>
+        </div>
+        <div class="slide flex flex-col justify-center items-center p-8">
+            <h2 class="text-4xl font-bold text-center mb-8 slide-title">Visualizando o SDLC: O Modelo V</h2>
+            <div class="card max-w-6xl w-full flex flex-col md:flex-row items-center gap-8">
+                <div class="md:w-2/5 text-left">
+                    <h3 class="font-bold text-2xl mb-4 highlight">O que é?</h3>
+                    <p class="text-lg">Uma evolução do modelo Cascata que ilustra como as atividades de teste se relacionam com cada fase de desenvolvimento.</p>
+                    <p class="mt-4 text-lg">Cada fase de <b>verificação</b> (lado esquerdo) tem uma fase de <b>validação</b> (lado direito) correspondente.</p>
+                    <p class="mt-6 p-3 bg-blue-50 rounded-lg text-base"><b>Ideia Central:</b> O planejamento e o design dos testes ocorrem em paralelo com o desenvolvimento, não apenas no final.</p>
+                </div>
+                <div class="md:w-3/5">
+                    <img src="https://d1ldvf68ux039x.cloudfront.net/thumbs/photos/2001/6016376/1000w_q95.jpg" alt="Diagrama do Modelo V" class="rounded-lg shadow-md w-full object-contain max-h-[60vh]">
+                </div>
+            </div>
+        </div>
+        <div class="slide flex flex-col justify-center items-center p-8">
+            <h2 class="text-4xl font-bold text-center mb-8 slide-title">Uma Evolução: O Modelo W</h2>
+            <div class="card max-w-6xl w-full flex flex-col md:flex-row items-center gap-8">
+                <div class="md:w-2/5 text-left">
+                    <h3 class="font-bold text-2xl mb-4 highlight">O que é?</h3>
+                    <p class="text-lg">Uma evolução do Modelo V que enfatiza a execução de atividades de teste <b>em paralelo</b> com as atividades de desenvolvimento desde o início.</p>
+                    <p class="mt-4 text-lg">Ele duplica o "V", criando um V para desenvolvimento e outro para teste.</p>
+                    <p class="mt-6 p-3 bg-blue-50 rounded-lg text-base"><b>Ideia Central:</b> Para cada atividade de desenvolvimento, existe uma atividade de teste correspondente. Não se testa apenas o produto; testa-se também os artefactos.</p>
+                </div>
+                <div class="md:w-3/5">
+                    <img src="https://shiftasia.com/wp-content/uploads/2020/07/www.png" alt="Diagrama do Modelo W" class="rounded-lg shadow-md w-full object-contain max-h-[60vh]">
+                </div>
+            </div>
+        </div>
+        <div class="slide flex flex-col justify-center items-center p-4 bg-white">
+            <h2 class="text-3xl font-bold text-center mb-4 slide-title">Modelo W: Visão Detalhada</h2>
+            <div class="w-full h-[80vh] flex items-center justify-center">
+                <img src="https://shiftasia.com/wp-content/uploads/2020/07/www.png" alt="Diagrama Detalhado do Modelo W" class="rounded-lg shadow-2xl object-contain max-w-full max-h-full">
+            </div>
+        </div>
+        <div class="slide flex flex-col justify-center items-center p-8">
+            <h2 class="text-4xl font-bold text-center mb-8 slide-title">Abordagens "Test-First"</h2>
+            <p class="text-xl text-center max-w-4xl mb-8">O "Shift-Left" levado ao extremo: os testes são escritos ANTES do código de produção.</p>
+             <div class="card w-full max-w-4xl space-y-4">
+                <p><b>TDD (Test-Driven Development):</b> O desenvolvedor escreve um teste unitário automatizado que falha, depois escreve o código mínimo para o fazer passar, e refatora.</p>
+                <p><b>ATDD (Acceptance Test-Driven Development):</b> A equipe (cliente, dev, tester) cria testes de aceitação (a partir dos requisitos) antes do desenvolvimento da funcionalidade.</p>
+                <p><b>BDD (Behavior-Driven Development):</b> Uma evolução do ATDD que descreve o comportamento do sistema numa linguagem natural (Ex: Given/When/Then).</p>
+            </div>
+        </div>
+        <div class="slide flex flex-col justify-center items-center p-8">
+            <h2 class="text-4xl font-bold text-center mb-8 slide-title">DevOps e a Melhoria Contínua</h2>
+            <div class="grid md:grid-cols-2 gap-8 max-w-5xl">
+                <div class="card">
+                    <h3 class="font-bold text-xl mb-2 highlight">DevOps e Teste</h3>
+                    <p>DevOps visa a unir Desenvolvimento e Operações. O teste é um pilar central, com foco em <b>automação contínua (CI/CD)</b> para fornecer feedback rápido sobre a qualidade do código a cada alteração.</p>
+                </div>
+                <div class="card">
+                    <h3 class="font-bold text-xl mb-2 highlight">Retrospectivas</h3>
+                    <p>Reuniões regulares para discutir: O que correu bem? O que correu mal? O que podemos melhorar? São um mecanismo fundamental para a <b>melhoria contínua</b> do processo de teste.</p>
+                </div>
+            </div>
+        </div>
+        <div class="slide flex flex-col justify-center items-center text-center p-8 bg-[#2c3e50] text-white">
+             <h2 class="text-4xl font-bold mb-8 slide-title">Conclusão: O Teste é uma Atividade de Engenharia Integrada</h2>
+            <div class="max-w-3xl mx-auto text-left text-xl space-y-4">
+                <p>✅ O teste é um processo estruturado, não um evento aleatório.</p>
+                <p>✅ A qualidade é responsabilidade de toda a equipe, mas a independência do teste agrega um valor imenso.</p>
+                <p>✅ A forma como desenvolvemos (SDLC) dita a forma como testamos. O teste deve adaptar-se ao contexto do projeto para ser eficaz.</p>
+            </div>
+        </div>
+        <div class="slide flex flex-col justify-center items-center text-center p-8">
+             <h2 class="text-4xl font-bold mb-8 slide-title">Referências e Próximos Passos</h2>
+             <div class="card max-w-2xl w-full text-left">
+                <h3 class="font-bold text-xl mb-4">Material de Referência:</h3>
+                <ul class="list-disc list-inside space-y-2">
+                    <li>ISTQB Certified Tester Foundation Level Syllabus v4.0</li>
+                    <li><a href="https://www.istqb.org" target="_blank" class="text-blue-600 hover:underline">www.istqb.org</a></li>
+                    <li><a href="https://bstqb.org.br/" target="_blank" class="text-blue-600 hover:underline">bstqb.org.br</a></li>
+                </ul>
+                <h3 class="font-bold text-xl mt-6 mb-4">Na Próxima Aula:</h3>
+                <p>Vamos aprofundar os <b>Níveis e Tipos de Teste</b> (Seção 2.2 do CTFL) e começar a explorar o <b>Teste Estático</b> (Capítulo 3).</p>
+             </div>
+        </div>
+
+    </div>
+
+    <!-- Navegação e Botão Gemini -->
+    <div class="fixed bottom-0 left-0 right-0 p-4 bg-white/80 backdrop-blur-lg flex justify-between items-center shadow-t-lg border-t border-gray-200">
+        <button id="prevBtn" class="bg-[#34495e] hover:bg-[#2c3e50] text-white font-bold py-2 px-6 rounded-lg transition-all">Anterior</button>
+        <div id="slide-counter" class="text-lg font-semibold text-gray-700"></div>
+        <button id="nextBtn" class="bg-[#34495e] hover:bg-[#2c3e50] text-white font-bold py-2 px-6 rounded-lg transition-all">Próximo</button>
+    </div>
+
+    <button id="gemini-btn" class="fixed bottom-20 right-5 bg-gradient-to-br from-purple-500 to-indigo-600 text-white p-4 rounded-full shadow-lg hover:scale-110 transition-transform">
+        <span class="text-2xl">✨</span>
+    </button>
+    
+    <!-- Modal Gemini -->
+    <div id="gemini-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full p-6 relative">
+            <h3 class="text-2xl font-bold mb-4 text-[#2980b9]">✨ Explicar Conceito</h3>
+            <div id="gemini-content" class="text-gray-700 space-y-4 max-h-[60vh] overflow-y-auto">
+                <div id="gemini-loader" class="flex justify-center items-center h-32">
+                    <div class="spinner"></div>
+                </div>
+                <div id="gemini-response" class="hidden"></div>
+            </div>
+            <button id="close-modal-btn" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-2xl">&times;</button>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const slideCounter = document.getElementById('slide-counter');
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+
+            const geminiBtn = document.getElementById('gemini-btn');
+            const geminiModal = document.getElementById('gemini-modal');
+            const closeModalBtn = document.getElementById('close-modal-btn');
+            const geminiLoader = document.getElementById('gemini-loader');
+            const geminiResponse = document.getElementById('gemini-response');
+
+            function showSlide(index) {
+                slides.forEach((slide, i) => {
+                    slide.classList.toggle('active', i === index);
+                });
+                slideCounter.textContent = `Slide ${index + 1} de ${totalSlides}`;
+                prevBtn.disabled = index === 0;
+                prevBtn.classList.toggle('opacity-50', index === 0);
+                nextBtn.disabled = index === totalSlides - 1;
+                nextBtn.classList.toggle('opacity-50', index === totalSlides - 1);
+            }
+
+            function changeSlide(direction) {
+                currentSlide += direction;
+                if (currentSlide < 0) currentSlide = 0;
+                if (currentSlide >= totalSlides) currentSlide = totalSlides - 1;
+                showSlide(currentSlide);
+            }
+
+            prevBtn.addEventListener('click', () => changeSlide(-1));
+            nextBtn.addEventListener('click', () => changeSlide(1));
+            
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight' && !nextBtn.disabled) nextBtn.click();
+                else if (e.key === 'ArrowLeft' && !prevBtn.disabled) prevBtn.click();
+                else if (e.key === 'Escape' && !geminiModal.classList.contains('hidden')) {
+                    closeModal();
+                }
+            });
+            
+            function openModal() {
+                geminiModal.classList.remove('hidden');
+                geminiResponse.classList.add('hidden');
+                geminiLoader.style.display = 'flex';
+                geminiResponse.innerHTML = '';
+            }
+
+            function closeModal() {
+                geminiModal.classList.add('hidden');
+            }
+
+            geminiBtn.addEventListener('click', async () => {
+                const activeSlide = document.querySelector('.slide.active');
+                const titleElement = activeSlide.querySelector('.slide-title');
+                const concept = titleElement ? titleElement.innerText : "Teste de Software";
+
+                openModal();
+
+                try {
+                    const text = await callGeminiAPI(concept);
+                    geminiLoader.style.display = 'none';
+                    geminiResponse.innerHTML = text.replace(/\n/g, '<br>');
+                    geminiResponse.classList.remove('hidden');
+                } catch (error) {
+                    geminiLoader.style.display = 'none';
+                    geminiResponse.innerHTML = '<p class="text-red-500">Desculpe, ocorreu um erro ao buscar a explicação. Tente novamente.</p>';
+                    geminiResponse.classList.remove('hidden');
+                }
+            });
+
+            closeModalBtn.addEventListener('click', closeModal);
+            geminiModal.addEventListener('click', (e) => {
+                if (e.target === geminiModal) {
+                    closeModal();
+                }
+            });
+
+            async function callGeminiAPI(concept) {
+                const apiKey = "";
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+                
+                const systemPrompt = "Você é um assistente de ensino especialista em Teste e Qualidade de Software. Explique o seguinte conceito de forma simples e clara para um estudante de Análise e Desenvolvimento de Sistemas, usando uma analogia do dia a dia quando apropriado. A resposta deve ter no máximo 2 parágrafos concisos.";
+                
+                const payload = {
+                    systemInstruction: {
+                        parts: [{ text: systemPrompt }]
+                    },
+                    contents: [{
+                        parts: [{ text: `O conceito a ser explicado é: "${concept}"` }]
+                    }]
+                };
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`API call failed with status: ${response.status}`);
+                }
+
+                const result = await response.json();
+                return result.candidates[0].content.parts[0].text;
+            }
+
+            const activeSlideIndex = Array.from(slides).findIndex(s => s.classList.contains('active'));
+            currentSlide = activeSlideIndex !== -1 ? activeSlideIndex : 0;
+            showSlide(currentSlide);
+        });
+    </script>
+</body>
+</html>
+

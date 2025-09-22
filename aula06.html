@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apresentação: Níveis, Tipos e Teste Estático</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #F8F7F4; color: #2c3e50; overflow: hidden; }
+        .slide {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
+            opacity: 0; transform: scale(0.98); pointer-events: none;
+        }
+        .slide.active { opacity: 1; transform: scale(1); pointer-events: auto; }
+        .highlight { color: #2980b9; }
+        .card { background-color: white; border-radius: 0.75rem; padding: 1.5rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); border: 1px solid #e5e7eb; }
+    </style>
+</head>
+<body class="flex flex-col">
+
+    <div id="presentation-container" class="relative w-screen h-screen">
+
+        <!-- Slide 1: Título -->
+        <div class="slide active flex flex-col justify-center items-center text-center p-8">
+            <p class="text-xl font-bold text-gray-500 mb-2">Aula 06 | CTFL 4.0 - Cap. 2 & 3</p>
+            <h1 class="text-5xl md:text-6xl font-black text-[#2980b9] leading-tight">A Arquitetura da Qualidade</h1>
+            <p class="text-2xl md:text-3xl mt-4 text-gray-700 max-w-3xl mx-auto">Níveis, Tipos de Teste e o poder do Teste Estático.</p>
+        </div>
+
+        <!-- Slide 2: Agenda -->
+        <div class="slide flex flex-col justify-center items-center p-8">
+            <h2 class="text-4xl font-bold text-center mb-8">Agenda da Aula</h2>
+            <div class="card max-w-2xl w-full text-left">
+                <ul class="text-xl space-y-4 list-disc list-inside">
+                    <li><b class="highlight">Níveis de Teste:</b> A jornada da Unidade ao Sistema.</li>
+                    <li><b class="highlight">Tipos de Teste:</b> As diferentes "lentes" para avaliar a qualidade.</li>
+                    <li><b class="highlight">Teste de Manutenção:</b> Testar o que já está em produção.</li>
+                    <li><b class="highlight">Teste Estático:</b> Encontrando defeitos sem executar o código.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 3: Níveis de Teste - Introdução -->
+        <div class="slide flex flex-col justify-center items-center p-8 text-center">
+            <p class="text-lg font-bold text-gray-500">Seção 2.2</p>
+            <h2 class="text-4xl font-bold mb-8">Níveis de Teste: Construindo Confiança Camada por Camada</h2>
+            <p class="max-w-4xl text-xl mb-8">Os níveis de teste são grupos de atividades organizadas que testam o software em diferentes estágios de desenvolvimento, desde a menor parte do código até o sistema completo.</p>
+             <div class="card max-w-lg w-full">
+                <img src="https://i.imgur.com/G5gS5p7.png" alt="Pirâmide de Testes com camadas de Unidade, Integração e UI/Sistema" class="rounded-lg">
+             </div>
+        </div>
+        
+        <!-- Slide 4: Teste de Componente -->
+        <div class="slide flex flex-col justify-center items-center p-8">
+            <h2 class="text-4xl font-bold text-center mb-8">Nível 1: Teste de Componente (ou de Unidade)</h2>
+             <div class="card max-w-4xl w-full text-lg">
+                <p class="mb-4">Foca em testar componentes <b class="highlight">isoladamente</b>. É o primeiro nível de teste, geralmente realizado pelos próprios desenvolvedores.</p>
+                <div class="mt-6 p-4 bg-blue-50 border-l-4 border-blue-500 rounded-r-lg">
+                    <p class="font-bold">Exemplo Prático:</p>
+                    <p class="text-base mt-2">Testar uma função `calcularJuros(valor, taxa, tempo)` para garantir que ela retorna o valor correto para diferentes entradas (positivas, zero, negativas), independentemente do resto do sistema bancário.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Teste de Integração -->
+        <div class="slide flex flex-col justify-center items-center p-8">
+            <h2 class="text-4xl font-bold text-center mb-8">Nível 2: Teste de Integração</h2>
+            <div class="card max-w-4xl w-full text-lg">
+                <p class="mb-4">Foca em testar as <b class="highlight">interfaces e interações entre os componentes</b>. O objetivo é descobrir defeitos na "cola" que une as diferentes partes do sistema.</p>
+                <div class="mt-6 p-4 bg-blue-50 border-l-4 border-blue-500 rounded-r-lg">
+                    <p class="font-bold">Exemplo Prático:</p>
+                    <p class="text-base mt-2">Após testar o módulo de `Carrinho de Compras` e o `Gateway de Pagamento` separadamente, o teste de integração verifica se, ao clicar em "Finalizar Compra", o carrinho envia os dados corretos (valor, produtos) para o gateway e se recebe a resposta de sucesso ou falha adequadamente.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Teste de Sistema -->
+        <div class="slide flex flex-col justify-center items-center p-8">
+            <h2 class="text-4xl font-bold text-center mb-8">Nível 3: Teste de Sistema</h2>
+            <div class="card max-w-4xl w-full text-lg">
+                <p class="mb-4">Foca no <b class="highlight">comportamento do sistema como um todo</b>. Os testes são baseados nos requisitos funcionais e não funcionais e simulam o uso real do sistema de ponta a ponta.</p>
+                <div class="mt-6 p-4 bg-blue-50 border-l-4 border-blue-500 rounded-r-lg">
+                    <p class="font-bold">Exemplo Prático:</p>
+                    <p class="text-base mt-2">Numa aplicação de e-commerce, um teste de sistema validaria o fluxo completo: procurar um produto, adicioná-lo ao carrinho, fazer login, inserir um endereço, aplicar um cupão de desconto, pagar com cartão de crédito e receber o e-mail de confirmação.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Teste de Aceitação -->
+        <div class="slide flex flex-col justify-center items-center p-8">
+            <h2 class="text-4xl font-bold text-center mb-8">Nível 4: Teste de Aceitação</h2>
+            <div class="card max-w-4xl w-full text-lg">
+                <p class="mb-4">Focado em <b class="highlight">validar</b> se o sistema atende às necessidades do negócio e do utilizador. Não se trata de encontrar defeitos, mas de <b class="highlight">estabelecer confiança</b> para o lançamento.</p>
+                <div class="mt-6 p-4 bg-blue-50 border-l-4 border-blue-500 rounded-r-lg">
+                    <p class="font-bold">Exemplo Prático:</p>
+                    <p class="text-base mt-2">O cliente final (ou um grupo de utilizadores-piloto) realiza as suas tarefas do dia a dia no novo sistema de faturação para confirmar que ele é intuitivo, cumpre os requisitos legais e está pronto para ser implementado na empresa. (Ex: Teste Alfa e Beta).</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Tipos de Teste -->
+        <div class="slide flex flex-col justify-center items-center p-8 text-center">
+            <h2 class="text-4xl font-bold mb-8">Tipos de Teste: As "Lentes" da Qualidade</h2>
+            <p class="max-w-4xl text-xl mb-8">Enquanto os **Níveis de Teste** respondem "Onde testamos?", os **Tipos de Teste** respondem "O que estamos a procurar?". Um tipo de teste pode ser aplicado em múltiplos níveis.</p>
+        </div>
+        
+        <!-- Slide 9: Teste Funcional -->
+        <div class="slide flex flex-col justify-center items-center p-8">
+            <h2 class="text-4xl font-bold text-center mb-8">Tipo de Teste: Funcional</h2>
+            <div class="card max-w-3xl text-center">
+                <p class="text-5xl mb-4">⚙️</p>
+                <p class="text-2xl font-bold mb-4 highlight">O que o sistema FAZ?</p>
+                <p class="text-lg">Avalia as funções que um sistema deve executar. Baseia-se nos requisitos funcionais e foca na **correção, integridade e adequação** do comportamento do software.</p>
+                 <p class="mt-6 p-3 bg-gray-100 rounded-lg text-base"><b>Exemplo:</b> Verificar se o botão "Guardar" realmente guarda as informações no banco de dados.</p>
+            </div>
+        </div>
+
+        <!-- Slide 10: Teste Não-Funcional -->
+        <div class="slide flex flex-col justify-center items-center p-8">
+            <h2 class="text-4xl font-bold text-center mb-8">Tipo de Teste: Não-Funcional</h2>
+             <div class="card max-w-3xl text-center">
+                <p class="text-5xl mb-4">⚡</p>
+                <p class="text-2xl font-bold mb-4 highlight">QUÃO BEM o sistema se comporta?</p>
+                <p class="text-lg">Avalia as características de qualidade do software, como **performance, usabilidade, segurança, confiabilidade, etc.** (baseado na norma ISO 25010).</p>
+                <p class="mt-6 p-3 bg-gray-100 rounded-lg text-base"><b>Exemplo:</b> Verificar se a página de login carrega em menos de 2 segundos com 100 utilizadores simultâneos.</p>
+            </div>
+        </div>
+
+        <!-- Slide 11: Caixa-Preta vs. Caixa-Branca -->
+        <div class="slide flex flex-col justify-center items-center p-8">
+            <h2 class="text-4xl font-bold text-center mb-8">Abordagens de Teste: Caixa-Preta vs. Caixa-Branca</h2>
+             <div class="max-w-5xl w-full grid md:grid-cols-2 gap-8 text-center">
+                <div class="card">
+                    <h3 class="font-bold text-2xl mb-4 highlight">Teste Caixa-Preta</h3>
+                    <p class="text-5xl mb-4">⬛</p>
+                    <p class="text-lg">Os testes são derivados das especificações (requisitos) <b class="highlight">sem conhecimento da estrutura interna</b> do código. O sistema é visto como uma "caixa preta".</p>
+                </div>
+                <div class="card">
+                    <h3 class="font-bold text-2xl mb-4 highlight">Teste Caixa-Branca</h3>
+                    <p class="text-5xl mb-4">⬜</p>
+                    <p class="text-lg">Os testes são derivados da <b class="highlight">estrutura interna do código</b> (ex: lógica, branches, loops). Requer acesso e conhecimento do código-fonte.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12: Teste de Confirmação e Regressão -->
+        <div class="slide flex flex-col justify-center items-center p-8">
+            <h2 class="text-4xl font-bold text-center mb-8">Testes Relacionados à Mudança</h2>
+             <div class="max-w-5xl w-full grid md:grid-cols-2 gap-8 text-center">
+                <div class="card">
+                    <h3 class="font-bold text-2xl mb-4 highlight">Teste de Confirmação (Re-teste)</h3>
+                     <p class="text-5xl mb-4">✔️</p>
+                    <p class="text-lg">Executado para confirmar que um <b class="highlight">defeito previamente reportado foi corrigido com sucesso</b>.</p>
+                </div>
+                <div class="card">
+                    <h3 class="font-bold text-2xl mb-4 highlight">Teste de Regressão</h3>
+                    <p class="text-5xl mb-4">🔄</p>
+                    <p class="text-lg">Executado para garantir que uma mudança (uma nova funcionalidade ou a correção de um defeito) <b class="highlight">não introduziu novos defeitos</b> em partes do sistema que antes funcionavam.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 13: Teste de Manutenção -->
+        <div class="slide flex flex-col justify-center items-center p-8">
+            <p class="text-lg font-bold text-gray-500">Seção 2.3</p>
+            <h2 class="text-4xl font-bold text-center mb-8">Teste de Manutenção</h2>
+            <div class="card max-w-3xl w-full text-lg">
+                <p class="mb-4">Ocorre quando um sistema <b class="highlight">já em produção</b> sofre alterações. O escopo e o rigor do teste dependem do risco e do tamanho da mudança.</p>
+                 <p class="mt-4 text-sm">Vamos explorar os principais gatilhos para este tipo de teste.</p>
+            </div>
+        </div>
+        
+        <!-- Slide 14 (NOVO) -->
+        <div class="slide flex flex-col justify-center items-center p-8">
+            <h2 class="text-4xl font-bold text-center mb-8">Manutenção: Testando Modificações</h2>
+             <div class="card max-w-4xl w-full text-lg">
+                <p class="mb-4">É o tipo mais comum de manutenção, incluindo correções de bugs (<i class="highlight">hotfixes</i>) ou a adição de novas funcionalidades (<i class="highlight">enhancements</i>).</p>
+                <div class="mt-6 p-4 bg-blue-50 border-l-4 border-blue-500 rounded-r-lg">
+                    <p class="font-bold">Exemplo Prático (Hotfix):</p>
+                    <p class="text-base mt-2">Um bug crítico está a cobrar o dobro dos clientes no checkout. Após a correção, o roteiro de teste é:</p>
+                    <ol class="list-decimal list-inside text-sm mt-2">
+                        <li><b>Teste de Confirmação:</b> Executar o cenário exato que causava a cobrança dupla para garantir que foi corrigido.</li>
+                        <li><b>Teste de Regressão Focado:</b> Testar outras formas de pagamento (MB WAY, PayPal) para garantir que não foram afetadas pela correção.</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 15 (NOVO) -->
+        <div class="slide flex flex-col justify-center items-center p-8">
+            <h2 class="text-4xl font-bold text-center mb-8">Manutenção: Testando Migrações</h2>
+            <div class="card max-w-4xl w-full text-lg">
+                <p class="mb-4">Ocorre quando o sistema é movido para um novo ambiente operacional, como uma migração para a nuvem ou a atualização do sistema operativo.</p>
+                <div class="mt-6 p-4 bg-blue-50 border-l-4 border-blue-500 rounded-r-lg">
+                    <p class="font-bold">Exemplo Prático (Migração para a Cloud):</p>
+                    <p class="text-base mt-2">Uma empresa está a migrar o seu CRM de um servidor local para a AWS. O roteiro de teste inclui:</p>
+                    <ul class="list-disc list-inside text-sm mt-2">
+                        <li><b>Teste Funcional Comparativo:</b> O CRM comporta-se exatamente da mesma forma na nuvem?</li>
+                        <li><b>Teste de Performance:</b> O tempo de resposta melhorou ou piorou?</li>
+                        <li><b>Teste de Dados:</b> Todos os dados dos clientes foram migrados sem corrupção?</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 16 (NOVO) -->
+         <div class="slide flex flex-col justify-center items-center p-8">
+            <h2 class="text-4xl font-bold text-center mb-8">Manutenção: Testando a Desativação</h2>
+            <div class="card max-w-4xl w-full text-lg">
+                <p class="mb-4">Ocorre quando um sistema legado chega ao fim da sua vida útil e é descontinuado (*retirement*). O teste foca-se na preservação dos dados e numa transição suave.</p>
+                <div class="mt-6 p-4 bg-blue-50 border-l-4 border-blue-500 rounded-r-lg">
+                    <p class="font-bold">Exemplo Prático (Desativação de Sistema):</p>
+                    <p class="text-base mt-2">Um sistema de faturação antigo será substituído por um novo ERP. O roteiro de teste para a desativação inclui:</p>
+                    <ul class="list-disc list-inside text-sm mt-2">
+                        <li><b>Teste de Arquivamento:</b> Verificar se todas as faturas antigas podem ser exportadas para um arquivo seguro, cumprindo as leis de retenção de dados.</li>
+                        <li><b>Teste de Restauração:</b> Tentar restaurar uma fatura do arquivo para garantir a sua integridade.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 17 -->
+        <div class="slide flex flex-col justify-center items-center p-8 text-center">
+            <p class="text-lg font-bold text-gray-500">Capítulo 3</p>
+            <h2 class="text-4xl font-bold mb-8">Teste Estático: Encontrando Defeitos sem Executar o Código</h2>
+            <p class="max-w-4xl text-xl mb-8">Ao contrário do **Teste Dinâmico** (que executa o software), o **Teste Estático** examina os produtos de trabalho (código-fonte, requisitos, modelos) para encontrar defeitos.</p>
+        </div>
+        
+        <!-- Slide 18 -->
+        <div class="slide flex flex-col justify-center items-center p-8">
+            <h2 class="text-4xl font-bold text-center mb-8">O Enorme Valor do Teste Estático</h2>
+             <div class="card max-w-3xl text-center">
+                <p class="text-5xl mb-4">💰</p>
+                <p class="text-2xl font-bold mb-4 highlight">É a aplicação máxima do princípio "Teste Antecipado".</p>
+                <p class="text-lg">Encontrar um defeito num documento de requisitos durante uma revisão é <b class="highlight">infinitamente mais barato</b> do que encontrá-lo em produção. O teste estático pode detetar:</p>
+                <ul class="mt-4 text-base list-disc list-inside text-left">
+                    <li>Ambiguidade e omissões nos requisitos.</li>
+                    <li>Desvios dos padrões de codificação.</li>
+                    <li>Vulnerabilidades de segurança no código.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 19 -->
+        <div class="slide flex flex-col justify-center items-center p-8">
+            <h2 class="text-4xl font-bold text-center mb-8">O Processo de Revisão (Ex: Revisão de Código)</h2>
+             <div class="card max-w-4xl w-full">
+                <div class="text-sm flex flex-wrap justify-center items-center gap-2">
+                    <div class="p-2 bg-gray-200 rounded-lg"><b>1. Planeamento</b><p>Define-se o escopo e os objetivos.</p></div>
+                    <div class="font-bold">→</div>
+                    <div class="p-2 bg-blue-100 rounded-lg"><b>2. Início</b><p>Distribui-se o documento/código.</p></div>
+                    <div class="font-bold">→</div>
+                    <div class="p-2 bg-green-100 rounded-lg"><b>3. Revisão Individual</b><p>Cada revisor analisa e anota os problemas.</p></div>
+                    <div class="font-bold">→</div>
+                    <div class="p-2 bg-yellow-100 rounded-lg"><b>4. Comunicação e Análise</b><p>A equipa discute os achados numa reunião.</p></div>
+                    <div class="font-bold">→</div>
+                    <div class="p-2 bg-purple-100 rounded-lg"><b>5. Correção e Relatório</b><p>O autor corrige os defeitos encontrados.</p></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 20 -->
+        <div class="slide flex flex-col justify-center items-center p-8">
+            <h2 class="text-4xl font-bold text-center mb-8">Papéis Numa Revisão Formal</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl">
+                <div class="card"><b class="block text-lg">Autor</b><p class="text-sm">Quem criou o produto de trabalho.</p></div>
+                <div class="card"><b class="block text-lg">Moderador</b><p class="text-sm">Lidera a reunião, garante o foco e a produtividade.</p></div>
+                <div class="card"><b class="block text-lg">Relator</b><p class="text-sm">Regista todos os defeitos e decisões.</p></div>
+                <div class="card"><b class="block text-lg">Revisor</b><p class="text-sm">Analisa o documento/código para encontrar defeitos.</p></div>
+            </div>
+        </div>
+        
+        <!-- Slide 21 (Antigo 18) -->
+        <div class="slide flex flex-col justify-center items-center p-8">
+            <h2 class="text-4xl font-bold text-center mb-8">Tipo de Revisão: Revisão Informal</h2>
+            <div class="card max-w-3xl w-full">
+                <p class="text-lg mb-4">A forma mais simples e rápida de obter feedback. Não segue um processo definido e não precisa de ser documentada formalmente.</p>
+                <div class="mt-6 p-4 bg-blue-50 border-l-4 border-blue-500 rounded-r-lg">
+                    <p class="font-bold">Exemplo do Dia a Dia:</p>
+                    <p class="text-base mt-2">Um desenvolvedor chama um colega à sua mesa e diz: <i class="text-gray-600">"Podes dar uma vista de olhos rápido nisto? Acho que esta lógica pode ser simplificada, mas não tenho a certeza."</i> O colega olha por 2 minutos, dá uma sugestão, e o trabalho continua.</p>
+                    <p class="font-bold mt-4">Foco: <span class="highlight">Colaboração e Velocidade.</span></p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 22 -->
+        <div class="slide flex flex-col justify-center items-center p-8">
+            <h2 class="text-4xl font-bold text-center mb-8">Tipo de Revisão: Walkthrough</h2>
+             <div class="card max-w-3xl w-full">
+                <p class="text-lg mb-4">O <b class="highlight">autor</b> do artefacto (documento ou código) apresenta o seu trabalho a um grupo, guiando-os através do conteúdo para partilhar conhecimento e obter feedback.</p>
+                <div class="mt-6 p-4 bg-blue-50 border-l-4 border-blue-500 rounded-r-lg">
+                    <p class="font-bold">Exemplo do Dia a Dia:</p>
+                    <p class="text-base mt-2">Uma analista de negócio agenda uma reunião de 30 minutos com um dev e um tester para apresentar um protótipo no Figma. Ela explica o fluxo do utilizador passo a passo e o grupo faz perguntas para clarificar o comportamento.</p>
+                    <p class="font-bold mt-4">Roteiro Sugerido: <span class="text-gray-600">"Neste ecrã, o utilizador insere os dados. Alguma dúvida sobre as validações?"</span></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 23 -->
+        <div class="slide flex flex-col justify-center items-center p-8">
+            <h2 class="text-4xl font-bold text-center mb-8">Tipo de Revisão: Revisão Técnica</h2>
+             <div class="card max-w-3xl w-full">
+                <p class="text-lg mb-4">Um processo mais estruturado, liderado por um moderador, onde um grupo de <b class="highlight">especialistas técnicos</b> analisa um produto de trabalho para garantir a viabilidade e conformidade técnica.</p>
+                <div class="mt-6 p-4 bg-blue-50 border-l-4 border-blue-500 rounded-r-lg">
+                    <p class="font-bold">Exemplo do Dia a Dia:</p>
+                    <p class="text-base mt-2">A equipa de arquitetura reúne-se para rever um diagrama de integração com um novo sistema de pagamentos. O foco é identificar gargalos de performance, falhas de segurança e se a solução se alinha com a arquitetura geral.</p>
+                    <p class="font-bold mt-4">Pergunta-Chave: <span class="text-gray-600">"Esta solução é escalável e segura?"</span></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 24 -->
+        <div class="slide flex flex-col justify-center items-center p-8">
+            <h2 class="text-4xl font-bold text-center mb-8">Tipo de Revisão: Inspeção</h2>
+             <div class="card max-w-3xl w-full">
+                <p class="text-lg mb-4">O tipo de revisão <b class="highlight">mais formal e rigoroso</b>. Segue um processo definido com papéis claros (Autor, Moderador, Relator, Revisor) e o objetivo de encontrar o máximo de defeitos possível.</p>
+                <div class="mt-6 p-4 bg-blue-50 border-l-4 border-blue-500 rounded-r-lg">
+                    <p class="font-bold">Exemplo do Dia a Dia:</p>
+                    <p class="text-base mt-2">Num projeto de software para um dispositivo médico, o código de um módulo que calcula a dosagem passa por uma inspeção formal. Os revisores preparam-se individualmente com checklists e, na reunião, analisam o código linha a linha.</p>
+                    <p class="font-bold mt-4">Características: <span class="text-gray-600">Preparação obrigatória e recolha de métricas.</span></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 25 -->
+        <div class="slide flex flex-col justify-center items-center p-8">
+            <h2 class="text-4xl font-bold text-center mb-8">Fatores de Sucesso para Revisões Eficazes</h2>
+             <div class="card max-w-3xl w-full">
+                <ul class="text-left text-xl space-y-4 list-disc list-inside">
+                    <li>Definir objetivos claros.</li>
+                    <li>Escolher o tipo de revisão adequado para o objetivo.</li>
+                    <li>Rever em "pequenos pedaços" para manter a concentração.</li>
+                    <li>Criar uma cultura onde o feedback é visto como construtivo, não como uma crítica pessoal.</li>
+                    <li>Ter tempo suficiente para a preparação individual.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 26 -->
+        <div class="slide flex flex-col justify-center items-center text-center p-8 bg-[#2c3e50] text-white">
+             <h2 class="text-4xl font-bold mb-8">Conclusão: A Qualidade é Construída em Camadas</h2>
+            <div class="max-w-3xl mx-auto text-left text-xl space-y-4">
+                <p>✅ Os **Níveis de Teste** garantem a cobertura desde o micro (unidade) ao macro (sistema).</p>
+                <p>✅ Os **Tipos de Teste** permitem-nos focar em aspetos específicos da qualidade (funcional, performance, etc.).</p>
+                <p>✅ O **Teste Estático** é a nossa primeira e mais barata linha de defesa, garantindo a qualidade dos próprios blocos de construção do software.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Navegação -->
+    <div class="fixed bottom-0 left-0 right-0 p-4 bg-white/80 backdrop-blur-lg flex justify-between items-center shadow-t-lg border-t border-gray-200">
+        <button id="prevBtn" class="bg-[#34495e] hover:bg-[#2c3e50] text-white font-bold py-2 px-6 rounded-lg transition-all">Anterior</button>
+        <div id="slide-counter" class="text-lg font-semibold text-gray-700"></div>
+        <button id="nextBtn" class="bg-[#34495e] hover:bg-[#2c3e50] text-white font-bold py-2 px-6 rounded-lg transition-all">Próximo</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const slideCounter = document.getElementById('slide-counter');
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+
+            function showSlide(index) {
+                slides.forEach((slide, i) => {
+                    slide.classList.toggle('active', i === index);
+                });
+                slideCounter.textContent = `Slide ${index + 1} de ${totalSlides}`;
+                prevBtn.disabled = index === 0;
+                prevBtn.classList.toggle('opacity-50', index === 0);
+                nextBtn.disabled = index === totalSlides - 1;
+                nextBtn.classList.toggle('opacity-50', index === totalSlides - 1);
+            }
+
+            function changeSlide(direction) {
+                currentSlide += direction;
+                if (currentSlide < 0) currentSlide = 0;
+                if (currentSlide >= totalSlides) currentSlide = totalSlides - 1;
+                showSlide(currentSlide);
+            }
+
+            prevBtn.addEventListener('click', () => changeSlide(-1));
+            nextBtn.addEventListener('click', () => changeSlide(1));
+            
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight' && !nextBtn.disabled) nextBtn.click();
+                else if (e.key === 'ArrowLeft' && !prevBtn.disabled) prevBtn.click();
+            });
+
+            showSlide(currentSlide);
+        });
+    </script>
+</body>
+</html>
+

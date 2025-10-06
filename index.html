@@ -14,12 +14,12 @@
 </head>
 <body class="bg-slate-100 text-slate-800">
 
-    <div class="container mx-auto px-4 py-12">
+    <div class="container mx-auto px-4 py-10 sm:py-12">
         
-        <header class="text-center mb-16">
-            <h1 class="text-5xl font-bold text-slate-900">Teste e Qualidade de Software</h1>
-            <p class="text-2xl font-bold text-blue-700 mt-6 mb-2 tracking-wide drop-shadow">Recursos e Apresentações das Aulas</p>
-            <p class="mt-2 text-base text-slate-700">
+        <header class="text-center mb-12 sm:mb-16">
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900">Teste e Qualidade de Software</h1>
+            <p class="text-lg sm:text-xl lg:text-2xl font-bold text-blue-700 mt-6 mb-2 tracking-wide drop-shadow">Recursos e Apresentações das Aulas</p>
+            <p class="mt-2 text-sm sm:text-base text-slate-700">
                 <strong>Instituição:</strong> IFCE Campus Canindé<br>
                 <strong>Curso:</strong> Análise e Desenvolvimento de Sistemas (ADS) <br>
                 <strong>Disciplina:</strong> Teste e Qualidade de Software<br>
@@ -31,159 +31,159 @@
 
         <main>
         <!-- Seção de Aulas -->
-        <section class="mb-16">
-            <div class="flex justify-between items-center mb-8">
-                <h2 class="text-3xl font-bold text-slate-900">Aulas</h2>
-                <div class="flex space-x-2">
-                    <button id="sort-desc" class="bg-slate-200 text-slate-700 font-semibold py-2 px-4 rounded-lg hover:bg-slate-300 transition-colors">Mais Recentes</button>
-                    <button id="sort-asc" class="bg-slate-200 text-slate-700 font-semibold py-2 px-4 rounded-lg hover:bg-slate-300 transition-colors">Mais Antigos</button>
+        <section class="mb-12 sm:mb-16">
+            <div class="flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-center mb-8">
+                <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">Aulas</h2>
+                <div class="flex flex-col w-full gap-2 sm:flex-row sm:w-auto sm:gap-2">
+                    <button id="sort-desc" class="w-full sm:w-auto bg-slate-200 text-slate-700 text-sm sm:text-base font-semibold py-2 px-4 rounded-lg hover:bg-slate-300 transition-colors">Mais Recentes</button>
+                    <button id="sort-asc" class="w-full sm:w-auto bg-slate-200 text-slate-700 text-sm sm:text-base font-semibold py-2 px-4 rounded-lg hover:bg-slate-300 transition-colors">Mais Antigos</button>
                 </div>
             </div>
-            <div id="aulas-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            <div id="aulas-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10">
                 <!-- ... Cards das aulas existentes ... -->
-                <div class="bg-white rounded-xl shadow-lg p-8 flex flex-col hover:shadow-2xl hover:-translate-y-2 transition-all duration-300" data-date="2025-08-19">
-                    <div class="flex justify-between items-center">
+                <div class="bg-white rounded-xl shadow-lg p-6 sm:p-8 flex flex-col hover:shadow-2xl hover:-translate-y-2 transition-all duration-300" data-date="2025-08-19">
+                    <div class="flex flex-wrap items-center justify-between gap-y-1">
                         <span class="font-semibold text-sm text-red-600">Aula 1</span>
                         <span class="text-xs text-gray-500">19/08/2025</span>
                     </div>
-                    <h3 class="text-2xl font-bold mt-2 mb-3">O Custo da Falha</h3>
-                    <p class="text-slate-600 mb-6 flex-grow">
+                    <h3 class="text-xl sm:text-2xl font-bold mt-2 mb-3">O Custo da Falha</h3>
+                    <p class="text-slate-600 text-sm sm:text-base mb-6 flex-grow">
                         Uma introdução sobre o impacto de falhas de software, com base no World Quality Report 2024-25, motivando a importância da disciplina.
                     </p>
                     <div class="mt-auto pt-4">
-                        <a href="./aula01.html" class="block bg-red-600 text-white text-center font-bold py-3 px-5 rounded-lg hover:bg-red-700 transition-colors mb-2">
+                        <a href="./aula01.html" class="block bg-red-600 text-white text-center font-bold text-sm sm:text-base py-3 px-4 sm:px-5 rounded-lg hover:bg-red-700 transition-colors mb-2">
                             Acessar a Apresentação
                         </a>
-                        <a href="https://docs.google.com/document/d/17WjTqV2jH64f6hQBENk-FyKAxZaVzz0gGJhDb3Ex2LI/edit?usp=sharing" class="block bg-gray-200 text-gray-700 text-center font-bold py-3 px-5 rounded-lg hover:bg-gray-300 transition-colors mb-4">
+                        <a href="https://docs.google.com/document/d/17WjTqV2jH64f6hQBENk-FyKAxZaVzz0gGJhDb3Ex2LI/edit?usp=sharing" class="block bg-gray-200 text-gray-700 text-center font-bold text-sm sm:text-base py-3 px-4 sm:px-5 rounded-lg hover:bg-gray-300 transition-colors mb-4">
                             Baixar a Nota de Aula
                         </a>
                         <div class="mt-3">
-                            <p class="text-xs text-gray-600 mb-2 text-center">Podcast Relacionado:</p>
+                            <p class="text-xs sm:text-sm text-gray-600 mb-2 text-center">Podcast Relacionado:</p>
                             <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/episode/527HcVyfg0RJcKzZF8mkz5?utm_source=generator" width="100%" height="152" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
                         </div>
                     </div>
                 </div>
-                <div class="bg-white rounded-xl shadow-lg p-8 flex flex-col hover:shadow-2xl hover:-translate-y-2 transition-all duration-300" data-date="2025-08-26">
-                    <div class="flex justify-between items-center">
+                <div class="bg-white rounded-xl shadow-lg p-6 sm:p-8 flex flex-col hover:shadow-2xl hover:-translate-y-2 transition-all duration-300" data-date="2025-08-26">
+                    <div class="flex flex-wrap items-center justify-between gap-y-1">
                         <span class="font-semibold text-sm text-blue-600">Aula 2</span>
                         <span class="text-xs text-gray-500">26/08/2025</span>
                     </div>
-                    <h3 class="text-2xl font-bold mt-2 mb-3">A Origem dos Bugs</h3>
-                    <p class="text-slate-600 mb-6 flex-grow">
+                    <h3 class="text-xl sm:text-2xl font-bold mt-2 mb-3">A Origem dos Bugs</h3>
+                    <p class="text-slate-600 text-sm sm:text-base mb-6 flex-grow">
                         Introdução à Engenharia de Requisitos (CPRE Cap. 1 & 2) e análise de falhas históricas como a do foguete Ariane 5.
                     </p>
                     <div class="mt-auto pt-4">
-                        <a href="./aula02.html" class="block bg-blue-600 text-white text-center font-bold py-3 px-5 rounded-lg hover:bg-blue-700 transition-colors mb-2">
+                        <a href="./aula02.html" class="block bg-blue-600 text-white text-center font-bold text-sm sm:text-base py-3 px-4 sm:px-5 rounded-lg hover:bg-blue-700 transition-colors mb-2">
                             Acessar a Apresentação
                         </a>
-                        <a href="https://docs.google.com/document/d/18HZ-ofpI2h9gwir8uQjj48JrahBqFyfkgAPy8IMlpTI/edit?usp=sharing" class="block bg-gray-200 text-gray-700 text-center font-bold py-3 px-5 rounded-lg hover:bg-gray-300 transition-colors mb-4">
+                        <a href="https://docs.google.com/document/d/18HZ-ofpI2h9gwir8uQjj48JrahBqFyfkgAPy8IMlpTI/edit?usp=sharing" class="block bg-gray-200 text-gray-700 text-center font-bold text-sm sm:text-base py-3 px-4 sm:px-5 rounded-lg hover:bg-gray-300 transition-colors mb-4">
                             Baixar a Nota de Aula
                         </a>
                         <div class="mt-3">
-                            <p class="text-xs text-gray-600 mb-2 text-center">Podcast Relacionado:</p>
+                            <p class="text-xs sm:text-sm text-gray-600 mb-2 text-center">Podcast Relacionado:</p>
                             <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/episode/1lByEXBwdU31x6LFawVWqm?utm_source=generator" width="100%" height="152" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
                         </div>
                     </div>
                 </div>
-                <div class="bg-white rounded-xl shadow-lg p-8 flex flex-col hover:shadow-2xl hover:-translate-y-2 transition-all duration-300" data-date="2025-09-02">
-                    <div class="flex justify-between items-center">
+                <div class="bg-white rounded-xl shadow-lg p-6 sm:p-8 flex flex-col hover:shadow-2xl hover:-translate-y-2 transition-all duration-300" data-date="2025-09-02">
+                    <div class="flex flex-wrap items-center justify-between gap-y-1">
                         <span class="font-semibold text-sm text-green-600">Aula 3</span>
                         <span class="text-xs text-gray-500">02/09/2025</span>
                     </div>
-                    <h3 class="text-2xl font-bold mt-2 mb-3">Do Requisito ao Código</h3>
-                    <p class="text-slate-600 mb-6 flex-grow">
+                    <h3 class="text-xl sm:text-2xl font-bold mt-2 mb-3">Do Requisito ao Código</h3>
+                    <p class="text-slate-600 text-sm sm:text-base mb-6 flex-grow">
                         Foco na documentação e elaboração de requisitos (CPRE Cap. 3 & 4) e a importância de padrões como o IEEE 830.
                     </p>
                     <div class="mt-auto pt-4">
-                        <a href="./aula03.html" class="block bg-green-600 text-white text-center font-bold py-3 px-5 rounded-lg hover:bg-green-700 transition-colors mb-2">
+                        <a href="./aula03.html" class="block bg-green-600 text-white text-center font-bold text-sm sm:text-base py-3 px-4 sm:px-5 rounded-lg hover:bg-green-700 transition-colors mb-2">
                             Acessar a Apresentação
                         </a>
-                        <a href="https://docs.google.com/document/d/184eTNWgmaRBlkKOc17562bAkBO_CeYENtHAARaqFbik/edit?usp=sharing" class="block bg-gray-200 text-gray-700 text-center font-bold py-3 px-5 rounded-lg hover:bg-gray-300 transition-colors mb-4">
+                        <a href="https://docs.google.com/document/d/184eTNWgmaRBlkKOc17562bAkBO_CeYENtHAARaqFbik/edit?usp=sharing" class="block bg-gray-200 text-gray-700 text-center font-bold text-sm sm:text-base py-3 px-4 sm:px-5 rounded-lg hover:bg-gray-300 transition-colors mb-4">
                             Baixar a Nota de Aula
                         </a>
                         <div class="mt-3">
-                            <p class="text-xs text-gray-600 mb-2 text-center">Podcast Relacionado:</p>
+                            <p class="text-xs sm:text-sm text-gray-600 mb-2 text-center">Podcast Relacionado:</p>
                             <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/episode/45Xsu0xOHWGIIg8HqSEKBA?utm_source=generator" width="100%" height="152" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
                         </div>
                     </div>
                 </div>
-                <div class="bg-white rounded-xl shadow-lg p-8 flex flex-col hover:shadow-2xl hover:-translate-y-2 transition-all duration-300" data-date="2025-09-09">
-                    <div class="flex justify-between items-center">
+                <div class="bg-white rounded-xl shadow-lg p-6 sm:p-8 flex flex-col hover:shadow-2xl hover:-translate-y-2 transition-all duration-300" data-date="2025-09-09">
+                    <div class="flex flex-wrap items-center justify-between gap-y-1">
                         <span class="font-semibold text-sm text-purple-600">Aula 4</span>
                         <span class="text-xs text-gray-500">09/09/2025</span>
                     </div>
-                    <h3 class="text-2xl font-bold mt-2 mb-3">Processo, Gestão e Ferramentas de Requisitos</h3>
-                    <p class="text-slate-600 mb-6 flex-grow">
+                    <h3 class="text-xl sm:text-2xl font-bold mt-2 mb-3">Processo, Gestão e Ferramentas de Requisitos</h3>
+                    <p class="text-slate-600 text-sm sm:text-base mb-6 flex-grow">
                         Controle do ciclo de vida dos requisitos de software, abordando a criação de processos adaptáveis, práticas de gestão essenciais e a seleção de ferramentas de mercado. (CPRE Cap. 5, 6 e 7)
                     </p>
                     <div class="mt-auto pt-4">
-                        <a href="./aula04.html" class="block bg-purple-600 text-white text-center font-bold py-3 px-5 rounded-lg hover:bg-purple-700 transition-colors mb-2">
+                        <a href="./aula04.html" class="block bg-purple-600 text-white text-center font-bold text-sm sm:text-base py-3 px-4 sm:px-5 rounded-lg hover:bg-purple-700 transition-colors mb-2">
                             Acessar a Apresentação
                         </a>
-                        <a href="https://docs.google.com/document/d/16u3sR_WKM99NdXjuawj4o51xjT7vne5eiyVkxDkpdjU/edit?usp=sharing" class="block bg-gray-200 text-gray-700 text-center font-bold py-3 px-5 rounded-lg hover:bg-gray-300 transition-colors mb-4">
+                        <a href="https://docs.google.com/document/d/16u3sR_WKM99NdXjuawj4o51xjT7vne5eiyVkxDkpdjU/edit?usp=sharing" class="block bg-gray-200 text-gray-700 text-center font-bold text-sm sm:text-base py-3 px-4 sm:px-5 rounded-lg hover:bg-gray-300 transition-colors mb-4">
                             Baixar a Nota de Aula
                         </a>
                         <div class="mt-3">
-                            <p class="text-xs text-gray-600 mb-2 text-center">Podcast Relacionado:</p>
+                            <p class="text-xs sm:text-sm text-gray-600 mb-2 text-center">Podcast Relacionado:</p>
                             <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/episode/0KXYMVXQL4ZBc0kXiTYkn5?utm_source=generator" width="100%" height="152" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
                         </div>
                     </div>
                 </div>
-                <div class="bg-white rounded-xl shadow-lg p-8 flex flex-col hover:shadow-2xl hover:-translate-y-2 transition-all duration-300" data-date="2025-09-16">
-                    <div class="flex justify-between items-center">
+                <div class="bg-white rounded-xl shadow-lg p-6 sm:p-8 flex flex-col hover:shadow-2xl hover:-translate-y-2 transition-all duration-300" data-date="2025-09-16">
+                    <div class="flex flex-wrap items-center justify-between gap-y-1">
                         <span class="font-semibold text-sm text-amber-600">Aula 5</span>
                         <span class="text-xs text-gray-500">16/09/2025</span>
                     </div>
-                    <h3 class="text-2xl font-bold mt-2 mb-3">Fundamentos do Teste e Ciclo de Vida de Software</h3>
-                    <p class="text-slate-600 mb-6 flex-grow">
+                    <h3 class="text-xl sm:text-2xl font-bold mt-2 mb-3">Fundamentos do Teste e Ciclo de Vida de Software</h3>
+                    <p class="text-slate-600 text-sm sm:text-base mb-6 flex-grow">
                         Explore os conceitos essenciais do teste de software, desde os seus objetivos e princípios fundamentais até à sua psicologia. Entenda como as atividades de teste se integram e se adaptam aos diferentes ciclos de vida do desenvolvimento, como Ágil, V e W.
                     </p>
                     <div class="mt-auto pt-4">
-                        <a href="./aula05.html" class="block bg-amber-600 text-white text-center font-bold py-3 px-5 rounded-lg hover:bg-amber-700 transition-colors mb-2">
+                        <a href="./aula05.html" class="block bg-amber-600 text-white text-center font-bold text-sm sm:text-base py-3 px-4 sm:px-5 rounded-lg hover:bg-amber-700 transition-colors mb-2">
                             Acessar a Apresentação
                         </a>
-                        <a href="https://docs.google.com/document/d/1P3FUOBm12vE6FPNtvZiDnYvPfc7naNPORDYbKozBn6k/edit?usp=sharing" class="block bg-gray-200 text-gray-700 text-center font-bold py-3 px-5 rounded-lg hover:bg-gray-300 transition-colors mb-4">
+                        <a href="https://docs.google.com/document/d/1P3FUOBm12vE6FPNtvZiDnYvPfc7naNPORDYbKozBn6k/edit?usp=sharing" class="block bg-gray-200 text-gray-700 text-center font-bold text-sm sm:text-base py-3 px-4 sm:px-5 rounded-lg hover:bg-gray-300 transition-colors mb-4">
                             Baixar a Nota de Aula
                         </a>
                         <div class="mt-3">
-                            <p class="text-xs text-gray-600 mb-2 text-center">Podcast Relacionado:</p>
+                            <p class="text-xs sm:text-sm text-gray-600 mb-2 text-center">Podcast Relacionado:</p>
                             <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/episode/6haaiqHq8odxZw2XKgMOhh?utm_source=generator" width="100%" height="152" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
                         </div>
                     </div>
                 </div>
-                <div class="bg-white rounded-xl shadow-lg p-8 flex flex-col hover:shadow-2xl hover:-translate-y-2 transition-all duration-300" data-date="2025-09-23">
-                    <div class="flex justify-between items-center">
+                <div class="bg-white rounded-xl shadow-lg p-6 sm:p-8 flex flex-col hover:shadow-2xl hover:-translate-y-2 transition-all duration-300" data-date="2025-09-23">
+                    <div class="flex flex-wrap items-center justify-between gap-y-1">
                         <span class="font-semibold text-sm text-cyan-600">Aula 6</span>
                         <span class="text-xs text-gray-500">23/09/2025</span>
                     </div>
-                    <h3 class="text-2xl font-bold mt-2 mb-3">Níveis, Tipos e Técnicas de Teste</h3>
-                    <p class="text-slate-600 mb-6 flex-grow">
+                    <h3 class="text-xl sm:text-2xl font-bold mt-2 mb-3">Níveis, Tipos e Técnicas de Teste</h3>
+                    <p class="text-slate-600 text-sm sm:text-base mb-6 flex-grow">
                         Conheça os diferentes níveis de teste (componente, integração, sistema, aceitação) e os diversos tipos de teste, desde funcionais até não-funcionais. Aprenda também as principais técnicas de design de teste baseadas em especificação e estrutura.
                     </p>
                     <div class="mt-auto pt-4">
-                        <a href="./aula06.html" class="block bg-cyan-600 text-white text-center font-bold py-3 px-5 rounded-lg hover:bg-cyan-700 transition-colors mb-2">
+                        <a href="./aula06.html" class="block bg-cyan-600 text-white text-center font-bold text-sm sm:text-base py-3 px-4 sm:px-5 rounded-lg hover:bg-cyan-700 transition-colors mb-2">
                             Acessar a Apresentação
                         </a>
-                        <a href="https://docs.google.com/document/d/1VnACuBKvYM5mYLdiX2AmnwoVWwDCVzKtrVonkpSM7PE/edit?usp=sharing" class="block bg-gray-200 text-gray-700 text-center font-bold py-3 px-5 rounded-lg hover:bg-gray-300 transition-colors mb-4">
+                        <a href="https://docs.google.com/document/d/1VnACuBKvYM5mYLdiX2AmnwoVWwDCVzKtrVonkpSM7PE/edit?usp=sharing" class="block bg-gray-200 text-gray-700 text-center font-bold text-sm sm:text-base py-3 px-4 sm:px-5 rounded-lg hover:bg-gray-300 transition-colors mb-4">
                             Baixar a Nota de Aula
                         </a>
                         <div class="mt-3">
-                            <p class="text-xs text-gray-600 mb-2 text-center">Podcast Relacionado:</p>
+                            <p class="text-xs sm:text-sm text-gray-600 mb-2 text-center">Podcast Relacionado:</p>
                             <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/episode/1se4Vr44xH37d5la6PUFg8?utm_source=generator" width="100%" height="152" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
                         </div>
                     </div>
                 </div>
-                <div class="border-2 border-dashed border-slate-300 rounded-xl p-8 flex justify-center items-center">
-                    <p class="text-slate-500 text-center font-semibold">Próximas aulas serão adicionadas aqui...</p>
+                <div class="border-2 border-dashed border-slate-300 rounded-xl p-6 sm:p-8 flex justify-center items-center">
+                    <p class="text-slate-500 text-center font-semibold text-sm sm:text-base">Próximas aulas serão adicionadas aqui...</p>
                 </div>
             </div>
         </section>
 
 
         <!-- Seção de Arquivos e Links Úteis -->
-        <section class="mb-16">
-            <h2 class="text-3xl font-bold text-slate-900 mb-8">Arquivos e Links Úteis</h2>
-            <ul class="list-disc list-inside text-slate-700 text-lg space-y-2">
+        <section class="mb-12 sm:mb-16">
+            <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mb-6 sm:mb-8">Arquivos e Links Úteis</h2>
+            <ul class="list-disc list-inside text-slate-700 text-base sm:text-lg space-y-2">
                 <li><a href="https://ieeexplore.ieee.org/document/720574" target="_blank" class="text-blue-700 underline">IEEE 830 - Requisitos de Software</a></li>
                 <li><a href="https://www.bstqb.online/cpre-fl" target="_blank" class="text-blue-700 underline">CPRE - Certified Professional for Requirements Engineering</a></li>
                 <li><a href="https://worldqualityreport.com/" target="_blank" class="text-blue-700 underline">World Quality Report</a></li>
@@ -192,7 +192,7 @@
         </section>
         </main>
         
-        <footer class="text-center mt-20 text-slate-500">
+        <footer class="text-center mt-16 sm:mt-20 text-slate-500 text-sm sm:text-base">
             <p>&copy; 2025 - Material da Disciplina de Teste e Qualidade de Software</p>
         </footer>
     </div>

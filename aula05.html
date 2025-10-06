@@ -12,19 +12,6 @@
     <style>
         .highlight { color: #2980b9; }
         .card { background-color: white; border-radius: 0.75rem; padding: 1.5rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); border: 1px solid #e5e7eb; }
-        #gemini-modal.hidden { display: none; }
-        .spinner {
-            border: 4px solid rgba(0, 0, 0, 0.1);
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            border-left-color: #2980b9;
-            animation: spin 1s ease infinite;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
     </style>
 </head>
 <body class="flex flex-col">
@@ -388,115 +375,17 @@
 
     </div>
 
-    <!-- Navegação e Botão Gemini -->
+    <!-- Navegação -->
     <div class="fixed bottom-0 left-0 right-0 px-4 py-2 sm:px-6 sm:py-3 bg-white/80 backdrop-blur-lg flex justify-between items-center shadow-lg border-t border-gray-200 z-40">
         <button id="prevBtn" class="flex-1 sm:flex-initial bg-[#34495e] hover:bg-[#2c3e50] text-white font-bold text-sm sm:text-base py-2 px-3 sm:px-6 rounded-lg transition-all max-w-[120px]">Anterior</button>
         <div id="slide-counter" class="text-center text-sm sm:text-base font-semibold text-gray-700">Slide 1 de 32</div>
         <button id="nextBtn" class="flex-1 sm:flex-initial bg-[#34495e] hover:bg-[#2c3e50] text-white font-bold text-sm sm:text-base py-2 px-3 sm:px-6 rounded-lg transition-all max-w-[120px]">Próximo</button>
     </div>
 
-    <button id="gemini-btn" class="fixed bottom-24 sm:bottom-20 right-5 bg-gradient-to-br from-purple-500 to-indigo-600 text-white p-4 rounded-full shadow-lg hover:scale-110 transition-transform z-50">
-        <span class="text-2xl">✨</span>
-    </button>
+
     
-    <!-- Modal Gemini -->
-    <div id="gemini-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
-        <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full p-6 relative">
-            <h3 class="text-2xl font-bold mb-4 text-[#2980b9]">✨ Explicar Conceito</h3>
-            <div id="gemini-content" class="text-gray-700 space-y-4 max-h-[60vh] overflow-y-auto">
-                <div id="gemini-loader" class="flex justify-center items-center h-32">
-                    <div class="spinner"></div>
-                </div>
-                <div id="gemini-response" class="hidden"></div>
-            </div>
-            <button id="close-modal-btn" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-2xl">&times;</button>
-        </div>
-    </div>
+
 
     <script src="slides.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // A lógica de navegação foi movida para slides.js
-            // A lógica específica do modal Gemini permanece aqui.
-            const geminiBtn = document.getElementById('gemini-btn');
-            const geminiModal = document.getElementById('gemini-modal');
-            const closeModalBtn = document.getElementById('close-modal-btn');
-            const geminiLoader = document.getElementById('gemini-loader');
-            const geminiResponse = document.getElementById('gemini-response');
-
-            document.addEventListener('keydown', (e) => {
-                // Adiciona o listener para a tecla 'Escape' fechar o modal
-                if (e.key === 'Escape' && !geminiModal.classList.contains('hidden')) {
-                    closeModal();
-                }
-            });
-            
-            function openModal() {
-                geminiModal.classList.remove('hidden');
-                geminiResponse.classList.add('hidden');
-                geminiLoader.style.display = 'flex';
-                geminiResponse.innerHTML = '';
-            }
-
-            function closeModal() {
-                geminiModal.classList.add('hidden');
-            }
-
-            geminiBtn.addEventListener('click', async () => {
-                const activeSlide = document.querySelector('.slide.active');
-                const titleElement = activeSlide.querySelector('.slide-title');
-                const concept = titleElement ? titleElement.innerText : "Teste de Software";
-
-                openModal();
-
-                try {
-                    const text = await callGeminiAPI(concept);
-                    geminiLoader.style.display = 'none';
-                    geminiResponse.innerHTML = text.replace(/\n/g, '<br>');
-                    geminiResponse.classList.remove('hidden');
-                } catch (error) {
-                    geminiLoader.style.display = 'none';
-                    geminiResponse.innerHTML = '<p class="text-red-500">Desculpe, ocorreu um erro ao buscar a explicação. Tente novamente.</p>';
-                    geminiResponse.classList.remove('hidden');
-                }
-            });
-
-            closeModalBtn.addEventListener('click', closeModal);
-            geminiModal.addEventListener('click', (e) => {
-                if (e.target === geminiModal) {
-                    closeModal();
-                }
-            });
-
-            async function callGeminiAPI(concept) {
-                const apiKey = "";
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
-                
-                const systemPrompt = "Você é um assistente de ensino especialista em Teste e Qualidade de Software. Explique o seguinte conceito de forma simples e clara para um estudante de Análise e Desenvolvimento de Sistemas, usando uma analogia do dia a dia quando apropriado. A resposta deve ter no máximo 2 parágrafos concisos.";
-                
-                const payload = {
-                    systemInstruction: {
-                        parts: [{ text: systemPrompt }]
-                    },
-                    contents: [{
-                        parts: [{ text: `O conceito a ser explicado é: "${concept}"` }]
-                    }]
-                };
-
-                const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-
-                if (!response.ok) {
-                    throw new Error(`API call failed with status: ${response.status}`);
-                }
-
-                const result = await response.json();
-                return result.candidates[0].content.parts[0].text;
-            }
-        });
-    </script>
 </body>
 </html>

@@ -1,0 +1,124 @@
+body { 
+    font-family: 'Inter', sans-serif; 
+    background-color: #F8F7F4; 
+    color: #2c3e50; 
+    overflow-x: hidden;
+    min-height: 100vh;
+    width: 100%;
+}
+
+/* Em telas maiores, ocultamos a rolagem vertical para o efeito de slide */
+@media (min-width: 768px) {
+    body {
+        overflow-y: hidden;
+    }
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto; /* Altura automática baseada no conteúdo */
+    min-height: 100%;
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    opacity: 0;
+    transform: scale(0.98);
+    pointer-events: none;
+    padding-top: 70px;    /* Espaço para o botão de voltar */
+    padding-bottom: 70px; /* Espaço para navegação inferior */
+}
+
+.slide.active {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+    overflow-y: auto; /* Permite rolagem em slides ativos se o conteúdo for maior que a tela */
+    display: flex;
+    flex-direction: column; /* Garante que o conteúdo flua verticalmente */
+    min-height: 100vh;
+}
+
+.chart-container { 
+    position: relative; 
+    width: 100%; 
+    max-width: 600px; 
+    margin-left: auto; 
+    margin-right: auto; 
+    height: 70vh; 
+    max-height: 450px; 
+}
+
+/* Melhorias para títulos responsivos */
+h1, h2, h3 {
+    word-wrap: break-word;
+    line-height: 1.2;
+}
+
+/* Estilo específico para a conclusão final do slide 7 */
+.conclusao-final {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    margin-bottom: 2.5rem;
+}
+
+h1 { font-size: clamp(1.5rem, 4vw, 3rem); }
+h2 { font-size: clamp(1.25rem, 3.5vw, 2.5rem); }
+h3 { font-size: clamp(1rem, 3vw, 1.5rem); }
+
+/* Ajustes para modo paisagem em celulares (telas baixas) */
+@media (max-height: 500px) and (orientation: landscape) {
+    .slide {
+        padding-top: 80px;    /* Mais espaço para o botão de voltar */
+        padding-bottom: 80px; /* Mais espaço para a navegação inferior */
+        justify-content: flex-start; /* Alinha o conteúdo no topo para evitar cortes */
+    }
+    
+    /* Otimizações específicas para o arquivo aula03.html */
+    body[data-presentation="aula03"] .slide h2 {
+        margin-top: 0.5rem;
+    }
+
+    /* Reduz um pouco o tamanho dos títulos para caberem melhor */
+    h1 { font-size: clamp(1.2rem, 3vw, 2.2rem); }
+    h2 { font-size: clamp(1.1rem, 2.5vw, 2rem); }
+    h3 { font-size: clamp(1rem, 2.2vw, 1.3rem); }
+
+    /* Reduz o tamanho do conteúdo principal para melhorar a leitura */
+    .slide > div { transform: scale(0.95); margin-top: -1rem; }
+    
+    /* Ajustes gerais para slides com problemas em modo paisagem */
+    .slide:nth-child(3) > div,
+    .slide:nth-child(5) > div,
+    .slide:nth-child(7) > div {
+        transform: scale(0.85); /* Reduz mais o tamanho de todos os slides problemáticos */
+        margin-top: -2rem;   /* Sobe o conteúdo para compensar o espaço */
+        padding-bottom: 1rem; /* Adiciona espaço extra abaixo */
+    }
+
+    /* Ajustes específicos para o slide 3 (Complexidade) */
+    .slide:nth-child(3) ul {
+        margin-bottom: 1.5rem; /* Mais espaço no final da lista */
+    }
+    
+    /* Ajustes específicos para o slide 5 (Habilidades) */
+    .slide:nth-child(5) .space-y-4 {
+        margin-bottom: 1.5rem;
+    }
+    
+    /* Ajustes específicos para o slide 7 (Conclusão) - fonte maior que antes */
+    .slide:nth-child(7) .text-lg,
+    .slide:nth-child(7) .text-2xl,
+    .slide:nth-child(7) .text-3xl {
+        font-size: 1.05rem !important; /* Fonte maior que a anterior (0.9rem) */
+        line-height: 1.3;
+    }
+    
+    /* Ajustes específicos para o último parágrafo do slide 7 */
+    .slide:nth-child(7) p:last-child {
+        margin-bottom: 2rem; /* Garante espaço suficiente no final */
+        padding-bottom: 1.5rem;
+        font-size: 1rem !important; /* Fonte maior que a anterior (0.85rem) */
+    }
+}

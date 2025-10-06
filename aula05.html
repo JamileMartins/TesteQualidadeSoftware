@@ -7,15 +7,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">    
+    <link rel="stylesheet" href="slides.css">
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #F8F7F4; color: #2c3e50; overflow: hidden; }
-        .slide {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
-            opacity: 0; transform: scale(0.98); pointer-events: none;
-        }
-        .slide.active { opacity: 1; transform: scale(1); pointer-events: auto; }
         .highlight { color: #2980b9; }
         .card { background-color: white; border-radius: 0.75rem; padding: 1.5rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); border: 1px solid #e5e7eb; }
         #gemini-modal.hidden { display: none; }
@@ -34,12 +28,14 @@
     </style>
 </head>
 <body class="flex flex-col">
-    <button onclick="window.location.href='index.html'" style="position:fixed;top:20px;right:20px;z-index:1000;" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg shadow-md transition-colors">Voltar para a tela principal</button>
+    <div class="fixed top-0 left-0 right-0 py-2 px-4 bg-gray-100/90 backdrop-blur-sm z-[1000] border-b border-gray-200 flex justify-end">
+        <button onclick="window.location.href='index.html'" class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm md:text-base py-1 sm:py-2 px-3 sm:px-4 rounded-lg transition-opacity duration-300 shadow-lg">Voltar para a tela principal</button>
+    </div>
 
-    <div id="presentation-container" class="relative w-screen h-screen">
+    <div id="presentation-container" class="relative w-full min-h-screen pb-16 mt-14">
 
         <!-- ... slides 1 a 22 permanecem os mesmos ... -->
-        <div class="slide active flex flex-col justify-center items-center text-center p-8">
+        <div class="slide active flex flex-col justify-center items-center text-center p-4 sm:p-6 md:p-8">
             <p class="text-xl font-bold text-gray-500 mb-2">Aula 05 | CTFL 4.0 - Capítulo 1 & Seção 2.1</p>
             <h1 class="text-5xl md:text-6xl font-black text-[#2980b9] leading-tight slide-title">Fundamentos do Teste</h1>
             <p class="text-2xl md:text-3xl mt-4 text-gray-700 max-w-3xl mx-auto">O que é, por que fazemos e como o teste se encaixa no ciclo de vida do desenvolvimento.</p>
@@ -393,13 +389,13 @@
     </div>
 
     <!-- Navegação e Botão Gemini -->
-    <div class="fixed bottom-0 left-0 right-0 p-4 bg-white/80 backdrop-blur-lg flex justify-between items-center shadow-t-lg border-t border-gray-200">
-        <button id="prevBtn" class="bg-[#34495e] hover:bg-[#2c3e50] text-white font-bold py-2 px-6 rounded-lg transition-all">Anterior</button>
-        <div id="slide-counter" class="text-lg font-semibold text-gray-700"></div>
-        <button id="nextBtn" class="bg-[#34495e] hover:bg-[#2c3e50] text-white font-bold py-2 px-6 rounded-lg transition-all">Próximo</button>
+    <div class="fixed bottom-0 left-0 right-0 px-4 py-2 sm:px-6 sm:py-3 bg-white/80 backdrop-blur-lg flex justify-between items-center shadow-lg border-t border-gray-200 z-40">
+        <button id="prevBtn" class="flex-1 sm:flex-initial bg-[#34495e] hover:bg-[#2c3e50] text-white font-bold text-sm sm:text-base py-2 px-3 sm:px-6 rounded-lg transition-all max-w-[120px]">Anterior</button>
+        <div id="slide-counter" class="text-center text-sm sm:text-base font-semibold text-gray-700">Slide 1 de 32</div>
+        <button id="nextBtn" class="flex-1 sm:flex-initial bg-[#34495e] hover:bg-[#2c3e50] text-white font-bold text-sm sm:text-base py-2 px-3 sm:px-6 rounded-lg transition-all max-w-[120px]">Próximo</button>
     </div>
 
-    <button id="gemini-btn" class="fixed bottom-20 right-5 bg-gradient-to-br from-purple-500 to-indigo-600 text-white p-4 rounded-full shadow-lg hover:scale-110 transition-transform">
+    <button id="gemini-btn" class="fixed bottom-24 sm:bottom-20 right-5 bg-gradient-to-br from-purple-500 to-indigo-600 text-white p-4 rounded-full shadow-lg hover:scale-110 transition-transform z-50">
         <span class="text-2xl">✨</span>
     </button>
     
@@ -417,47 +413,20 @@
         </div>
     </div>
 
-
+    <script src="slides.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const slides = document.querySelectorAll('.slide');
-            const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
-            const slideCounter = document.getElementById('slide-counter');
-            let currentSlide = 0;
-            const totalSlides = slides.length;
-
+            // A lógica de navegação foi movida para slides.js
+            // A lógica específica do modal Gemini permanece aqui.
             const geminiBtn = document.getElementById('gemini-btn');
             const geminiModal = document.getElementById('gemini-modal');
             const closeModalBtn = document.getElementById('close-modal-btn');
             const geminiLoader = document.getElementById('gemini-loader');
             const geminiResponse = document.getElementById('gemini-response');
 
-            function showSlide(index) {
-                slides.forEach((slide, i) => {
-                    slide.classList.toggle('active', i === index);
-                });
-                slideCounter.textContent = `Slide ${index + 1} de ${totalSlides}`;
-                prevBtn.disabled = index === 0;
-                prevBtn.classList.toggle('opacity-50', index === 0);
-                nextBtn.disabled = index === totalSlides - 1;
-                nextBtn.classList.toggle('opacity-50', index === totalSlides - 1);
-            }
-
-            function changeSlide(direction) {
-                currentSlide += direction;
-                if (currentSlide < 0) currentSlide = 0;
-                if (currentSlide >= totalSlides) currentSlide = totalSlides - 1;
-                showSlide(currentSlide);
-            }
-
-            prevBtn.addEventListener('click', () => changeSlide(-1));
-            nextBtn.addEventListener('click', () => changeSlide(1));
-            
             document.addEventListener('keydown', (e) => {
-                if (e.key === 'ArrowRight' && !nextBtn.disabled) nextBtn.click();
-                else if (e.key === 'ArrowLeft' && !prevBtn.disabled) prevBtn.click();
-                else if (e.key === 'Escape' && !geminiModal.classList.contains('hidden')) {
+                // Adiciona o listener para a tecla 'Escape' fechar o modal
+                if (e.key === 'Escape' && !geminiModal.classList.contains('hidden')) {
                     closeModal();
                 }
             });
@@ -527,12 +496,7 @@
                 const result = await response.json();
                 return result.candidates[0].content.parts[0].text;
             }
-
-            const activeSlideIndex = Array.from(slides).findIndex(s => s.classList.contains('active'));
-            currentSlide = activeSlideIndex !== -1 ? activeSlideIndex : 0;
-            showSlide(currentSlide);
         });
     </script>
 </body>
 </html>
-

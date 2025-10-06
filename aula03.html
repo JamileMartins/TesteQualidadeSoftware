@@ -7,68 +7,88 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">    
+    <link rel="stylesheet" href="slides.css">
     <style>
-        body { font-family: 'Inter', sans-serif; overflow: hidden; }
-        .slide {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            padding: 4rem;
-            transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
-            opacity: 0;
-            transform: scale(0.95);
-            pointer-events: none;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-        .slide.active {
-            opacity: 1;
-            transform: scale(1);
-            pointer-events: auto;
-        }
+        /* Estilos específicos para aula03.html */
         .slide-content {
             width: 100%;
-            max-width: 1100px;
+            max-width: 1200px;
+            padding: 0.5rem;
+        }
+
+        /* Ajusta a largura do slide-content em telas menores */
+        @media (max-width: 768px) {
+            .slide-content {
+                width: 100%;
+                padding: 0.25rem;
+            }
+        }
+
+        /* Ajustes para modo paisagem em celulares */
+        @media (max-height: 500px) and (orientation: landscape) {
+            /* Reduz o espaçamento em elementos específicos no modo paisagem */
+            .slide h2 {
+                margin-bottom: 0.5rem !important;
+            }
+            .slide .mb-8 {
+                margin-bottom: 0.5rem !important;
+            }
+            .slide .mb-12 {
+                margin-bottom: 0.75rem !important;
+            }
+            .slide p {
+                margin-bottom: 0.5rem;
+                font-size: 90%;
+            }
+            .grid {
+                gap: 0.5rem !important;
+            }
+            /* Ajustes específicos para slides com diagramas */
+            .slide:nth-child(8) .bg-white {
+                transform: scale(0.8);
+                transform-origin: center top;
+            }
+            /* Ajuste para texto mais compacto */
+            .text-xl, .text-2xl, .text-3xl {
+                font-size: 90% !important;
+            }
         }
     </style>
 </head>
-<body class="bg-gray-100">
+<body class="flex flex-col" data-presentation="aula03">
+    <div class="fixed top-0 left-0 right-0 py-2 px-4 bg-gray-100/90 backdrop-blur-sm z-[1000] border-b border-gray-200 flex justify-end">
+        <button onclick="window.location.href='index.html'" class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm md:text-base py-1 sm:py-2 px-3 sm:px-4 rounded-lg transition-opacity duration-300 shadow-lg">Voltar para a tela principal</button>
+    </div>
 
-    <button onclick="window.location.href='index.html'" style="position:fixed;top:20px;right:20px;z-index:1000;" class="bg-slate-600 hover:bg-slate-700 text-white font-bold py-2 px-6 rounded-lg transition-all">Voltar para a tela principal</button>
-    <div id="presentation-container" class="relative w-screen h-screen">
+    <div id="presentation-container" class="relative w-full min-h-screen pb-16 mt-14">
 
         <!-- Slide 1: Título -->
-        <div class="slide active bg-slate-800 text-white text-center">
+        <div class="slide active flex justify-center items-center bg-slate-800 text-white text-center p-4 sm:p-6 md:p-8">
             <div class="slide-content">
-                <h1 class="text-5xl md:text-7xl font-black leading-tight">Do Requisito ao Código de Qualidade</h1>
-                <p class="text-2xl md:text-3xl mt-4 text-slate-300">Como Documentar e Elaborar Requisitos que Evitam Desastres</p>
-                <p class="mt-8 text-slate-400">Baseado no Syllabus CPRE (Cap. 3 & 4) e Padrões IEEE 830</p>
+                <h1 class="text-3xl sm:text-4xl md:text-6xl font-black leading-tight mt-4">Do Requisito ao Código de Qualidade</h1>
+                <p class="text-lg sm:text-xl md:text-2xl mt-3 sm:mt-4 text-slate-300">Como Documentar e Elaborar Requisitos que Evitam Desastres</p>
+                <p class="mt-4 sm:mt-6 text-sm sm:text-base text-slate-400">Baseado no Syllabus CPRE (Cap. 3 & 4) e Padrões IEEE 830</p>
             </div>
         </div>
 
         <!-- Slide 2: Agenda -->
-        <div class="slide text-center">
+        <div class="slide flex justify-center items-center text-center p-4 sm:p-6 md:p-8">
             <div class="slide-content">
-                <h2 class="text-4xl font-bold text-slate-700 mb-12">O Que Vamos Cobrir Hoje?</h2>
-                <div class="grid md:grid-cols-2 gap-8 text-left text-lg">
-                    <div class="bg-white p-6 rounded-lg shadow-md">
-                        <h3 class="font-bold text-2xl text-blue-600 mb-3">1. A Arte de Documentar (CPRE Cap. 3)</h3>
-                        <ul class="list-disc list-inside space-y-2 text-slate-600">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-700 mb-4 sm:mb-6 md:mb-8">O Que Vamos Cobrir Hoje?</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 text-left text-sm sm:text-base md:text-lg">
+                    <div class="bg-white p-3 sm:p-4 md:p-6 rounded-lg shadow-md">
+                        <h3 class="font-bold text-lg sm:text-xl md:text-2xl text-blue-600 mb-2 md:mb-3">1. A Arte de Documentar (CPRE Cap. 3)</h3>
+                        <ul class="list-disc list-inside space-y-1 sm:space-y-2 text-slate-600">
                             <li>O que são "Produtos de Trabalho"?</li>
                             <li>Técnicas: Linguagem, Templates e Modelos.</li>
                             <li>O Padrão Ouro: IEEE 830.</li>
                             <li>O poder dos Protótipos.</li>
                         </ul>
                     </div>
-                    <div class="bg-white p-6 rounded-lg shadow-md">
-                        <h3 class="font-bold text-2xl text-green-600 mb-3">2. A Ciência de Elaborar (CPRE Cap. 4)</h3>
-                        <ul class="list-disc list-inside space-y-2 text-slate-600">
-                    <button onclick="window.location.href='index.html'" style="position:fixed;top:20px;right:20px;z-index:1000;" class="bg-slate-600 hover:bg-slate-700 text-white font-bold py-2 px-6 rounded-lg transition-all">Voltar para a tela principal</button>
+                    <div class="bg-white p-3 sm:p-4 md:p-6 rounded-lg shadow-md">
+                        <h3 class="font-bold text-lg sm:text-xl md:text-2xl text-green-600 mb-2 md:mb-3">2. A Ciência de Elaborar (CPRE Cap. 4)</h3>
+                        <ul class="list-disc list-inside space-y-1 sm:space-y-2 text-slate-600">
                             <li>Onde encontrar os requisitos? (Fontes)</li>
                             <li>Como extraí-los? (Elicitação)</li>
                             <li>O que fazer quando há conflitos?</li>
@@ -80,7 +100,7 @@
         </div>
 
         <!-- Slide 3: O Problema Central -->
-        <div class="slide bg-red-600 text-white text-center">
+        <div class="slide flex justify-center items-center bg-red-600 text-white text-center p-4 sm:p-6 md:p-8">
             <div class="slide-content">
                 <h2 class="text-5xl font-bold mb-6">O Problema Central</h2>
                 <p class="text-3xl leading-relaxed max-w-4xl mx-auto">"A causa número 1 do fracasso de projetos de software é a <strong class="bg-yellow-300 text-red-700 px-2">má qualidade dos requisitos</strong>. Não é o código, não é o prazo, não é o orçamento. Começa aqui."</p>
@@ -88,7 +108,7 @@
         </div>
         
         <!-- Slide 4: Capítulo 3 CPRE: Produtos de Trabalho -->
-        <div class="slide">
+        <div class="slide flex justify-center items-center p-4 sm:p-6 md:p-8">
              <div class="slide-content">
                 <h2 class="text-sm font-bold uppercase text-blue-500 mb-2">CPRE CAP. 3 - PRODUTOS DE TRABALHO</h2>
                 <h3 class="text-4xl font-bold text-slate-800 mb-8">O Que São os "Artefatos" da Engenharia de Requisitos?</h3>
@@ -97,7 +117,7 @@
         </div>
         
         <!-- Slide 5: Linguagem Natural -->
-        <div class="slide">
+        <div class="slide flex justify-center items-center p-4 sm:p-6 md:p-8">
             <div class="slide-content">
                 <h2 class="text-3xl font-bold text-slate-800 mb-8">Fundamento #1: Linguagem Natural</h2>
                 <div class="grid md:grid-cols-2 gap-8">
@@ -114,7 +134,7 @@
         </div>
 
         <!-- Slide 6: Templates -->
-        <div class="slide">
+        <div class="slide flex justify-center items-center p-4 sm:p-6 md:p-8">
             <div class="slide-content">
                 <h2 class="text-3xl font-bold text-slate-800 mb-8">Fundamento #2: Templates (A Solução para a Ambiguidade)</h2>
                 <p class="text-xl text-slate-600 mb-8 max-w-4xl">Templates fornecem uma estrutura pré-definida para superar as deficiências da linguagem natural. Eles nos forçam a pensar nos detalhes.</p>
@@ -127,7 +147,7 @@
         </div>
 
         <!-- Slide 7: Modelos -->
-        <div class="slide">
+        <div class="slide flex justify-center items-center p-4 sm:p-6 md:p-8">
             <div class="slide-content">
                 <h2 class="text-3xl font-bold text-slate-800 mb-8">Fundamento #3: Modelos (Uma Imagem Vale Mais que Mil Requisitos)</h2>
                 <p class="text-xl text-slate-600 mb-8 max-w-4xl">Modelos são representações abstratas para entender relações complexas. Eles nos ajudam a ter uma visão geral e a descobrir inconsistências que o texto esconde.</p>
@@ -140,32 +160,53 @@
         </div>
 
         <!-- Slide 8: Exemplo de Modelagem de Contexto -->
-        <div class="slide">
+        <div class="slide flex justify-center items-center p-4 sm:p-6 md:p-8">
             <div class="slide-content">
-                <h2 class="text-3xl font-bold text-slate-800 mb-8">Exemplo Prático: Modelagem de Contexto</h2>
-                <div class="bg-white p-8 rounded-lg shadow-lg flex items-center justify-center space-x-8 text-center">
+                <h2 class="text-2xl sm:text-3xl font-bold text-slate-800 mb-4 sm:mb-6 md:mb-8">Exemplo Prático: Modelagem de Contexto</h2>
+                <!-- Versão para desktop/tablet -->
+                <div class="hidden sm:flex bg-white p-4 sm:p-6 md:p-8 rounded-lg shadow-lg items-center justify-center space-x-4 sm:space-x-6 md:space-x-8 text-center">
                     <div class="flex flex-col items-center">
-                        <div class="w-24 h-24 bg-slate-200 rounded-full flex items-center justify-center text-4xl">👤</div>
-                        <p class="mt-2 font-semibold">Cliente</p>
+                        <div class="w-16 sm:w-20 md:w-24 h-16 sm:h-20 md:h-24 bg-slate-200 rounded-full flex items-center justify-center text-2xl sm:text-3xl md:text-4xl">👤</div>
+                        <p class="mt-2 font-semibold text-sm sm:text-base">Cliente</p>
                     </div>
-                    <div class="text-3xl font-bold text-slate-400">↔️</div>
+                    <div class="text-xl sm:text-2xl md:text-3xl font-bold text-slate-400">↔️</div>
                     <div class="flex flex-col items-center">
-                        <div class="w-48 h-32 bg-blue-600 text-white rounded-lg flex items-center justify-center p-4">
-                            <h3 class="text-xl font-bold">Sistema de E-commerce</h3>
+                        <div class="w-32 sm:w-40 md:w-48 h-24 sm:h-28 md:h-32 bg-blue-600 text-white rounded-lg flex items-center justify-center p-2 sm:p-3 md:p-4">
+                            <h3 class="text-base sm:text-lg md:text-xl font-bold">Sistema de E-commerce</h3>
                         </div>
                     </div>
-                    <div class="text-3xl font-bold text-slate-400">↔️</div>
+                    <div class="text-xl sm:text-2xl md:text-3xl font-bold text-slate-400">↔️</div>
                     <div class="flex flex-col items-center">
-                        <div class="w-24 h-24 bg-slate-200 rounded-full flex items-center justify-center text-4xl">💳</div>
-                        <p class="mt-2 font-semibold">Gateway de Pagamento</p>
+                        <div class="w-16 sm:w-20 md:w-24 h-16 sm:h-20 md:h-24 bg-slate-200 rounded-full flex items-center justify-center text-2xl sm:text-3xl md:text-4xl">💳</div>
+                        <p class="mt-2 font-semibold text-sm sm:text-base">Gateway de Pagamento</p>
                     </div>
                 </div>
-                <p class="text-center mt-8 text-lg text-slate-600">Este modelo simples define o <strong class="text-blue-600">escopo</strong>. O que está dentro do sistema? Com quem ele conversa? Isso evita o "scope creep" (aumento descontrolado do escopo).</p>
+                
+                <!-- Versão para celular (layout em coluna) -->
+                <div class="sm:hidden bg-white p-4 rounded-lg shadow-lg flex flex-col items-center space-y-4 text-center">
+                    <div class="flex flex-col items-center">
+                        <div class="w-16 h-16 bg-slate-200 rounded-full flex items-center justify-center text-2xl">👤</div>
+                        <p class="mt-1 font-semibold text-sm">Cliente</p>
+                    </div>
+                    <div class="text-xl font-bold text-slate-400">⬇️</div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-40 h-24 bg-blue-600 text-white rounded-lg flex items-center justify-center p-2">
+                            <h3 class="text-base font-bold">Sistema de E-commerce</h3>
+                        </div>
+                    </div>
+                    <div class="text-xl font-bold text-slate-400">⬇️</div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-16 h-16 bg-slate-200 rounded-full flex items-center justify-center text-2xl">💳</div>
+                        <p class="mt-1 font-semibold text-sm">Gateway de Pagamento</p>
+                    </div>
+                </div>
+                
+                <p class="text-center mt-4 sm:mt-6 md:mt-8 text-sm sm:text-base md:text-lg text-slate-600">Este modelo simples define o <strong class="text-blue-600">escopo</strong>. O que está dentro do sistema? Com quem ele conversa? Isso evita o "scope creep" (aumento descontrolado do escopo).</p>
             </div>
         </div>
 
         <!-- Slide 9: Glossário -->
-        <div class="slide">
+        <div class="slide flex justify-center items-center p-4 sm:p-6 md:p-8">
             <div class="slide-content text-center">
                 <h2 class="text-3xl font-bold text-slate-800 mb-8">O Dicionário do Projeto: O Glossário</h2>
                 <p class="text-xl text-slate-600 mb-8 max-w-4xl mx-auto">"Cliente" para o marketing pode ser diferente de "Cliente" para o financeiro. Um glossário centralizado garante que todos falem a mesma língua, evitando mal-entendidos caríssimos.</p>
@@ -174,7 +215,7 @@
         </div>
 
         <!-- Slide 10: Estrutura de Documentação IEEE 830 -->
-        <div class="slide">
+        <div class="slide flex justify-center items-center p-4 sm:p-6 md:p-8">
             <div class="slide-content">
                  <h2 class="text-sm font-bold uppercase text-gray-500 mb-2">O BLUEPRINT DO PROJETO</h2>
                 <h3 class="text-4xl font-bold text-slate-800 mb-8">A Estrutura de Documentação (SRS)</h3>
@@ -183,24 +224,24 @@
         </div>
 
         <!-- Slide 11: Papel do IEEE 830 -->
-        <div class="slide">
+        <div class="slide flex justify-center items-center p-4 sm:p-6 md:p-8">
             <div class="slide-content">
-                <h2 class="text-3xl font-bold text-slate-800 mb-8">O Papel do Padrão IEEE 830</h2>
-                <p class="text-xl text-slate-600 mb-8 max-w-4xl">O IEEE 830 não é só um template, é um guia para garantir a <b>qualidade do documento de requisitos</b>. Um bom SRS, segundo o padrão, deve ser:</p>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-                    <div class="bg-white p-4 rounded-lg shadow-md"><strong>Correto</strong></div>
-                    <div class="bg-white p-4 rounded-lg shadow-md"><strong>Completo</strong></div>
-                    <div class="bg-white p-4 rounded-lg shadow-md"><strong>Consistente</strong></div>
-                    <div class="bg-white p-4 rounded-lg shadow-md"><strong>Inequívoco</strong></div>
-                    <div class="bg-white p-4 rounded-lg shadow-md"><strong>Verificável</strong></div>
-                    <div class="bg-white p-4 rounded-lg shadow-md"><strong>Modificável</strong></div>
-                    <div class="bg-white p-4 rounded-lg shadow-md"><strong>Rastreável</strong></div>
+                <h2 class="text-2xl sm:text-3xl font-bold text-slate-800 mb-4 sm:mb-6 md:mb-8">O Papel do Padrão IEEE 830</h2>
+                <p class="text-sm sm:text-base md:text-xl text-slate-600 mb-4 sm:mb-6 md:mb-8 max-w-4xl">O IEEE 830 não é só um template, é um guia para garantir a <b>qualidade do documento de requisitos</b>. Um bom SRS, segundo o padrão, deve ser:</p>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 sm:gap-3 md:gap-4 text-center text-sm sm:text-base">
+                    <div class="bg-white p-2 sm:p-3 md:p-4 rounded-lg shadow-md"><strong>Correto</strong></div>
+                    <div class="bg-white p-2 sm:p-3 md:p-4 rounded-lg shadow-md"><strong>Completo</strong></div>
+                    <div class="bg-white p-2 sm:p-3 md:p-4 rounded-lg shadow-md"><strong>Consistente</strong></div>
+                    <div class="bg-white p-2 sm:p-3 md:p-4 rounded-lg shadow-md"><strong>Inequívoco</strong></div>
+                    <div class="bg-white p-2 sm:p-3 md:p-4 rounded-lg shadow-md"><strong>Verificável</strong></div>
+                    <div class="bg-white p-2 sm:p-3 md:p-4 rounded-lg shadow-md"><strong>Modificável</strong></div>
+                    <div class="bg-white p-2 sm:p-3 md:p-4 rounded-lg shadow-md"><strong>Rastreável</strong></div>
                 </div>
             </div>
         </div>
 
         <!-- Slide 12: Protótipos -->
-        <div class="slide">
+        <div class="slide flex justify-center items-center p-4 sm:p-6 md:p-8">
             <div class="slide-content text-center">
                 <h2 class="text-3xl font-bold text-slate-800 mb-8">Tangibilizando Ideias: Protótipos</h2>
                 <p class="text-xl text-slate-600 mb-8 max-w-4xl mx-auto">Às vezes, a melhor forma de validar um requisito é mostrando-o. Protótipos (de baixa ou alta fidelidade) são uma ferramenta poderosa para obter feedback rápido e evitar a construção de algo que o usuário não quer.</p>
@@ -209,7 +250,7 @@
         </div>
 
         <!-- Slide 13: Capítulo 4 CPRE: Elaboração -->
-        <div class="slide bg-green-600 text-white">
+        <div class="slide flex justify-center items-center bg-green-600 text-white p-4 sm:p-6 md:p-8">
             <div class="slide-content">
                 <h2 class="text-sm font-bold uppercase mb-2">CPRE CAP. 4 - ELABORAÇÃO DE REQUISITOS</h2>
                 <h3 class="text-5xl font-bold">O Processo de "Escavar" a Informação Correta</h3>
@@ -218,32 +259,32 @@
         </div>
 
         <!-- Slide 14: Fontes -->
-        <div class="slide">
+        <div class="slide flex justify-center items-center p-4 sm:p-6 md:p-8">
             <div class="slide-content">
-                <h2 class="text-3xl font-bold text-slate-800 mb-8">Passo 1: Fontes - Onde os Requisitos se Escondem?</h2>
-                <p class="text-xl text-slate-600 mb-8 max-w-4xl">Eles não aparecem magicamente. Precisamos buscá-los ativamente em:</p>
-                <div class="grid md:grid-cols-3 gap-6 text-center">
-                    <div class="bg-white p-6 rounded-lg shadow-md">
-                        <p class="text-4xl mb-2">👥</p>
-                        <h3 class="font-bold">Stakeholders</h3>
-                        <p class="text-sm text-slate-500">Usuários, gestores, clientes, desenvolvedores...</p>
+                <h2 class="text-2xl sm:text-3xl font-bold text-slate-800 mb-4 sm:mb-6 md:mb-8">Passo 1: Fontes - Onde os Requisitos se Escondem?</h2>
+                <p class="text-sm sm:text-base md:text-xl text-slate-600 mb-4 sm:mb-6 md:mb-8 max-w-4xl">Eles não aparecem magicamente. Precisamos buscá-los ativamente em:</p>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 md:gap-6 text-center">
+                    <div class="bg-white p-3 sm:p-4 md:p-6 rounded-lg shadow-md">
+                        <p class="text-2xl sm:text-3xl md:text-4xl mb-1 sm:mb-2">👥</p>
+                        <h3 class="font-bold text-base sm:text-lg">Stakeholders</h3>
+                        <p class="text-xs sm:text-sm text-slate-500">Usuários, gestores, clientes, desenvolvedores...</p>
                     </div>
-                    <div class="bg-white p-6 rounded-lg shadow-md">
-                        <p class="text-4xl mb-2">📄</p>
-                        <h3 class="font-bold">Documentos</h3>
-                        <p class="text-sm text-slate-500">Leis, manuais, processos de negócio existentes...</p>
+                    <div class="bg-white p-3 sm:p-4 md:p-6 rounded-lg shadow-md">
+                        <p class="text-2xl sm:text-3xl md:text-4xl mb-1 sm:mb-2">📄</p>
+                        <h3 class="font-bold text-base sm:text-lg">Documentos</h3>
+                        <p class="text-xs sm:text-sm text-slate-500">Leis, manuais, processos de negócio existentes...</p>
                     </div>
-                    <div class="bg-white p-6 rounded-lg shadow-md">
-                        <p class="text-4xl mb-2">💻</p>
-                        <h3 class="font-bold">Sistemas Legados</h3>
-                        <p class="text-sm text-slate-500">Sistemas atuais que serão substituídos ou integrados.</p>
+                    <div class="bg-white p-3 sm:p-4 md:p-6 rounded-lg shadow-md">
+                        <p class="text-2xl sm:text-3xl md:text-4xl mb-1 sm:mb-2">💻</p>
+                        <h3 class="font-bold text-base sm:text-lg">Sistemas Legados</h3>
+                        <p class="text-xs sm:text-sm text-slate-500">Sistemas atuais que serão substituídos ou integrados.</p>
                     </div>
                 </div>
             </div>
         </div>
         
         <!-- Slide 15: Elicitação -->
-        <div class="slide">
+        <div class="slide flex justify-center items-center p-4 sm:p-6 md:p-8">
             <div class="slide-content">
                 <h2 class="text-3xl font-bold text-slate-800 mb-8">Passo 2: Elicitação - Como Extrair a Informação?</h2>
                 <p class="text-xl text-slate-600 mb-8 max-w-4xl">É um trabalho de detetive. Usamos técnicas diferentes para situações diferentes:</p>
@@ -256,7 +297,7 @@
         </div>
 
         <!-- Slide 16: Resolução de Conflitos -->
-        <div class="slide">
+        <div class="slide flex justify-center items-center p-4 sm:p-6 md:p-8">
             <div class="slide-content text-center">
                 <h2 class="text-3xl font-bold text-slate-800 mb-8">Passo 3: Resolução de Conflitos</h2>
                 <p class="text-xl text-slate-600 mb-8 max-w-4xl mx-auto">Inevitavelmente, os requisitos entrarão em conflito.</p>
@@ -270,7 +311,7 @@
         </div>
         
         <!-- Slide 17: Case Study Checkpoint -->
-        <div class="slide">
+        <div class="slide flex justify-center items-center p-4 sm:p-6 md:p-8">
             <div class="slide-content">
                 <h2 class="text-3xl font-bold text-slate-800 mb-8">Ponto de Verificação: Nossos Casos de Estudo</h2>
                 <div class="grid md:grid-cols-2 gap-8 text-left">
@@ -287,7 +328,7 @@
         </div>
 
         <!-- Slide 18: Validação -->
-        <div class="slide">
+        <div class="slide flex justify-center items-center p-4 sm:p-6 md:p-8">
             <div class="slide-content">
                 <h2 class="text-3xl font-bold text-slate-800 mb-8">Passo 4: Validação - A Rede de Segurança</h2>
                 <p class="text-xl text-slate-600 mb-8 max-w-4xl">É o processo de verificar com os stakeholders se os requisitos documentados são <strong class="text-green-600">realmente o que eles precisam</strong>. É a última chance de encontrar erros antes de escrever uma única linha de código.</p>
@@ -299,7 +340,7 @@
         </div>
 
         <!-- Slide 19: Conclusão -->
-        <div class="slide bg-slate-800 text-white text-center">
+        <div class="slide flex justify-center items-center bg-slate-800 text-white text-center p-4 sm:p-6 md:p-8">
             <div class="slide-content">
                 <h2 class="text-5xl font-bold mb-6">Conclusão: O Ciclo Virtuoso</h2>
                 <p class="text-2xl mb-8 max-w-4xl mx-auto">Documentar e Elaborar não são fases separadas, são um ciclo contínuo.</p>
@@ -316,49 +357,12 @@
     </div>
 
     <!-- Navegação -->
-    <div class="fixed bottom-0 left-0 right-0 p-4 bg-white/90 backdrop-blur-sm flex justify-between items-center border-t border-gray-200">
-        <button id="prevBtn" class="bg-slate-600 hover:bg-slate-700 text-white font-bold py-2 px-6 rounded-lg transition-all disabled:opacity-50">Anterior</button>
-        <div id="slide-counter" class="text-lg font-semibold text-slate-700"></div>
-        <button id="nextBtn" class="bg-slate-600 hover:bg-slate-700 text-white font-bold py-2 px-6 rounded-lg transition-all disabled:opacity-50">Próximo</button>
+    <div class="fixed bottom-0 left-0 right-0 px-4 py-2 sm:px-6 sm:py-3 bg-white/80 backdrop-blur-lg flex justify-between items-center shadow-lg border-t border-gray-200 z-40">
+        <button id="prevBtn" class="flex-1 sm:flex-initial bg-[#34495e] hover:bg-[#2c3e50] text-white font-bold text-sm sm:text-base py-2 px-3 sm:px-6 rounded-lg transition-all max-w-[120px]">Anterior</button>
+        <div id="slide-counter" class="text-center text-sm sm:text-base font-semibold text-gray-700">Slide 1 de 19</div>
+        <button id="nextBtn" class="flex-1 sm:flex-initial bg-[#34495e] hover:bg-[#2c3e50] text-white font-bold text-sm sm:text-base py-2 px-3 sm:px-6 rounded-lg transition-all max-w-[120px]">Próximo</button>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const slides = document.querySelectorAll('.slide');
-            const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
-            const slideCounter = document.getElementById('slide-counter');
-            let currentSlide = 0;
-            const totalSlides = slides.length;
-
-            function showSlide(index) {
-                slides.forEach((slide, i) => {
-                    slide.classList.toggle('active', i === index);
-                });
-                slideCounter.textContent = `Slide ${index + 1} de ${totalSlides}`;
-                prevBtn.disabled = index === 0;
-                nextBtn.disabled = index === totalSlides - 1;
-            }
-
-            function changeSlide(direction) {
-                const newIndex = currentSlide + direction;
-                if (newIndex >= 0 && newIndex < totalSlides) {
-                    currentSlide = newIndex;
-                    showSlide(currentSlide);
-                }
-            }
-
-            prevBtn.addEventListener('click', () => changeSlide(-1));
-            nextBtn.addEventListener('click', () => changeSlide(1));
-            
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'ArrowRight') nextBtn.click();
-                if (e.key === 'ArrowLeft') prevBtn.click();
-            });
-
-            // Mostra o primeiro slide
-            showSlide(currentSlide);
-        });
-    </script>
+    <script src="slides.js"></script>
 </body>
 </html>

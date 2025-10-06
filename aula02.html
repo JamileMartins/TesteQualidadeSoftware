@@ -9,52 +9,27 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
-    <!-- 
-        Chosen Palette: Calm Harmony (Warm Off-White, Dark Slate, Accent Red, Accent Blue, Data Green)
-        Application Structure Plan: A thematic, single-page scrolling narrative. Starts with impactful real-world failures to create emotional buy-in. Transitions to core concepts presented interactively (accordions). Presents hard data through animated charts to persuade logically. Concludes by summarizing the problem (symptoms) and empowering the student as the solution. This structure is designed for motivation and retention, moving from "why this matters" to "what it is" and "how you fit in", which is more engaging for a student audience than a traditional linear presentation.
-        Visualization & Content Choices: 
-        - Case Studies (Ariane 5, Horizon): Goal=Impact. Method=Cards with icons. Interaction=None, focus on story. Justification=Strong narrative hook.
-        - Core Concepts (Definitions, Types, Principles): Goal=Organize/Explain. Method=Accordion. Interaction=Click to expand/collapse. Justification=Prevents information overload, encourages active exploration.
-        - Statistics (Costs, Bug Origins): Goal=Persuade. Method=Charts and animated counters. Interaction=Chart tooltips on hover. Justification=Visual data is more memorable and convincing than text alone. Library=Chart.js on Canvas.
-        - Conclusion: Goal=Empower. Method=Bulleted list. Interaction=None. Justification=Clear, direct call to action.
-        CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. 
-    -->
-    <style>
-        body { font-family: 'Inter', sans-serif; background-color: #F8F7F4; color: #2c3e50; overflow: hidden; }
-        .slide {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-            opacity: 0;
-            transform: scale(0.98);
-            pointer-events: none;
-        }
-        .slide.active {
-            opacity: 1;
-            transform: scale(1);
-            pointer-events: auto;
-        }
-        .chart-container { position: relative; width: 100%; max-width: 600px; margin-left: auto; margin-right: auto; height: 70vh; max-height: 450px; }
-    </style>
+    <link rel="stylesheet" href="slides.css">
 </head>
 <body class="flex flex-col">
-    <button onclick="window.location.href='index.html'" style="position:fixed;top:20px;right:20px;z-index:1000;" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-opacity duration-300">Voltar para a tela principal</button>
+    <div class="fixed top-0 left-0 right-0 py-2 px-4 bg-[#F8F7F4]/90 backdrop-blur-sm z-[1000] border-b border-gray-200 flex justify-end">
+        <button onclick="window.location.href='index.html'" class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm md:text-base py-1 sm:py-2 px-3 sm:px-4 rounded-lg transition-opacity duration-300 shadow-lg">Voltar para a tela principal</button>
+    </div>
 
-    <div id="presentation-container" class="relative w-screen h-screen">
+    <div id="presentation-container" class="relative w-full min-h-screen pb-16 mt-14">
 
         <!-- Slide 1: Título -->
-        <div class="slide active flex flex-col justify-center items-center text-center p-8">
-            <h1 class="text-5xl md:text-7xl font-black text-[#c0392b] leading-tight">A Origem de Todos os Bugs</h1>
-            <p class="text-2xl md:text-3xl mt-4 text-gray-700 max-w-3xl mx-auto">Como um requisito mal definido pode derrubar o projeto mais brilhante e custar milhões.</p>
+        <div class="slide active flex flex-col justify-center items-center text-center p-4 sm:p-6 md:p-8">
+            <div>
+                <h1 class="text-3xl sm:text-5xl md:text-6xl font-black text-[#c0392b] leading-tight mb-4">A Origem de Todos os Bugs</h1>
+                <p class="text-lg sm:text-xl md:text-2xl mt-2 sm:mt-4 text-gray-700 max-w-3xl mx-auto">Como um requisito mal definido pode derrubar o projeto mais brilhante e custar milhões.</p>
+            </div>
         </div>
 
         <!-- Slide 2: Falhas Reais -->
-        <div class="slide flex flex-col justify-center items-center text-center p-8">
-            <h2 class="text-4xl font-bold mb-12">Anatomia de Desastres de Software</h2>
-            <div class="grid md:grid-cols-2 gap-8 max-w-5xl w-full">
+        <div class="slide flex flex-col justify-center items-center text-center p-4 sm:p-6 md:p-8">
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-12">Anatomia de Desastres de Software</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 max-w-5xl w-full">
                 <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 text-left">
                     <div class="flex items-center mb-4">
                         <span class="text-4xl mr-4">🚀</span>
@@ -81,8 +56,8 @@
         </div>
         
         <!-- Slide 3: O que é Qualidade? -->
-        <div class="slide flex flex-col justify-center items-center text-center p-8">
-            <h2 class="text-4xl font-bold mb-8">O que é Qualidade de Software?</h2>
+        <div class="slide flex flex-col justify-center items-center text-center p-4 sm:p-6 md:p-8">
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 md:mb-8">O que é Qualidade de Software?</h2>
             <div class="max-w-3xl bg-white p-8 rounded-xl shadow-lg border border-gray-200">
                  <blockquote class="text-3xl font-bold text-center text-[#2c3e50]">
                     "Qualidade é conformidade aos requisitos."
@@ -93,55 +68,78 @@
         </div>
 
         <!-- Slide 4: Erro, Defeito, Falha -->
-        <div class="slide flex flex-col justify-center items-center text-center p-8">
-            <h2 class="text-4xl font-bold mb-8">A Anatomia de um Problema</h2>
-             <div class="max-w-4xl w-full bg-white p-8 rounded-xl shadow-lg border border-gray-200">
-                <div class="flex flex-col md:flex-row justify-around items-center space-y-4 md:space-y-0">
-                    <div class="text-center">
-                        <p class="text-6xl">👤</p>
-                        <h3 class="text-xl font-bold mt-2">Erro Humano</h3>
-                        <p>Uma pessoa comete um erro...</p>
+        <div class="slide flex flex-col justify-center items-center text-center p-4 sm:p-6 md:p-8">
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 md:mb-8">A Anatomia de um Problema</h2>
+             <div class="max-w-4xl w-full bg-white p-4 sm:p-6 md:p-8 rounded-xl shadow-lg border border-gray-200 overflow-x-hidden">
+                <!-- Versão desktop: lado a lado -->
+                <div class="hidden md:flex flex-row justify-around items-center">
+                    <div class="text-center px-2">
+                        <p class="text-4xl sm:text-5xl md:text-6xl">👤</p>
+                        <h3 class="text-base sm:text-lg md:text-xl font-bold mt-2">Erro Humano</h3>
+                        <p class="text-sm md:text-base">Uma pessoa comete um erro...</p>
                     </div>
-                    <div class="text-4xl text-gray-400">➡️</div>
-                    <div class="text-center">
-                        <p class="text-6xl">🐞</p>
-                        <h3 class="text-xl font-bold mt-2">Defeito (Bug)</h3>
-                        <p>...que cria um defeito no software...</p>
+                    <div class="text-2xl sm:text-3xl md:text-4xl text-gray-400">➡️</div>
+                    <div class="text-center px-2">
+                        <p class="text-4xl sm:text-5xl md:text-6xl">🐞</p>
+                        <h3 class="text-base sm:text-lg md:text-xl font-bold mt-2">Defeito (Bug)</h3>
+                        <p class="text-sm md:text-base">...que cria um defeito no software...</p>
                     </div>
-                    <div class="text-4xl text-gray-400">➡️</div>
-                    <div class="text-center">
-                        <p class="text-6xl">💣</p>
-                        <h3 class="text-xl font-bold mt-2">Falha</h3>
-                        <p>...que pode causar uma falha na operação.</p>
+                    <div class="text-2xl sm:text-3xl md:text-4xl text-gray-400">➡️</div>
+                    <div class="text-center px-2">
+                        <p class="text-4xl sm:text-5xl md:text-6xl">💣</p>
+                        <h3 class="text-base sm:text-lg md:text-xl font-bold mt-2">Falha</h3>
+                        <p class="text-sm md:text-base">...que pode causar uma falha na operação.</p>
                     </div>
                 </div>
-                <p class="mt-8 text-lg"><strong>O objetivo do teste é encontrar o DEFEITO antes que ele vire uma FALHA.</strong></p>
+                
+                <!-- Versão mobile: em coluna -->
+                <div class="flex flex-col md:hidden space-y-4">
+                    <div class="text-center">
+                        <p class="text-4xl sm:text-5xl">👤</p>
+                        <h3 class="text-base sm:text-lg font-bold mt-2">Erro Humano</h3>
+                        <p class="text-sm sm:text-base">Uma pessoa comete um erro...</p>
+                        <div class="text-2xl sm:text-3xl text-gray-400 my-1">⬇️</div>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-4xl sm:text-5xl">🐞</p>
+                        <h3 class="text-base sm:text-lg font-bold mt-2">Defeito (Bug)</h3>
+                        <p class="text-sm sm:text-base">...que cria um defeito no software...</p>
+                        <div class="text-2xl sm:text-3xl text-gray-400 my-1">⬇️</div>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-4xl sm:text-5xl">💣</p>
+                        <h3 class="text-base sm:text-lg font-bold mt-2">Falha</h3>
+                        <p class="text-sm sm:text-base">...que pode causar uma falha na operação.</p>
+                    </div>
+                </div>
+                
+                <p class="mt-4 sm:mt-6 md:mt-8 text-base sm:text-lg text-center"><strong>O objetivo do teste é encontrar o DEFEITO antes que ele vire uma FALHA.</strong></p>
             </div>
         </div>
 
         <!-- Slide 5: Abordagem de Teste -->
-        <div class="slide flex flex-col justify-center items-center text-center p-8">
-            <h2 class="text-4xl font-bold mb-8">Qual é a Mentalidade Correta para Testar?</h2>
-            <div class="grid md:grid-cols-2 gap-8 max-w-5xl">
-                <div class="bg-red-50 p-8 rounded-xl border border-red-200">
-                    <h3 class="text-2xl font-bold text-red-800 mb-4">Abordagem Tradicional (Errada)</h3>
-                    <p class="text-lg"><strong>Meta:</strong> Mostrar que o sistema funciona.</p>
-                    <p class="text-lg"><strong>Critério de Sucesso:</strong> Sistema sem falhas.</p>
-                    <p class="text-xl font-bold mt-4"><strong>Resultado:</strong> Sistema com defeitos ocultos.</p>
+        <div class="slide flex flex-col justify-center items-center text-center p-4 sm:p-6 md:p-8">
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 sm:mb-4 md:mb-6">Qual é a Mentalidade Correta para Testar?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 max-w-5xl w-full px-2">
+                <div class="bg-red-50 p-3 sm:p-4 md:p-6 rounded-xl border border-red-200">
+                    <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-red-800 mb-2 md:mb-4">Abordagem Tradicional (Errada)</h3>
+                    <p class="text-sm sm:text-base md:text-lg"><strong>Meta:</strong> Mostrar que o sistema funciona.</p>
+                    <p class="text-sm sm:text-base md:text-lg"><strong>Critério de Sucesso:</strong> Sistema sem falhas.</p>
+                    <p class="text-base sm:text-lg md:text-xl font-bold mt-2 md:mt-4"><strong>Resultado:</strong> Sistema com defeitos ocultos.</p>
                 </div>
-                <div class="bg-green-50 p-8 rounded-xl border border-green-200">
-                    <h3 class="text-2xl font-bold text-green-800 mb-4">Abordagem Moderna (Correta)</h3>
-                    <p class="text-lg"><strong>Meta:</strong> Encontrar defeitos.</p>
-                    <p class="text-lg"><strong>Critério de Sucesso:</strong> Encontrar falhas.</p>
-                    <p class="text-xl font-bold mt-4"><strong>Resultado:</strong> Sistema com menos defeitos.</p>
+                <div class="bg-green-50 p-3 sm:p-4 md:p-6 rounded-xl border border-green-200">
+                    <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-green-800 mb-2 md:mb-4">Abordagem Moderna (Correta)</h3>
+                    <p class="text-sm sm:text-base md:text-lg"><strong>Meta:</strong> Encontrar defeitos.</p>
+                    <p class="text-sm sm:text-base md:text-lg"><strong>Critério de Sucesso:</strong> Encontrar falhas.</p>
+                    <p class="text-base sm:text-lg md:text-xl font-bold mt-2 md:mt-4"><strong>Resultado:</strong> Sistema com menos defeitos.</p>
                 </div>
             </div>
-            <p class="mt-8 text-xl max-w-3xl">Desenvolvedores devem provar que o sistema funciona. <strong>Testadores devem provar que ele não funciona.</strong></p>
+            <p class="mt-4 sm:mt-6 md:mt-8 text-base sm:text-lg md:text-xl max-w-3xl px-2">Desenvolvedores devem provar que o sistema funciona. <strong>Testadores devem provar que ele não funciona.</strong></p>
         </div>
         
         <!-- Slide 6: Introdução aos 7 Princípios -->
-        <div class="slide flex flex-col justify-center items-center text-center p-8">
-             <h2 class="text-4xl font-bold mb-8">Os 7 Princípios Fundamentais do Teste</h2>
+        <div class="slide flex flex-col justify-center items-center text-center p-4 sm:p-6 md:p-8">
+             <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 md:mb-8">Os 7 Princípios Fundamentais do Teste</h2>
              <div class="max-w-4xl w-full space-y-6">
                 <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 text-left">
                     <h3 class="font-bold text-xl mb-2">1. Teste demonstra a presença de defeitos</h3>
@@ -155,18 +153,19 @@
         </div>
 
         <!-- Slide 7: Princípio 3 - Teste Antecipado -->
-        <div class="slide flex flex-col justify-center items-center text-center p-8">
-            <h2 class="text-4xl font-bold mb-8">Princípio 3: Teste Antecipado (A Regra de Ouro)</h2>
-            <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 w-full max-w-4xl">
-                <h3 class="text-xl font-bold mb-4">Custo para Corrigir um Erro por Fase (Regra 10 de Myers)</h3>
-                <div class="chart-container !h-[400px] !max-h-[400px]"><canvas id="fixCostChart"></canvas></div>
-                <p class="text-sm text-gray-600 mt-4">Começar a testar cedo (nos requisitos!) é a decisão financeira mais inteligente que um projeto pode tomar.</p>
+        <div class="slide flex flex-col justify-center items-center text-center p-4 sm:p-6 md:p-8">
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 sm:mb-4 md:mb-6">Princípio 3: Teste Antecipado</h2>
+            <div class="bg-white p-3 sm:p-4 md:p-6 rounded-xl shadow-lg border border-gray-200 w-full max-w-4xl">
+                <h3 class="text-base sm:text-lg md:text-xl font-bold mb-2 md:mb-4">Custo para Corrigir um Erro por Fase (Regra 10 de Myers)</h3>
+                <!-- Ajustando a altura do gráfico para se adaptar melhor em telas com modo horizontal -->
+                <div class="chart-container !h-[300px] sm:!h-[350px] md:!h-[400px] !max-h-[400px]"><canvas id="fixCostChart"></canvas></div>
+                <p class="text-xs sm:text-sm text-gray-600 mt-2 sm:mt-3 md:mt-4">Começar a testar cedo (nos requisitos!) é a decisão financeira mais inteligente que um projeto pode tomar.</p>
             </div>
         </div>
         
         <!-- Slide 8: Origem dos Erros -->
-        <div class="slide flex flex-col justify-center items-center text-center p-8">
-            <h2 class="text-4xl font-bold mb-8">Onde a Maioria dos Erros Nasce?</h2>
+        <div class="slide flex flex-col justify-center items-center text-center p-4 sm:p-6 md:p-8">
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 md:mb-8">Onde a Maioria dos Erros Nasce?</h2>
             <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 w-full max-w-lg">
                 <h3 class="text-xl font-bold mb-4">Introdução de Erros por Etapa do Desenvolvimento</h3>
                 <div class="chart-container !h-[350px] !max-h-[350px]"><canvas id="bugSourceChart"></canvas></div>
@@ -176,8 +175,8 @@
         </div>
         
         <!-- Slide 9: Princípio 4 e 5 -->
-        <div class="slide flex flex-col justify-center items-center text-center p-8">
-             <h2 class="text-4xl font-bold mb-8">Os 7 Princípios Fundamentais (cont.)</h2>
+        <div class="slide flex flex-col justify-center items-center text-center p-4 sm:p-6 md:p-8">
+             <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 md:mb-8">Os 7 Princípios Fundamentais (cont.)</h2>
              <div class="max-w-4xl w-full space-y-6">
                 <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 text-left">
                     <h3 class="font-bold text-xl mb-2">4. Agrupamento de Defeitos</h3>
@@ -191,8 +190,8 @@
         </div>
 
         <!-- Slide 10: Princípio 6 e 7 -->
-        <div class="slide flex flex-col justify-center items-center text-center p-8">
-             <h2 class="text-4xl font-bold mb-8">Os 7 Princípios Fundamentais (final)</h2>
+        <div class="slide flex flex-col justify-center items-center text-center p-4 sm:p-6 md:p-8">
+             <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 md:mb-8">Os 7 Princípios Fundamentais (final)</h2>
              <div class="max-w-4xl w-full space-y-6">
                  <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 text-left">
                     <h3 class="font-bold text-xl mb-2">6. Teste depende do contexto</h3>
@@ -206,8 +205,8 @@
         </div>
         
         <!-- Slide 11: Sumário dos 7 Princípios -->
-        <div class="slide flex flex-col justify-center items-center text-center p-8">
-            <h2 class="text-4xl font-bold mb-8">Resumo: Os 7 Princípios do Teste</h2>
+        <div class="slide flex flex-col justify-center items-center text-center p-4 sm:p-6 md:p-8">
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 md:mb-8">Resumo: Os 7 Princípios do Teste</h2>
             <div class="max-w-3xl w-full bg-white p-8 rounded-xl shadow-lg border border-gray-200">
                 <ul class="text-left text-xl space-y-3">
                     <li><span class="font-bold text-blue-600">1.</span> Teste demonstra a <b>presença</b> de defeitos.</li>
@@ -222,14 +221,14 @@
         </div>
 
         <!-- Slide 12: Conclusão Parte 1 -->
-        <div class="slide flex flex-col justify-center items-center text-center p-8 bg-[#2c3e50] text-white">
-            <h2 class="text-4xl font-bold mb-4">Qualidade Começa no Requisito.</h2>
+        <div class="slide flex flex-col justify-center items-center text-center p-4 sm:p-6 md:p-8 bg-[#2c3e50] text-white">
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">Qualidade Começa no Requisito.</h2>
             <p class="max-w-3xl mx-auto text-gray-300 text-2xl">Se o pedido (requisito) estiver errado, você vai validar um sistema que funciona perfeitamente... para resolver o problema errado.</p>
         </div>
         
         <!-- Slide 13: Conclusão Parte 2 -->
-        <div class="slide flex flex-col justify-center items-center text-center p-8 bg-[#2c3e50] text-white">
-             <h2 class="text-4xl font-bold mb-8">O seu papel neste cenário:</h2>
+        <div class="slide flex flex-col justify-center items-center text-center p-4 sm:p-6 md:p-8 bg-[#2c3e50] text-white">
+             <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 md:mb-8">O seu papel neste cenário:</h2>
             <div class="max-w-3xl mx-auto text-left text-xl space-y-4 bg-white/10 p-8 rounded-lg">
                 <p>✅ Entender de ER e Teste torna-o um profissional <b>completo e valioso</b>.</p>
                 <p>✅ É a habilidade que separa um "codificador" de um "engenheiro de software".</p>
@@ -240,58 +239,37 @@
     </div>
 
     <!-- Navegação -->
-    <div class="fixed bottom-0 left-0 right-0 p-4 bg-white/80 backdrop-blur-lg flex justify-between items-center shadow-t-lg border-t border-gray-200">
-        <button id="prevBtn" class="bg-[#34495e] hover:bg-[#2c3e50] text-white font-bold py-2 px-6 rounded-lg transition-all">Anterior</button>
-        <div id="slide-counter" class="text-lg font-semibold text-gray-700"></div>
-        <button id="nextBtn" class="bg-[#34495e] hover:bg-[#2c3e50] text-white font-bold py-2 px-6 rounded-lg transition-all">Próximo</button>
+    <div class="fixed bottom-0 left-0 right-0 px-4 py-2 sm:px-6 sm:py-3 bg-white/80 backdrop-blur-lg flex justify-between items-center shadow-lg border-t border-gray-200 z-40">
+        <button id="prevBtn" class="flex-1 sm:flex-initial bg-[#34495e] hover:bg-[#2c3e50] text-white font-bold text-sm sm:text-base py-2 px-3 sm:px-6 rounded-lg transition-all max-w-[120px]">Anterior</button>
+        <div id="slide-counter" class="text-center text-sm sm:text-base font-semibold text-gray-700">Slide 1 de 13</div>
+        <button id="nextBtn" class="flex-1 sm:flex-initial bg-[#34495e] hover:bg-[#2c3e50] text-white font-bold text-sm sm:text-base py-2 px-3 sm:px-6 rounded-lg transition-all max-w-[120px]">Próximo</button>
     </div>
 
+    <script src="slides.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const slides = document.querySelectorAll('.slide');
-            const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
-            const slideCounter = document.getElementById('slide-counter');
-            let currentSlide = 0;
-            const totalSlides = slides.length;
-
-            function showSlide(index) {
-                slides.forEach((slide, i) => {
-                    slide.classList.toggle('active', i === index);
-                });
-                slideCounter.textContent = `Slide ${index + 1} de ${totalSlides}`;
-                prevBtn.disabled = index === 0;
-                prevBtn.classList.toggle('opacity-50', index === 0);
-                nextBtn.disabled = index === totalSlides - 1;
-                nextBtn.classList.toggle('opacity-50', index === totalSlides - 1);
-            }
-
-            function changeSlide(direction) {
-                currentSlide += direction;
-                if (currentSlide < 0) currentSlide = 0;
-                if (currentSlide >= totalSlides) currentSlide = totalSlides - 1;
-                showSlide(currentSlide);
-            }
-
-            prevBtn.addEventListener('click', () => changeSlide(-1));
-            nextBtn.addEventListener('click', () => changeSlide(1));
-            
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'ArrowRight') nextBtn.click();
-                else if (e.key === 'ArrowLeft') prevBtn.click();
-            });
-
             // --- GRÁFICOS ---
+            // A lógica dos gráficos permanece aqui, pois é específica para este slide.
             let fixCostChartInstance, bugSourceChartInstance;
 
             function createFixCostChart() {
                 const canvas = document.getElementById('fixCostChart');
                 if (!canvas) return;
                 if (fixCostChartInstance) fixCostChartInstance.destroy();
+                
+                // Verificar se estamos em modo paisagem e em tela pequena
+                const isLandscape = window.innerWidth > window.innerHeight;
+                const isMobile = window.innerWidth < 768;
+                
+                // Ajustar rótulos para economizar espaço em telas pequenas
+                const labels = isLandscape && isMobile ? 
+                    ['Req.', 'Proj.', 'Cod.', 'Testes U.', 'Testes S.', 'Op.'] : 
+                    ['Requisitos', 'Projeto', 'Codificação', 'Testes de Unidade', 'Testes de Sistema', 'Operação'];
+                
                 fixCostChartInstance = new Chart(canvas, {
                     type: 'bar',
                     data: {
-                        labels: ['Requisitos', 'Projeto', 'Codificação', 'Testes de Unidade', 'Testes de Sistema', 'Operação'],
+                        labels: labels,
                         datasets: [{ 
                             label: 'Custo Relativo', 
                             data: [1, 4.5, 10, 27.5, 50, 520], // Média dos intervalos
@@ -310,12 +288,22 @@
                                         if (value === 1 || value === 10 || value === 100 || value === 1000) {
                                             return value + 'x';
                                         }
+                                    },
+                                    // Fonte menor em telas pequenas no modo paisagem
+                                    font: {
+                                        size: isLandscape && isMobile ? 9 : 12
                                     }
                                 }
                             },
-                             x: {
-                                grid: { display: false }
-                             }
+                            x: {
+                                grid: { display: false },
+                                ticks: {
+                                    // Fonte menor em telas pequenas no modo paisagem
+                                    font: {
+                                        size: isLandscape && isMobile ? 9 : 12
+                                    }
+                                }
+                            }
                         },
                         plugins: { 
                             legend: { display: false }, 
@@ -354,9 +342,7 @@
 
             createFixCostChart();
             createBugSourceChart();
-            showSlide(currentSlide);
         });
     </script>
 </body>
 </html>
-

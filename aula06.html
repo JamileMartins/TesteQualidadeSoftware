@@ -7,35 +7,29 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">    
+    <link rel="stylesheet" href="slides.css">
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #F8F7F4; color: #2c3e50; overflow: hidden; }
-        .slide {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
-            opacity: 0; transform: scale(0.98); pointer-events: none;
-        }
-        .slide.active { opacity: 1; transform: scale(1); pointer-events: auto; }
         .highlight { color: #2980b9; }
         .card { background-color: white; border-radius: 0.75rem; padding: 1.5rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); border: 1px solid #e5e7eb; }
     </style>
 </head>
 <body class="flex flex-col">
-    <a href="index.html" class="fixed top-4 right-4 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg shadow-md transition-colors z-50">
-        Voltar para a tela principal
-    </a>
+    <div class="fixed top-0 left-0 right-0 py-2 px-4 bg-gray-100/90 backdrop-blur-sm z-[1000] border-b border-gray-200 flex justify-end">
+        <button onclick="window.location.href='index.html'" class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm md:text-base py-1 sm:py-2 px-3 sm:px-4 rounded-lg transition-opacity duration-300 shadow-lg">Voltar para a tela principal</button>
+    </div>
 
-    <div id="presentation-container" class="relative w-screen h-screen">
+    <div id="presentation-container" class="relative w-full min-h-screen pb-16 mt-14">
 
         <!-- Slide 1: Título -->
-        <div class="slide active flex flex-col justify-center items-center text-center p-8">
+        <div class="slide active flex flex-col justify-center items-center text-center p-4 sm:p-6 md:p-8">
             <p class="text-xl font-bold text-gray-500 mb-2">Aula 06 | CTFL 4.0 - Cap. 2 & 3</p>
             <h1 class="text-5xl md:text-6xl font-black text-[#2980b9] leading-tight">A Arquitetura da Qualidade</h1>
             <p class="text-2xl md:text-3xl mt-4 text-gray-700 max-w-3xl mx-auto">Níveis, Tipos de Teste e o poder do Teste Estático.</p>
         </div>
 
         <!-- Slide 2: Agenda -->
-        <div class="slide flex flex-col justify-center items-center p-8">
+        <div class="slide flex flex-col justify-center items-center p-4 sm:p-6 md:p-8">
             <h2 class="text-4xl font-bold text-center mb-8">Agenda da Aula</h2>
             <div class="card max-w-2xl w-full text-left">
                 <ul class="text-xl space-y-4 list-disc list-inside">
@@ -48,7 +42,7 @@
         </div>
 
         <!-- Slide 3: Níveis de Teste - Introdução -->
-        <div class="slide flex flex-col justify-center items-center p-8 text-center">
+        <div class="slide flex flex-col justify-center items-center p-4 sm:p-6 md:p-8 text-center">
             <p class="text-lg font-bold text-gray-500">Seção 2.2</p>
             <h2 class="text-4xl font-bold mb-8">Níveis de Teste: Construindo Confiança Camada por Camada</h2>
             <p class="max-w-4xl text-xl mb-8">Os níveis de teste são grupos de atividades organizadas que testam o software em diferentes estágios de desenvolvimento, desde a menor parte do código até o sistema completo.</p>
@@ -58,7 +52,7 @@
         </div>
         
         <!-- Slide 4: Teste de Componente -->
-        <div class="slide flex flex-col justify-center items-center p-8">
+        <div class="slide flex flex-col justify-center items-center p-4 sm:p-6 md:p-8">
             <h2 class="text-4xl font-bold text-center mb-8">Nível 1: Teste de Componente (ou de Unidade)</h2>
              <div class="card max-w-4xl w-full text-lg">
                 <p class="mb-4">Foca em testar componentes <b class="highlight">isoladamente</b>. É o primeiro nível de teste, geralmente realizado pelos próprios desenvolvedores.</p>
@@ -70,7 +64,7 @@
         </div>
 
         <!-- Slide 5: Teste de Integração -->
-        <div class="slide flex flex-col justify-center items-center p-8">
+        <div class="slide flex flex-col justify-center items-center p-4 sm:p-6 md:p-8">
             <h2 class="text-4xl font-bold text-center mb-8">Nível 2: Teste de Integração</h2>
             <div class="card max-w-4xl w-full text-lg">
                 <p class="mb-4">Foca em testar as <b class="highlight">interfaces e interações entre os componentes</b>. O objetivo é descobrir defeitos na "cola" que une as diferentes partes do sistema.</p>
@@ -82,7 +76,7 @@
         </div>
 
         <!-- Slide 6: Teste de Sistema -->
-        <div class="slide flex flex-col justify-center items-center p-8">
+        <div class="slide flex flex-col justify-center items-center p-4 sm:p-6 md:p-8">
             <h2 class="text-4xl font-bold text-center mb-8">Nível 3: Teste de Sistema</h2>
             <div class="card max-w-4xl w-full text-lg">
                 <p class="mb-4">Foca no <b class="highlight">comportamento do sistema como um todo</b>. Os testes são baseados nos requisitos funcionais e não funcionais e simulam o uso real do sistema de ponta a ponta.</p>
@@ -94,7 +88,7 @@
         </div>
 
         <!-- Slide 7: Teste de Aceitação -->
-        <div class="slide flex flex-col justify-center items-center p-8">
+        <div class="slide flex flex-col justify-center items-center p-4 sm:p-6 md:p-8">
             <h2 class="text-4xl font-bold text-center mb-8">Nível 4: Teste de Aceitação</h2>
             <div class="card max-w-4xl w-full text-lg">
                 <p class="mb-4">Focado em <b class="highlight">validar</b> se o sistema atende às necessidades do negócio e do utilizador. Não se trata de encontrar defeitos, mas de <b class="highlight">estabelecer confiança</b> para o lançamento.</p>
@@ -106,13 +100,13 @@
         </div>
 
         <!-- Slide 8: Tipos de Teste -->
-        <div class="slide flex flex-col justify-center items-center p-8 text-center">
+        <div class="slide flex flex-col justify-center items-center p-4 sm:p-6 md:p-8 text-center">
             <h2 class="text-4xl font-bold mb-8">Tipos de Teste: As "Lentes" da Qualidade</h2>
             <p class="max-w-4xl text-xl mb-8">Enquanto os <b>Níveis de Teste</b> respondem "Onde testamos?", os <b>Tipos de Teste</b> respondem "O que estamos a procurar?". Um tipo de teste pode ser aplicado em múltiplos níveis.</p>
         </div>
         
         <!-- Slide 9: Teste Funcional -->
-        <div class="slide flex flex-col justify-center items-center p-8">
+        <div class="slide flex flex-col justify-center items-center p-4 sm:p-6 md:p-8">
             <h2 class="text-4xl font-bold text-center mb-8">Tipo de Teste: Funcional</h2>
             <div class="card max-w-3xl text-center">
                 <p class="text-5xl mb-4">⚙️</p>
@@ -123,7 +117,7 @@
         </div>
 
         <!-- Slide 10: Teste Não-Funcional -->
-        <div class="slide flex flex-col justify-center items-center p-8">
+        <div class="slide flex flex-col justify-center items-center p-4 sm:p-6 md:p-8">
             <h2 class="text-4xl font-bold text-center mb-8">Tipo de Teste: Não-Funcional</h2>
              <div class="card max-w-3xl text-center">
                 <p class="text-5xl mb-4">⚡</p>
@@ -134,7 +128,7 @@
         </div>
 
         <!-- Slide 11: Caixa-Preta vs. Caixa-Branca -->
-        <div class="slide flex flex-col justify-center items-center p-8">
+        <div class="slide flex flex-col justify-center items-center p-4 sm:p-6 md:p-8">
             <h2 class="text-4xl font-bold text-center mb-8">Abordagens de Teste: Caixa-Preta vs. Caixa-Branca</h2>
              <div class="max-w-5xl w-full grid md:grid-cols-2 gap-8 text-center">
                 <div class="card">
@@ -151,7 +145,7 @@
         </div>
 
         <!-- Slide 12: Teste de Confirmação e Regressão -->
-        <div class="slide flex flex-col justify-center items-center p-8">
+        <div class="slide flex flex-col justify-center items-center p-4 sm:p-6 md:p-8">
             <h2 class="text-4xl font-bold text-center mb-8">Testes Relacionados à Mudança</h2>
              <div class="max-w-5xl w-full grid md:grid-cols-2 gap-8 text-center">
                 <div class="card">
@@ -168,7 +162,7 @@
         </div>
 
         <!-- Slide 13: Teste de Manutenção -->
-        <div class="slide flex flex-col justify-center items-center p-8">
+        <div class="slide flex flex-col justify-center items-center p-4 sm:p-6 md:p-8">
             <p class="text-lg font-bold text-gray-500">Seção 2.3</p>
             <h2 class="text-4xl font-bold text-center mb-8">Teste de Manutenção</h2>
             <div class="card max-w-3xl w-full text-lg">
@@ -178,7 +172,7 @@
         </div>
         
         <!-- Slide 14 (NOVO) -->
-        <div class="slide flex flex-col justify-center items-center p-8">
+        <div class="slide flex flex-col justify-center items-center p-4 sm:p-6 md:p-8">
             <h2 class="text-4xl font-bold text-center mb-8">Manutenção: Testando Modificações</h2>
              <div class="card max-w-4xl w-full text-lg">
                 <p class="mb-4">É o tipo mais comum de manutenção, incluindo correções de bugs (<i class="highlight">hotfixes</i>) ou a adição de novas funcionalidades (<i class="highlight">enhancements</i>).</p>
@@ -194,7 +188,7 @@
         </div>
 
         <!-- Slide 15 (NOVO) -->
-        <div class="slide flex flex-col justify-center items-center p-8">
+        <div class="slide flex flex-col justify-center items-center p-4 sm:p-6 md:p-8">
             <h2 class="text-4xl font-bold text-center mb-8">Manutenção: Testando Migrações</h2>
             <div class="card max-w-4xl w-full text-lg">
                 <p class="mb-4">Ocorre quando o sistema é movido para um novo ambiente operacional, como uma migração para a nuvem ou a atualização do sistema operativo.</p>
@@ -211,7 +205,7 @@
         </div>
 
         <!-- Slide 16 (NOVO) -->
-         <div class="slide flex flex-col justify-center items-center p-8">
+         <div class="slide flex flex-col justify-center items-center p-4 sm:p-6 md:p-8">
             <h2 class="text-4xl font-bold text-center mb-8">Manutenção: Testando a Desativação</h2>
             <div class="card max-w-4xl w-full text-lg">
                 <p class="mb-4">Ocorre quando um sistema legado chega ao fim da sua vida útil e é descontinuado (*retirement*). O teste foca-se na preservação dos dados e numa transição suave.</p>
@@ -227,14 +221,14 @@
         </div>
 
         <!-- Slide 17 -->
-        <div class="slide flex flex-col justify-center items-center p-8 text-center">
+        <div class="slide flex flex-col justify-center items-center p-4 sm:p-6 md:p-8 text-center">
             <p class="text-lg font-bold text-gray-500">Capítulo 3</p>
             <h2 class="text-4xl font-bold mb-8">Teste Estático: Encontrando Defeitos sem Executar o Código</h2>
             <p class="max-w-4xl text-xl mb-8">Ao contrário do <b>Teste Dinâmico</b> (que executa o software), o <b>Teste Estático</b> examina os produtos de trabalho (código-fonte, requisitos, modelos) para encontrar defeitos.</p>
         </div>
         
         <!-- Slide 18 -->
-        <div class="slide flex flex-col justify-center items-center p-8">
+        <div class="slide flex flex-col justify-center items-center p-4 sm:p-6 md:p-8">
             <h2 class="text-4xl font-bold text-center mb-8">O Enorme Valor do Teste Estático</h2>
              <div class="card max-w-3xl text-center">
                 <p class="text-5xl mb-4">💰</p>
@@ -249,7 +243,7 @@
         </div>
 
         <!-- Slide 19 -->
-        <div class="slide flex flex-col justify-center items-center p-8">
+        <div class="slide flex flex-col justify-center items-center p-4 sm:p-6 md:p-8">
             <h2 class="text-4xl font-bold text-center mb-8">O Processo de Revisão (Ex: Revisão de Código)</h2>
              <div class="card max-w-4xl w-full">
                 <div class="text-sm flex flex-wrap justify-center items-center gap-2">
@@ -267,7 +261,7 @@
         </div>
 
         <!-- Slide 20 -->
-        <div class="slide flex flex-col justify-center items-center p-8">
+        <div class="slide flex flex-col justify-center items-center p-4 sm:p-6 md:p-8">
             <h2 class="text-4xl font-bold text-center mb-8">Papéis Numa Revisão Formal</h2>
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl">
                 <div class="card"><b class="block text-lg">Autor</b><p class="text-sm">Quem criou o produto de trabalho.</p></div>
@@ -278,7 +272,7 @@
         </div>
         
         <!-- Slide 21 (Antigo 18) -->
-        <div class="slide flex flex-col justify-center items-center p-8">
+        <div class="slide flex flex-col justify-center items-center p-4 sm:p-6 md:p-8">
             <h2 class="text-4xl font-bold text-center mb-8">Tipo de Revisão: Revisão Informal</h2>
             <div class="card max-w-3xl w-full">
                 <p class="text-lg mb-4">A forma mais simples e rápida de obter feedback. Não segue um processo definido e não precisa de ser documentada formalmente.</p>
@@ -291,7 +285,7 @@
         </div>
         
         <!-- Slide 22 -->
-        <div class="slide flex flex-col justify-center items-center p-8">
+        <div class="slide flex flex-col justify-center items-center p-4 sm:p-6 md:p-8">
             <h2 class="text-4xl font-bold text-center mb-8">Tipo de Revisão: Walkthrough</h2>
              <div class="card max-w-3xl w-full">
                 <p class="text-lg mb-4">O <b class="highlight">autor</b> do artefacto (documento ou código) apresenta o seu trabalho a um grupo, guiando-os através do conteúdo para partilhar conhecimento e obter feedback.</p>
@@ -304,7 +298,7 @@
         </div>
 
         <!-- Slide 23 -->
-        <div class="slide flex flex-col justify-center items-center p-8">
+        <div class="slide flex flex-col justify-center items-center p-4 sm:p-6 md:p-8">
             <h2 class="text-4xl font-bold text-center mb-8">Tipo de Revisão: Revisão Técnica</h2>
              <div class="card max-w-3xl w-full">
                 <p class="text-lg mb-4">Um processo mais estruturado, liderado por um moderador, onde um grupo de <b class="highlight">especialistas técnicos</b> analisa um produto de trabalho para garantir a viabilidade e conformidade técnica.</p>
@@ -317,7 +311,7 @@
         </div>
 
         <!-- Slide 24 -->
-        <div class="slide flex flex-col justify-center items-center p-8">
+        <div class="slide flex flex-col justify-center items-center p-4 sm:p-6 md:p-8">
             <h2 class="text-4xl font-bold text-center mb-8">Tipo de Revisão: Inspeção</h2>
              <div class="card max-w-3xl w-full">
                 <p class="text-lg mb-4">O tipo de revisão <b class="highlight">mais formal e rigoroso</b>. Segue um processo definido com papéis claros (Autor, Moderador, Relator, Revisor) e o objetivo de encontrar o máximo de defeitos possível.</p>
@@ -330,7 +324,7 @@
         </div>
 
         <!-- Slide 25 -->
-        <div class="slide flex flex-col justify-center items-center p-8">
+        <div class="slide flex flex-col justify-center items-center p-4 sm:p-6 md:p-8">
             <h2 class="text-4xl font-bold text-center mb-8">Fatores de Sucesso para Revisões Eficazes</h2>
              <div class="card max-w-3xl w-full">
                 <ul class="text-left text-xl space-y-4 list-disc list-inside">
@@ -344,7 +338,7 @@
         </div>
 
         <!-- Slide 26 -->
-        <div class="slide flex flex-col justify-center items-center text-center p-8 bg-[#2c3e50] text-white">
+        <div class="slide flex flex-col justify-center items-center text-center p-4 sm:p-6 md:p-8 bg-[#2c3e50] text-white">
              <h2 class="text-4xl font-bold mb-8">Conclusão: A Qualidade é Construída em Camadas</h2>
             <div class="max-w-3xl mx-auto text-left text-xl space-y-4">
                 <p>✅ Os <b>Níveis de Teste</b> garantem a cobertura desde o micro (unidade) ao macro (sistema).</p>
@@ -356,50 +350,12 @@
     </div>
 
     <!-- Navegação -->
-    <div class="fixed bottom-0 left-0 right-0 p-4 bg-white/80 backdrop-blur-lg flex justify-between items-center shadow-t-lg border-t border-gray-200">
-        <button id="prevBtn" class="bg-[#34495e] hover:bg-[#2c3e50] text-white font-bold py-2 px-6 rounded-lg transition-all">Anterior</button>
-        <div id="slide-counter" class="text-lg font-semibold text-gray-700"></div>
-        <button id="nextBtn" class="bg-[#34495e] hover:bg-[#2c3e50] text-white font-bold py-2 px-6 rounded-lg transition-all">Próximo</button>
+    <div class="fixed bottom-0 left-0 right-0 px-4 py-2 sm:px-6 sm:py-3 bg-white/80 backdrop-blur-lg flex justify-between items-center shadow-lg border-t border-gray-200 z-40">
+        <button id="prevBtn" class="flex-1 sm:flex-initial bg-[#34495e] hover:bg-[#2c3e50] text-white font-bold text-sm sm:text-base py-2 px-3 sm:px-6 rounded-lg transition-all max-w-[120px]">Anterior</button>
+        <div id="slide-counter" class="text-center text-sm sm:text-base font-semibold text-gray-700">Slide 1 de 26</div>
+        <button id="nextBtn" class="flex-1 sm:flex-initial bg-[#34495e] hover:bg-[#2c3e50] text-white font-bold text-sm sm:text-base py-2 px-3 sm:px-6 rounded-lg transition-all max-w-[120px]">Próximo</button>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const slides = document.querySelectorAll('.slide');
-            const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
-            const slideCounter = document.getElementById('slide-counter');
-            let currentSlide = 0;
-            const totalSlides = slides.length;
-
-            function showSlide(index) {
-                slides.forEach((slide, i) => {
-                    slide.classList.toggle('active', i === index);
-                });
-                slideCounter.textContent = `Slide ${index + 1} de ${totalSlides}`;
-                prevBtn.disabled = index === 0;
-                prevBtn.classList.toggle('opacity-50', index === 0);
-                nextBtn.disabled = index === totalSlides - 1;
-                nextBtn.classList.toggle('opacity-50', index === totalSlides - 1);
-            }
-
-            function changeSlide(direction) {
-                currentSlide += direction;
-                if (currentSlide < 0) currentSlide = 0;
-                if (currentSlide >= totalSlides) currentSlide = totalSlides - 1;
-                showSlide(currentSlide);
-            }
-
-            prevBtn.addEventListener('click', () => changeSlide(-1));
-            nextBtn.addEventListener('click', () => changeSlide(1));
-            
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'ArrowRight' && !nextBtn.disabled) nextBtn.click();
-                else if (e.key === 'ArrowLeft' && !prevBtn.disabled) prevBtn.click();
-            });
-
-            showSlide(currentSlide);
-        });
-    </script>
+    <script src="slides.js"></script>
 </body>
 </html>
-

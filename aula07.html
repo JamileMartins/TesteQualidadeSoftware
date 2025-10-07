@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 07: A Arte e a Ciência de Encontrar Defeitos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="slides.css">
+    <style>
+        .highlight { color: #2980b9; }
+        .card { background-color: white; border-radius: 0.75rem; padding: 1.5rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); border: 1px solid #e5e7eb; }
+    </style>
+</head>
+<body class="flex flex-col" data-presentation="aula07">
+    <div class="fixed top-0 left-0 right-0 py-2 px-4 bg-gray-100/90 backdrop-blur-sm z-[1000] border-b border-gray-200 flex justify-end">
+        <button onclick="window.location.href='index.html'" class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm md:text-base py-1 sm:py-2 px-3 sm:px-4 rounded-lg transition-opacity duration-300 shadow-lg">Voltar para a tela principal</button>
+    </div>
+
+    <div id="presentation-container" class="relative w-full min-h-screen pb-16 mt-14">
+
+        <!-- Slide 1: Título -->
+        <div class="slide active flex justify-center items-center text-center p-4 sm:p-6 md:p-8">
+            <div class="slide-content">
+                <p class="text-base sm:text-lg md:text-xl font-bold text-gray-500 mb-2 sm:mb-3">Aula 07 | CTFL 4.0 - Cap. 4</p>
+                <h1 class="text-3xl sm:text-4xl md:text-6xl font-black text-[#2980b9] leading-tight">A Arte e a Ciência de Encontrar Defeitos</h1>
+                <p class="text-lg sm:text-xl md:text-3xl mt-3 sm:mt-4 text-gray-700 max-w-3xl mx-auto">Um mergulho profundo nas Técnicas de Teste de Software.</p>
+            </div>
+        </div>
+
+        <!-- Slide 2: Agenda -->
+        <div class="slide flex justify-center items-center p-4 sm:p-6 md:p-8">
+            <div class="slide-content">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 sm:mb-6 md:mb-8">Agenda da Aula</h2>
+                <div class="card max-w-2xl w-full text-left">
+                    <ul class="text-sm sm:text-base md:text-lg space-y-2 sm:space-y-3 list-disc list-inside">
+                        <li><b class="highlight">Categorias de Técnicas de Teste:</b> As três grandes abordagens.</li>
+                        <li><b class="highlight">Técnicas de Caixa-Preta:</b> Testando o "quê".
+                            <ul class="ml-4 sm:ml-6 text-xs sm:text-sm md:text-base list-[circle]">
+                                <li>Particionamento de Equivalência & Análise de Valor Limite</li>
+                                <li>Tabela de Decisão & Teste de Transição de Estados</li>
+                                <li>Teste Baseado em Casos de Uso</li>
+                            </ul>
+                        </li>
+                        <li><b class="highlight">Técnicas de Caixa-Branca:</b> Testando o "como".
+                             <ul class="ml-4 sm:ml-6 text-xs sm:text-sm md:text-base list-[circle]">
+                                <li>Cobertura de Instruções & Cobertura de Decisões</li>
+                            </ul>
+                        </li>
+                        <li><b class="highlight">Técnicas Baseadas na Experiência:</b> A intuição do testador.</li>
+                        <li><b class="highlight">Abordagens Colaborativas:</b> ATDD e o poder do trabalho em equipe.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Por que Técnicas? -->
+        <div class="slide flex justify-center items-center p-4 sm:p-6 md:p-8 text-center">
+            <div class="slide-content">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 md:mb-8">Por que Precisamos de Técnicas de Teste?</h2>
+                <p class="max-w-4xl text-base sm:text-lg md:text-xl mb-4 sm:mb-6 md:mb-8">Lembrem-se do 2º Princípio do Teste: <b class="highlight">"Teste exaustivo é impossível"</b>. Não podemos testar tudo.</p>
+                <div class="card max-w-3xl">
+                    <p class="text-sm sm:text-base md:text-lg">As técnicas de teste são métodos sistemáticos para <b class="highlight">selecionar um subconjunto de testes</b> com a maior probabilidade de encontrar defeitos. Elas ajudam a responder: "Dos infinitos testes que poderíamos fazer, quais são os mais importantes?"</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Categorias de Técnicas -->
+        <div class="slide flex justify-center items-center p-4 sm:p-6 md:p-8 text-center">
+            <div class="slide-content">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 md:mb-8">As 3 Grandes Categorias de Técnicas</h2>
+                <div class="max-w-5xl w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 text-center">
+                    <div class="card">
+                        <h3 class="font-bold text-xl sm:text-2xl mb-2 sm:mb-4 highlight">Caixa-Preta</h3>
+                        <p class="text-3xl sm:text-4xl md:text-5xl mb-2 sm:mb-4">⬛</p>
+                        <p class="text-sm sm:text-base md:text-lg">Foca no <b>comportamento externo</b>. Baseia-se nos requisitos. Não olhamos para o código.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="font-bold text-xl sm:text-2xl mb-2 sm:mb-4 highlight">Caixa-Branca</h3>
+                        <p class="text-3xl sm:text-4xl md:text-5xl mb-2 sm:mb-4">⬜</p>
+                        <p class="text-sm sm:text-base md:text-lg">Foca na <b>estrutura interna</b>. Baseia-se no código e na sua lógica. Requer conhecimento de programação.</p>
+                    </div>
+                    <div class="card sm:col-span-2 md:col-span-1">
+                        <h3 class="font-bold text-xl sm:text-2xl mb-2 sm:mb-4 highlight">Baseada na Experiência</h3>
+                        <p class="text-3xl sm:text-4xl md:text-5xl mb-2 sm:mb-4">🧠</p>
+                        <p class="text-sm sm:text-base md:text-lg">Foca na <b>intuição e conhecimento</b> do testador. Usa a experiência para "adivinhar" onde os erros podem estar.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Técnicas de Caixa-Preta -->
+        <div class="slide flex flex-col justify-center items-center p-8 text-center">
+            <h2 class="text-4xl font-bold mb-8">Técnicas de Caixa-Preta: Testando o "Quê"</h2>
+            <p class="max-w-4xl text-xl">Estas técnicas tratam o software como uma caixa opaca. O nosso foco é validar se as saídas estão corretas para determinadas entradas, com base nas especificações.</p>
+        </div>
+
+        <!-- Slide 6: Particionamento de Equivalência -->
+        <div class="slide flex justify-center items-center p-4 sm:p-6 md:p-8">
+            <div class="slide-content">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 sm:mb-6 md:mb-8">Caixa-Preta 1: Particionamento de Equivalência (EP)</h2>
+                <div class="card max-w-4xl w-full text-sm sm:text-base md:text-lg">
+                    <p class="mb-2 sm:mb-4"><b>Ideia Central:</b> Dividir todos os dados de entrada possíveis em "partições" ou "classes" onde o sistema deve ter o mesmo comportamento. Se testarmos um valor de uma partição, assumimos que cobrimos todos os outros.</p>
+                    <div class="mt-3 sm:mt-6 p-3 sm:p-4 bg-blue-50 border-l-4 border-blue-500 rounded-r-lg">
+                        <p class="font-bold text-sm sm:text-base">Exemplo Prático: Desconto por Idade</p>
+                        <p class="text-xs sm:text-sm md:text-base mt-1 sm:mt-2">Um site de cinema oferece bilhetes com desconto. A regra é: "Utilizadores com idade entre 13 e 18 anos pagam 5€; os restantes pagam 10€".</p>
+                        <ul class="list-disc list-inside text-xs sm:text-sm mt-1 sm:mt-2">
+                            <li><b>Partição Válida 1 (Desconto):</b> {13, 14, 15, 16, 17, 18} → Testar com: <b>15</b></li>
+                            <li><b>Partição Válida 2 (Preço Normal):</b> {19, ..., 120} → Testar com: <b>30</b></li>
+                            <li><b>Partição Inválida 1 (Idade Mínima):</b> {0, ..., 12} → Testar com: <b>10</b></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Análise de Valor Limite -->
+        <div class="slide flex flex-col justify-center items-center p-8">
+            <h2 class="text-4xl font-bold text-center mb-8">Caixa-Preta 2: Análise de Valor Limite (BVA)</h2>
+            <div class="card max-w-4xl w-full text-lg">
+                <p class="mb-4"><b>Ideia Central:</b> A maioria dos erros ocorre nas "fronteiras" das partições de equivalência. Esta técnica complementa o EP, focando-se nos valores limite.</p>
+                <div class="mt-6 p-4 bg-blue-50 border-l-4 border-blue-500 rounded-r-lg">
+                    <p class="font-bold">Exemplo Prático: Desconto por Idade (continuação)</p>
+                    <p class="text-base mt-2">Para a regra "idade entre 13 e 18", os limites são 12/13 e 18/19.</p>
+                    <p class="font-bold text-sm mt-2">Casos de Teste (BVA de 2 pontos):</p>
+                    <ul class="list-disc list-inside text-sm mt-2">
+                        <li>Testar com <b>12</b> (inválido) e <b>13</b> (válido).</li>
+                        <li>Testar com <b>18</b> (válido) e <b>19</b> (válido, mas com preço diferente).</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: EP + BVA no Mundo Real -->
+        <div class="slide flex justify-center items-center p-4 sm:p-6 md:p-8">
+            <div class="slide-content">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 sm:mb-6 md:mb-8">EP + BVA: Exemplo de Código</h2>
+                <div class="card max-w-4xl w-full text-sm sm:text-base md:text-lg">
+                    <p class="mb-2 sm:mb-4">Imagine que um dev implementou a regra do cinema assim:</p>
+                    <pre class="bg-gray-800 text-white p-2 sm:p-3 rounded-lg text-xs sm:text-sm mt-2"><code>if (idade &gt; 13 &amp;&amp; idade &lt; 18) { // BUG! Deveria ser &gt;= e &lt;=
+    preco = 5;
+} else {
+    preco = 10;
+}</code></pre>
+                    <div class="mt-3 sm:mt-6 p-3 sm:p-4 bg-green-50 border-l-4 border-green-500 rounded-r-lg">
+                        <p class="text-xs sm:text-sm md:text-base">Um teste de EP com `idade = 15` <b>não encontraria</b> o bug. Mas um teste de BVA com `idade = 13` ou `idade = 18` <b>falharia imediatamente</b>, revelando o defeito.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Tabela de Decisão -->
+        <div class="slide flex flex-col justify-center items-center p-8">
+            <h2 class="text-4xl font-bold text-center mb-8">Caixa-Preta 3: Tabela de Decisão</h2>
+            <div class="card max-w-4xl w-full text-lg">
+                <p class="mb-4"><b>Ideia Central:</b> Perfeita para testar lógicas de negócio complexas com múltiplas condições. A tabela ajuda a garantir que todas as combinações de regras são testadas.</p>
+                <div class="mt-6 p-4 bg-blue-50 border-l-4 border-blue-500 rounded-r-lg">
+                    <p class="font-bold">Exemplo Prático: Login com Autenticação de 2 Fatores (2FA)</p>
+                    <p class="text-base mt-2">Regras: Para fazer login, o utilizador e a password devem estar corretos. Se o 2FA estiver ativo, o código também deve estar correto.</p>
+                    <table class="min-w-full bg-white border border-gray-300 mt-4 text-sm text-center">
+                        <thead><tr class="bg-gray-100"><th class="p-2 border">Condições</th><th class="p-2 border">R1</th><th class="p-2 border">R2</th><th class="p-2 border">R3</th><th class="p-2 border">R4</th></tr></thead>
+                        <tbody>
+                            <tr><td class="p-2 border text-left">Credenciais Corretas?</td><td class="p-2 border">V</td><td class="p-2 border">V</td><td class="p-2 border">F</td><td class="p-2 border">V</td></tr>
+                            <tr><td class="p-2 border text-left">2FA Ativo?</td><td class="p-2 border">N</td><td class="p-2 border">V</td><td class="p-2 border">-</td><td class="p-2 border">V</td></tr>
+                             <tr><td class="p-2 border text-left">Código 2FA Correto?</td><td class="p-2 border">-</td><td class="p-2 border">V</td><td class="p-2 border">-</td><td class="p-2 border">F</td></tr>
+                            <tr class="bg-yellow-50"><td class="p-2 border text-left font-bold">Ação: Login com Sucesso</td><td class="p-2 border text-green-600 font-bold">X</td><td class="p-2 border text-green-600 font-bold">X</td><td class="p-2 border"></td><td class="p-2 border"></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 10: Tabela de Decisão - Benefícios -->
+        <div class="slide flex flex-col justify-center items-center p-8">
+            <h2 class="text-4xl font-bold text-center mb-8">Tabela de Decisão: Benefícios</h2>
+             <div class="card max-w-3xl text-center">
+                <p class="text-5xl mb-4">💡</p>
+                <p class="text-2xl font-bold mb-4 highlight">Encontra Lacunas nos Requisitos</p>
+                <p class="text-lg">Ao construir a tabela, é comum encontrar combinações de condições que não foram especificadas. O que acontece se as credenciais estiverem corretas, o 2FA estiver ativo, mas o utilizador não inserir um código? A tabela força a equipe a pensar nesses casos, melhorando a qualidade dos próprios requisitos.</p>
+            </div>
+        </div>
+
+        <!-- Slide 11: Teste de Transição de Estados -->
+        <div class="slide flex flex-col justify-center items-center p-8">
+            <h2 class="text-4xl font-bold text-center mb-8">Caixa-Preta 4: Teste de Transição de Estados</h2>
+            <div class="card max-w-4xl w-full text-lg">
+                <p class="mb-4"><b>Ideia Central:</b> Usada para sistemas que se comportam de maneira diferente dependendo do seu estado atual (uma "máquina de estados"). O teste foca em validar as transições entre os estados.</p>
+                <div class="mt-6 p-4 bg-blue-50 border-l-4 border-blue-500 rounded-r-lg">
+                    <p class="font-bold">Exemplo Prático: Um Carrinho de Compras</p>
+                     <img src="figures/Carrinho_de_Compras _ Mermaid.png" alt="Diagrama de Transição de Estados de um Carrinho de Compras" class="rounded-lg mt-2 mx-auto max-h-48">
+                    <p class="font-bold mt-2">Casos de Teste:</p>
+                    <ul class="list-disc list-inside text-sm mt-2">
+                        <li>De um carrinho "Vazio", ao adicionar um item, ele deve ir para o estado "Com Itens".</li>
+                        <li>De um carrinho "Com Itens", ao pagar, ele deve ir para o estado "Pago".</li>
+                        <li>É possível ir do estado "Pago" diretamente para "Vazio"? (Transição inválida que deve ser testada).</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12: Teste de Casos de Uso -->
+        <div class="slide flex flex-col justify-center items-center p-8">
+            <h2 class="text-4xl font-bold text-center mb-8">Caixa-Preta 5: Teste Baseado em Casos de Uso</h2>
+            <div class="card max-w-4xl w-full text-lg">
+                <p class="mb-4"><b>Ideia Central:</b> Deriva casos de teste diretamente dos Casos de Uso ou Histórias de Utilizador, cobrindo as interações do utilizador com o sistema para atingir um objetivo.</p>
+                <div class="mt-6 p-4 bg-blue-50 border-l-4 border-blue-500 rounded-r-lg">
+                    <p class="font-bold">Exemplo Prático: Caso de Uso "Recuperar Password"</p>
+                    <ul class="list-disc list-inside text-sm mt-2">
+                        <li><b>Teste do Fluxo Principal:</b> Utilizador insere email válido, clica em "Recuperar", recebe o email, clica no link, define nova password com sucesso.</li>
+                        <li><b>Teste do Fluxo Alternativo 1:</b> Utilizador insere email inválido/inexistente e recebe uma mensagem de erro apropriada.</li>
+                        <li><b>Teste do Fluxo Alternativo 2:</b> O link de recuperação expirou. Sistema informa o utilizador e oferece a opção de reenviar.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 13: Transição para Caixa-Branca -->
+        <div class="slide flex flex-col justify-center items-center p-8 text-center">
+            <h2 class="text-4xl font-bold mb-8">Técnicas de Teste de Caixa-Branca: Testando o "Como"</h2>
+            <p class="max-w-4xl text-xl">Agora, abrimos a "caixa" para olhar a estrutura interna do código. O nosso objetivo é garantir que a lógica está correta e que não há "becos sem saída" não testados.</p>
+        </div>
+
+        <!-- Slide 14: Cobertura de Instruções -->
+        <div class="slide flex justify-center items-center p-4 sm:p-6 md:p-8">
+            <div class="slide-content">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 sm:mb-6 md:mb-8">Caixa-Branca 1: Cobertura de Instruções</h2>
+                <div class="card max-w-4xl w-full text-sm sm:text-base md:text-lg">
+                    <p class="mb-2 sm:mb-4"><b>Ideia Central:</b> Garantir que cada linha de código executável é testada pelo menos uma vez. É a forma mais básica de cobertura de código.</p>
+                    <div class="mt-3 sm:mt-6 p-3 sm:p-4 bg-blue-50 border-l-4 border-blue-500 rounded-r-lg">
+                        <p class="font-bold text-sm sm:text-base">Exemplo Prático (JavaScript):</p>
+                        <pre class="bg-gray-800 text-white p-2 sm:p-3 rounded-lg text-xs sm:text-sm mt-2"><code>function getGreeting(hour) {
+  let greeting = "Boa noite";  // Linha 1
+  if (hour &lt; 12) {             // Linha 2
+    greeting = "Bom dia";      // Linha 3
+  } else if (hour &lt; 18) {      // Linha 4
+    greeting = "Boa tarde";    // Linha 5
+  }
+  return greeting;             // Linha 6
+}</code></pre>
+                        <p class="text-xs sm:text-sm md:text-base mt-1 sm:mt-2">Para 100% de cobertura de instruções, precisamos de testes que passem por todas as 6 linhas. Ex: `getGreeting(10)`, `getGreeting(15)`, `getGreeting(20)`.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 15: Cobertura de Decisões -->
+        <div class="slide flex justify-center items-center p-4 sm:p-6 md:p-8">
+            <div class="slide-content">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 sm:mb-6 md:mb-8">Caixa-Branca 2: Cobertura de Decisões (ou Ramos)</h2>
+                <div class="card max-w-4xl w-full text-sm sm:text-base md:text-lg">
+                    <p class="mb-2 sm:mb-4"><b>Ideia Central:</b> Mais forte que a anterior, garante que cada ramificação de uma decisão (o `if` e o `else`) é testada. Para cada `if`, testamos o resultado `true` e `false`.</p>
+                    <div class="mt-3 sm:mt-6 p-3 sm:p-4 bg-blue-50 border-l-4 border-blue-500 rounded-r-lg">
+                        <p class="font-bold text-sm sm:text-base">Exemplo Prático (JavaScript):</p>
+                        <pre class="bg-gray-800 text-white p-2 sm:p-3 rounded-lg text-xs sm:text-sm mt-2"><code>function canVote(age) {
+  if (age &gt;= 18) { // Decisão
+    return true;   // Ramo Verdadeiro
+  } else {
+    return false;  // Ramo Falso
+  }
+}</code></pre>
+                        <p class="text-xs sm:text-sm md:text-base mt-1 sm:mt-2">Para 100% de cobertura de decisões, precisamos de um teste onde `age &gt;= 18` é <b>Verdadeiro</b> (ex: `canVote(25)`) e outro onde é <b>Falso</b> (ex: `canVote(16)`).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 16: Valor da Caixa Branca -->
+         <div class="slide flex flex-col justify-center items-center p-8">
+            <h2 class="text-4xl font-bold text-center mb-8">O Valor do Teste de Caixa-Branca</h2>
+             <div class="card max-w-3xl text-center">
+                <p class="text-5xl mb-4">🎯</p>
+                <p class="text-2xl font-bold mb-4 highlight">Métricas Objetivas de Qualidade</p>
+                <p class="text-lg">As métricas de cobertura de código (ex: 85% de cobertura de decisões) dão à equipe
+                     uma medida tangível da profundidade dos seus testes unitários. Elas ajudam a identificar partes do código que não foram testadas e que podem conter defeitos ocultos ("dead code" ou lógica complexa não exercitada).</p>
+            </div>
+        </div>
+
+        <!-- Slide 17: Transição para Baseada na Experiência -->
+        <div class="slide flex flex-col justify-center items-center p-8 text-center">
+            <h2 class="text-4xl font-bold mb-8">Técnicas Baseadas na Experiência: A Intuição Humana</h2>
+            <p class="max-w-4xl text-xl">Às vezes, os defeitos mais críticos não são encontrados por métodos formais, mas pela intuição e "faro" de um testador experiente. Estas técnicas aproveitam esse conhecimento.</p>
+        </div>
+
+        <!-- Slide 18: Ataque de Erros -->
+        <div class="slide flex flex-col justify-center items-center p-8">
+            <h2 class="text-4xl font-bold text-center mb-8">Experiência 1: Ataque de Erros (Error Guessing)</h2>
+            <div class="card max-w-4xl w-full text-lg">
+                <p class="mb-4"><b>Ideia Central:</b> Usar a experiência para "adivinhar" onde os erros provavelmente estão. É uma técnica não sistemática, baseada numa lista mental de erros comuns.</p>
+                <div class="mt-6 p-4 bg-blue-50 border-l-4 border-blue-500 rounded-r-lg">
+                    <p class="font-bold">Checklist Mental de um Testador Experiente:</p>
+                    <ul class="list-disc list-inside text-sm mt-2">
+                        <li>O que acontece se eu deixar este campo obrigatório em branco?</li>
+                        <li>O que acontece se eu inserir `DROP TABLE users;` num campo de texto? (Injeção SQL)</li>
+                        <li>O que acontece se eu fizer o upload de um ficheiro de 1GB?</li>
+                        <li>O que acontece se a data de nascimento for no futuro?</li>
+                        <li>O que acontece com a divisão por zero neste cálculo?</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 19: Teste Exploratório -->
+        <div class="slide flex flex-col justify-center items-center p-8">
+            <h2 class="text-4xl font-bold text-center mb-8">Experiência 2: Teste Exploratório</h2>
+            <div class="card max-w-4xl w-full text-lg">
+                <p class="mb-4"><b>Ideia Central:</b> O testador explora livremente a aplicação, combinando simultaneamente o aprendizado sobre o sistema, o design de testes e a execução. É um teste criativo e não-roteirizado.</p>
+                <div class="mt-6 p-4 bg-blue-50 border-l-4 border-blue-500 rounded-r-lg">
+                    <p class="font-bold">Exemplo Prático: Testando um novo feed de notícias</p>
+                    <p class="text-base mt-2">Um testador pode começar a fazer scroll, depois tenta fazer scroll muito rápido, clica em "like" várias vezes seguidas, abre um post e volta rapidamente, desliga a internet a meio do carregamento... Cada ação gera novas ideias para o próximo teste.</p>
+                    <p class="font-bold mt-2">Diferença para o Ataque de Erros: <span class="text-gray-600 text-sm">O Teste Exploratório é um processo de descoberta, enquanto o Ataque de Erros é mais direcionado a falhas conhecidas.</span></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 20: Abordagens Colaborativas -->
+        <div class="slide flex flex-col justify-center items-center p-8 text-center">
+            <h2 class="text-4xl font-bold mb-8">Abordagens Baseadas na Colaboração</h2>
+            <p class="max-w-4xl text-xl">Estas abordagens usam a escrita de testes como uma forma de colaboração e comunicação, aplicando o "Shift-Left" para definir o comportamento esperado ANTES do desenvolvimento.</p>
+        </div>
+        
+        <!-- Slide 21: ATDD -->
+        <div class="slide flex flex-col justify-center items-center p-8">
+            <h2 class="text-4xl font-bold text-center mb-8">Desenvolvimento Orientado por Teste de Aceite (ATDD)</h2>
+             <div class="card max-w-3xl text-center">
+                <p class="text-5xl mb-4">🤝</p>
+                <p class="text-2xl font-bold mb-4 highlight">Testar é uma Atividade de Equipe</p>
+                <p class="text-lg">No ATDD, representantes do negócio (ex: Product Owner), desenvolvedores e testadores reúnem-se para escrever os critérios de aceite de uma História de Utilizador, muitas vezes na forma de exemplos concretos. Estes exemplos tornam-se os testes de aceitação.</p>
+                 <p class="mt-6 p-3 bg-gray-100 rounded-lg text-base"><b>Benefício:</b> Cria um entendimento partilhado e garante que o que é desenvolvido é exatamente o que o negócio precisa e pode ser testado.</p>
+            </div>
+        </div>
+        
+        <!-- Slide 22: BDD e Critérios de Aceite -->
+        <div class="slide flex flex-col justify-center items-center p-8">
+            <h2 class="text-4xl font-bold text-center mb-8">BDD e o Formato "Given-When-Then"</h2>
+            <div class="card max-w-4xl w-full text-lg">
+                <p class="mb-4">O BDD (Behavior-Driven Development) é uma forma popular de implementar o ATDD, usando uma linguagem estruturada e natural para descrever o comportamento do sistema.</p>
+                <div class="mt-6 p-4 bg-blue-50 border-l-4 border-blue-500 rounded-r-lg">
+                    <p class="font-bold">Exemplo Prático: Critério de Aceite para Login</p>
+                    <pre class="bg-gray-800 text-white p-3 rounded-lg text-sm mt-2"><code><span class="text-cyan-400">Funcionalidade:</span> Autenticação de Utilizador
+
+<span class="text-cyan-400">Cenário:</span> Login com credenciais válidas
+  <span class="text-purple-400">Dado que</span> eu sou um utilizador registado na página de login
+  <span class="text-purple-400">Quando</span> eu insiro o meu email e password corretos
+  <span class="text-purple-400">E</span> clico no botão "Entrar"
+  <span class="text-purple-400">Então</span> eu devo ser redirecionado para o meu dashboard</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 23: Escolha e Combinação -->
+        <div class="slide flex flex-col justify-center items-center p-8 text-center">
+            <h2 class="text-4xl font-bold mb-8">Escolhendo a Ferramenta Certa para o Trabalho</h2>
+            <p class="max-w-4xl text-xl mb-8">Não existe uma "melhor" técnica universal. A escolha depende de vários fatores:</p>
+            <div class="card max-w-3xl w-full text-left">
+                <ul class="text-xl space-y-3 list-disc list-inside">
+                    <li><b>Tipo de Sistema:</b> Crítico, complexo, com muita lógica de negócio?</li>
+                    <li><b>Risco:</b> Qual o impacto de uma falha nesta funcionalidade?</li>
+                    <li><b>Qualidade dos Requisitos:</b> Estão bem definidos ou são ambíguos?</li>
+                    <li><b>Tempo e Orçamento:</b> Recursos disponíveis para o esforço de teste.</li>
+                    <li><b>Competências da Equipe:</b> A equipe sabe programar para fazer testes de caixa-branca?</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 24: Combinação no Mundo Real 1 -->
+        <div class="slide flex justify-center items-center p-4 sm:p-6 md:p-8">
+            <div class="slide-content">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 sm:mb-6 md:mb-8">Combinação na Prática: Formulário de Registo</h2>
+                <div class="card max-w-4xl w-full text-sm sm:text-base md:text-lg">
+                    <p class="mb-2 sm:mb-4">Para um formulário de registo de utilizadores com campos de idade, email, e password:</p>
+                    <ul class="text-left text-xs sm:text-sm md:text-base space-y-2 sm:space-y-3 list-disc list-inside mt-2 sm:mt-4">
+                        <li><b>Particionamento de Equivalência e Valor Limite:</b> Para o campo "Idade" (18-65) e "Comprimento da Password" (8-20 caracteres).</li>
+                        <li><b>Tabela de Decisão:</b> Se houver regras complexas (ex: "se email já existe E idade &lt; 18, exibir mensagem X").</li>
+                        <li><b>Ataque de Erros:</b> Tentar emails com formatos inválidos, passwords comuns, ou submeter sem preencher campos.</li>
+                        <li><b>Teste Exploratório:</b> Preencher o formulário de forma não convencional, navegar para outras páginas e voltar, verificar mensagens de erro.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 25: Combinação no Mundo Real 2 -->
+        <div class="slide flex justify-center items-center p-4 sm:p-6 md:p-8">
+            <div class="slide-content">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 sm:mb-6 md:mb-8">Combinação na Prática: API de Cálculo</h2>
+                <div class="card max-w-4xl w-full text-sm sm:text-base md:text-lg">
+                    <p class="mb-2 sm:mb-4">Para um microsserviço que calcula o custo de envio com base em peso, distância e tipo de cliente:</p>
+                    <ul class="text-left text-xs sm:text-sm md:text-base space-y-2 sm:space-y-3 list-disc list-inside mt-2 sm:mt-4">
+                        <li><b>Particionamento de Equivalência e Valor Limite:</b> Para os campos numéricos "peso" e "distância".</li>
+                        <li><b>Tabela de Decisão:</b> Para combinar as regras de negócio (`peso &lt; 1kg` E `distância &gt; 100km` E `cliente = VIP`).</li>
+                        <li><b>Cobertura de Decisões (Caixa Branca):</b> Garantir que todos os `if`s no código que aplicam as sobretaxas são testados.</li>
+                        <li><b>Ataque de Erros:</b> Enviar pedidos com peso negativo, distância zero, ou tipo de cliente inválido.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 26: Ferramentas de Suporte -->
+        <div class="slide flex justify-center items-center p-4 sm:p-6 md:p-8 text-center">
+            <div class="slide-content">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 md:mb-8">Ferramentas que Auxiliam as Técnicas</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8 max-w-5xl w-full">
+                    <div class="card">
+                        <h3 class="font-bold text-lg sm:text-xl mb-1 sm:mb-2 highlight">Geração de Dados de Teste</h3>
+                        <p class="text-xs sm:text-sm md:text-base">Ferramentas como o <b>Faker.js</b> ou o <b>Mockaroo</b> criam dados realistas ou sintéticos para popular os testes derivados das técnicas de EP e BVA.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="font-bold text-lg sm:text-xl mb-1 sm:mb-2 highlight">Automação de Testes</h3>
+                        <p class="text-xs sm:text-sm md:text-base">Frameworks (<b>JUnit</b>, <b>Pytest</b>, <b>Cypress</b>) permitem codificar e executar os casos de teste derivados de todas as técnicas de forma repetível.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="font-bold text-lg sm:text-xl mb-1 sm:mb-2 highlight">Análise de Cobertura de Código</h3>
+                        <p class="text-xs sm:text-sm md:text-base">Ferramentas como o <b>JaCoCo</b> (Java) ou <b>Istanbul</b> (JavaScript) medem a percentagem de cobertura de instruções e decisões, guiando os testes de caixa-branca.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="font-bold text-lg sm:text-xl mb-1 sm:mb-2 highlight">Gestão de Casos de Teste</h3>
+                        <p class="text-xs sm:text-sm md:text-base">Plataformas como o <b>Jira</b> (com plugins como <b>Xray</b>) ou <b>TestRail</b> ajudam a organizar, rastrear e documentar os casos de teste.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 27: Desafios -->
+        <div class="slide flex justify-center items-center p-4 sm:p-6 md:p-8 text-center">
+            <div class="slide-content">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 md:mb-8">Desafios na Aplicação de Técnicas</h2>
+                <div class="card max-w-3xl w-full text-left">
+                    <ul class="text-xs sm:text-sm md:text-lg space-y-2 sm:space-y-3 list-disc list-inside">
+                        <li><b>Requisitos Ambíguos ou Incompletos:</b> A principal barreira para técnicas de Caixa-Preta.</li>
+                        <li><b>Falta de Tempo e Pressão de Prazos:</b> Leva a equipe a saltar as técnicas formais e depender apenas de testes ad-hoc.</li>
+                        <li><b>Complexidade do Sistema:</b> Em sistemas legados, pode ser difícil entender a lógica para aplicar Tabela de Decisão ou Transição de Estados.</li>
+                        <li><b>Resistência da Equipe:</b> Falta de conhecimento ou de percepção do valor das técnicas de teste.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 28: Boas Práticas -->
+        <div class="slide flex justify-center items-center p-4 sm:p-6 md:p-8 text-center">
+            <div class="slide-content">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 md:mb-8">Boas Práticas e Dicas Finais</h2>
+                <div class="card max-w-3xl w-full text-left">
+                    <ul class="text-xs sm:text-sm md:text-lg space-y-2 sm:space-y-3 list-disc list-inside">
+                        <li><b>Comece Cedo:</b> Aplique as técnicas na fase de requisitos para encontrar defeitos de lógica antes do desenvolvimento.</li>
+                        <li><b>Documente e Rastreie:</b> Mantenha os casos de teste claros e ligados aos requisitos que eles cobrem.</li>
+                        <li><b>Automatize o que Faz Sentido:</b> Testes de regressão baseados em técnicas formais são ótimos candidatos para automação.</li>
+                        <li><b>Colabore:</b> Testadores, desenvolvedores e analistas devem trabalhar juntos para definir os casos de teste mais eficazes.</li>
+                        <li><b>Adapte, não Adote Cegamente:</b> As técnicas são guias, não regras rígidas. Adapte-as ao seu contexto.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 29: Conclusão -->
+        <div class="slide flex justify-center items-center text-center p-4 sm:p-6 md:p-8 bg-[#2c3e50] text-white">
+            <div class="slide-content">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 md:mb-8">Conclusão: A Arte e a Ciência de Testar</h2>
+                <div class="max-w-3xl mx-auto text-left text-sm sm:text-base md:text-xl space-y-3 sm:space-y-4">
+                    <p class="flex items-start"><span class="mr-2">✅</span> <span>As <b>Técnicas de Teste</b> são a base para uma abordagem sistemática e eficaz, muito além de testes aleatórios.</span></p>
+                    <p class="flex items-start"><span class="mr-2">✅</span> <span>Entender quando aplicar <b>Caixa-Preta, Caixa-Branca e Baseadas na Experiência</b> é o que diferencia um testador amador de um profissional.</span></p>
+                    <p class="flex items-start"><span class="mr-2">✅</span> <span>A combinação inteligente de técnicas, apoiada por ferramentas, é a chave para maximizar a deteção de defeitos e entregar software de alta qualidade.</span></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 30: Próximos Passos -->
+        <div class="slide flex justify-center items-center text-center p-4 sm:p-6 md:p-8">
+            <div class="slide-content">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 md:mb-8">Na Próxima Aula...</h2>
+                <div class="card max-w-2xl w-full text-center">
+                    <h3 class="font-bold text-lg sm:text-xl mb-2 sm:mb-4">Gerenciamento das Atividades de Teste (Cap. 5)</h3>
+                    <p class="text-sm sm:text-base">Agora que sabemos <b>como</b> testar, vamos aprender a <b>gerir</b> o processo: Planeamento de Testes, Gestão de Risco, Monitorização e Gestão de Defeitos.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Navegação -->
+    <div class="fixed bottom-0 left-0 right-0 px-4 py-2 sm:px-6 sm:py-3 bg-white/80 backdrop-blur-lg flex justify-between items-center shadow-lg border-t border-gray-200 z-40">
+        <button id="prevBtn" class="flex-1 sm:flex-initial bg-[#34495e] hover:bg-[#2c3e50] text-white font-bold text-sm sm:text-base py-2 px-3 sm:px-6 rounded-lg transition-all max-w-[120px]">Anterior</button>
+        <div id="slide-counter" class="text-center text-sm sm:text-base font-semibold text-gray-700">Slide 1 de 30</div>
+        <button id="nextBtn" class="flex-1 sm:flex-initial bg-[#34495e] hover:bg-[#2c3e50] text-white font-bold text-sm sm:text-base py-2 px-3 sm:px-6 rounded-lg transition-all max-w-[120px]">Próximo</button>
+    </div>
+
+    <script src="slides.js"></script>
+</body>
+</html>
+

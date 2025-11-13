@@ -485,7 +485,7 @@ function calcularDesconto(preco, ehVip) {
     desconto = preco * 0.1;
   }
   
-  if (preco > 100) {
+  if (preco &gt; 100) {
     desconto = preco * 0.05; <span class="text-yellow-400">// SonarQube: "Este 'if' sobrescreve o desconto 'Vip'." (Bug Lógico)</span>
   }
   return desconto;
@@ -538,7 +538,7 @@ function calcularDesconto(preco, ehVip) {
                     <p class="text-xs sm:text-sm md:text-base mb-2 sm:mb-3">Este script automatiza o teste do "Caminho Feliz" de um login num site de e-commerce.</p>
                     <div class="overflow-x-auto">
                         <pre class="code text-xs sm:text-sm md:text-base"><span class="text-green-400">// Teste: "Deve permitir o login de um utilizador válido"</span>
-it('allows a valid user to log in', () => {
+it('allows a valid user to log in', () =&gt {
   
   <span class="text-gray-400">// 1. Visita a página de login</span>
   cy.visit('https://loja-exemplo.com/login');
@@ -746,7 +746,7 @@ it('allows a valid user to log in', () => {
                             <li><b>Passo 2:</b> Configurar a "Gate de Qualidade" (Quality Gate).
                                 <ul class="ml-4 sm:ml-6 list-[circle] text-xs sm:text-sm">
                                     <li>Ex: "A <b>build</b> deve falhar se houver 1 Bug ou Vulnerabilidade nova."</li>
-                                    <li>Ex: "A cobertura de código novo deve ser > 80%."</li>
+                                    <li>Ex: "A cobertura de código novo deve ser &gt; 80%."</li>
                                 </ul>
                         </li>
                         <li><b>Passo 3:</b> O Dev faz um <b>commit</b>. O SonarQube analisa. Se falhar, o Dev é notificado <b class="highlight">antes</b> de o código chegar ao QA.</li>

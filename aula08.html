@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 08: Gestão e Ferramentas de Teste (v2.0)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="slides.css">
+    <style>
+        .highlight { color: #2980b9; }
+        .slide.dark .highlight { color: #10b981; }
+        .card { 
+            background-color: white; 
+            border-radius: 0.75rem; 
+            padding: 1.5rem; 
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            border: 1px solid #e5e7eb;
+        }
+        .slide.dark { background-color: #1a1a1a; color: #F5F5F5; }
+        .slide.dark h1, .slide.dark h2, .slide.dark h3 { color: #FFFFFF; }
+        .slide.dark .card { background-color: #2c2c2c; border-color: #444; }
+        .slide.dark p, .slide.dark li { color: #e0e0e0; }
+        .code {
+            background-color: #2d2d2d;
+            color: #f1f1f1;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.95rem;
+            white-space: pre-wrap;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body class="flex flex-col" data-presentation="aula08">
+    <div class="fixed top-0 left-0 right-0 py-2 px-4 bg-gray-100/90 backdrop-blur-sm z-[1000] border-b border-gray-200 flex justify-end">
+        <button onclick="window.location.href='index.html'" class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm md:text-base py-1 sm:py-2 px-3 sm:px-4 rounded-lg transition-opacity duration-300 shadow-lg">Voltar para a tela principal</button>
+    </div>
+
+    <div id="presentation-container" class="relative w-full min-h-screen pb-16 mt-14">
+
+        <!-- Slide 1: Título (Escuro) -->
+        <div class="slide dark active flex justify-center items-center text-center p-4 sm:p-6 md:p-8">
+            <div class="slide-content">
+                <p class="text-base sm:text-lg md:text-xl font-bold text-gray-400 mb-2 sm:mb-3">Aula 08 | CTFL Capítulos 5 & 6</p>
+                <h1 class="text-3xl sm:text-4xl md:text-6xl font-black leading-tight">Gestão e Ferramentas de Teste</h1>
+                <p class="text-lg sm:text-xl md:text-2xl mt-3 sm:mt-4 text-gray-300 max-w-3xl mx-auto">Do Processo à Prática: Usando <span class="highlight font-bold">Jira, Cypress e JMeter</span> no Mundo Real</p>
+            </div>
+        </div>
+
+        <!-- Slide 2: Agenda (Claro) -->
+        <div class="slide flex justify-center items-center p-4 sm:p-6 md:p-8">
+            <div class="slide-content">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 sm:mb-6 md:mb-8">Agenda da Aula</h2>
+                <div class="card max-w-4xl w-full text-left grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
+                    <div>
+                        <h3 class="text-lg sm:text-xl font-bold border-b-2 border-blue-500 pb-2">Cap. 5: Gestão de Teste (O Processo)</h3>
+                        <ul class="text-sm sm:text-base md:text-lg space-y-1 sm:space-y-2 list-disc list-inside mt-2 sm:mt-4">
+                            <li>Planejamento e Estratégia</li>
+                            <li>Monitoramento e Controle</li>
+                            <li>Gestão de Risco na Prática</li>
+                            <li>Gestão de Defeitos (Bugs)</li>
+                        </ul>
+                    </div>
+                     <div>
+                        <h3 class="text-lg sm:text-xl font-bold border-b-2 border-green-500 pb-2">Cap. 6: Ferramentas (A Tecnologia)</h3>
+                        <ul class="text-sm sm:text-base md:text-lg space-y-1 sm:space-y-2 list-disc list-inside mt-2 sm:mt-4">
+                            <li>O Ecossistema de Ferramentas</li>
+                            <li>Exemplos: Jira, Cypress, SonarQube...</li>
+                            <li>Benefícios e Riscos da Automação</li>
+                            <li>Como Implementar Ferramentas</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: A Ligação (Claro) -->
+        <div class="slide flex justify-center items-center p-4 sm:p-6 md:p-8">
+            <div class="slide-content">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 sm:mb-6 md:mb-8">A Jornada até Aqui...</h2>
+                <div class="card max-w-3xl text-center">
+                    <p class="text-base sm:text-lg md:text-xl">Nas Aulas 1-4, aprendemos os <b class="highlight">Fundamentos</b> e as <b class="highlight">Técnicas</b> de como projetar testes.</p>
+                    <p class="text-lg sm:text-xl md:text-2xl font-bold my-3 sm:my-4">Agora, vamos responder:</p>
+                    <p class="text-lg sm:text-xl md:text-2xl font-bold"><span class="highlight">"Como gerimos</span> todo este processo?"<br>e<br><span class="highlight">"Como usamos ferramentas</span> para escalar?"</p>
+                    <p class="text-base sm:text-lg md:text-xl mt-3 sm:mt-4">Passamos da <b class="highlight">arte</b> de testar para a <b class="highlight">engenharia</b> de teste.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Cap 5 - O que é Gestão de Teste? (Escuro) -->
+        <div class="slide dark flex justify-center items-center p-4 sm:p-6 md:p-8">
+            <div class="slide-content">
+                <p class="text-base sm:text-lg font-bold text-gray-400 mb-2">Capítulo 5</p>
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 sm:mb-6 md:mb-8">O que é Gestão de Teste?</h2>
+                <div class="card max-w-4xl w-full">
+                    <p class="text-sm sm:text-base md:text-lg">É o <b class="highlight">cérebro</b> da operação de qualidade. É o conjunto de processos que nos leva de:</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8 my-3 sm:my-4 text-center">
+                        <div>
+                            <p class="text-xl sm:text-2xl font-bold">Caos</p>
+                            <p class="text-sm sm:text-base text-gray-300">"Testem aí, vejam se quebra."<br>"Bugs enviados por email."</p>
+                        </div>
+                        <div>
+                            <p class="text-xl sm:text-2xl font-bold highlight">Controle</p>
+                            <p class="text-sm sm:text-base text-gray-300">"Testes planeados com base no risco."<br>"Defeitos rastreados no Jira."</p>
+                        </div>
+                    </div>
+                    <p class="text-sm sm:text-base md:text-lg text-center">Gestão de Teste é o que torna a qualidade <b class="highlight">previsível</b> e <b class="highlight">mensurável</b>.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Planejamento e Estratégia (Claro) -->
+        <div class="slide flex justify-center items-center p-4 sm:p-6 md:p-8">
+            <div class="slide-content">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 sm:mb-6 md:mb-8">Planejamento e Estratégia</h2>
+                <div class="card max-w-4xl w-full">
+                    <p class="text-sm sm:text-base md:text-lg">O <b class="highlight">Plano de Teste</b> é o nosso mapa. Responde a perguntas cruciais:</p>
+                    <ul class="list-disc list-inside mt-2 ml-2 sm:ml-4 text-sm sm:text-base md:text-lg">
+                        <li><b>O QUÊ</b> será testado? (Escopo)</li>
+                        <li><b>COMO</b> será testado? (Estratégia: Automação? Teste Exploratório?)</li>
+                        <li><b>QUANDO</b> será testado? (Cronograma)</li>
+                        <li><b>QUAIS</b> os critérios de "Concluído/Done"?</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Exemplo Real: Plano de Teste (Netflix) (Claro) -->
+        <div class="slide flex justify-center items-center p-4 sm:p-6 md:p-8">
+            <div class="slide-content">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 sm:mb-6 md:mb-8">Exemplo Real: Plano de Teste (App de Streaming)</h2>
+                <div class="card max-w-4xl w-full">
+                    <p class="text-sm sm:text-base md:text-lg">Imagine planear os testes para uma nova funcionalidade de "Perfis de Utilizador" no <b class="highlight">Netflix</b>.</p>
+                    <ul class="list-disc list-inside mt-2 ml-2 sm:ml-4 text-xs sm:text-sm md:text-base">
+                        <li><b>Escopo (Testar):</b> Criar Perfil, Editar Perfil, Apagar Perfil, Mudar de Perfil.</li>
+                        <li><b>Fora do Escopo (Não Testar):</b> Algoritmo de recomendação, Processamento de pagamentos.</li>
+                        <li><b>Estratégia:</b>
+                            <ul class="ml-4 sm:ml-6 list-[circle] text-xs sm:text-sm">
+                                <li>Testes Funcionais Automatizados (Cypress) para regressão.</li>
+                                <li>Testes de Compatibilidade (Mobile e Smart TVs).</li>
+                                <li>Testes Exploratórios para usabilidade.</li>
+                            </ul>
+                        </li>
+                        <li><b>Critério de Saída:</b> 100% dos casos de teste de prioridade 1 executados. Nenhum bug crítico aberto.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Monitoramento e controle (Escuro) -->
+        <div class="slide dark flex justify-center items-center p-4 sm:p-6 md:p-8">
+            <div class="slide-content">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 sm:mb-6 md:mb-8">Monitoramento e Controle</h2>
+                <div class="card max-w-4xl w-full">
+                    <p class="text-sm sm:text-base md:text-lg"><b>Monitoramento:</b> É o ato de <b class="highlight">recolher dados</b>. "Onde estamos?"</p>
+                    <p class="text-sm sm:text-base md:text-lg mt-2"><b>Controle:</b> É o ato de <b class="highlight">tomar decisões</b> com base nos dados. "O que vamos fazer a respeito?"</p>
+                    <p class="text-sm sm:text-base md:text-lg mt-3 sm:mt-4"><b>Exemplo de Cenário:</b>
+                        <ul class="list-disc list-inside mt-2 ml-2 sm:ml-4 text-xs sm:text-sm md:text-base">
+                            <li><b>Monitoramento:</b> "O dashboard do <b class="highlight">Jira</b> mostra que 80% dos testes de regressão estão a falhar após o novo <em>merge</em>."</li>
+                            <li><b>Controle:</b> "Parar o <b>deploy</b>! A equipa de QA vai reverter a <b>build</b> e analisar os 5 testes que falharam primeiro."</li>
+                        </ul>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Gestão de Risco (RBT) (Claro) -->
+        <div class="slide flex justify-center items-center p-4 sm:p-6 md:p-8">
+            <div class="slide-content">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 sm:mb-6 md:mb-8">Gestão de Risco (Teste Baseado em Risco)</h2>
+                <div class="card max-w-4xl w-full">
+                    <p class="text-sm sm:text-base md:text-lg">Não temos tempo para testar tudo. RBT significa focar o esforço onde o impacto de uma falha é maior.</p>
+                    <p class="text-sm sm:text-base md:text-lg mt-3 sm:mt-4 font-bold">Exemplo: Aplicação Bancária</p>
+                    <ul class="list-disc list-inside mt-2 ml-2 sm:ml-4 text-xs sm:text-sm md:text-base">
+                        <li><b>Risco Alto:</b> Falha na Transferência PIX. (Impacto: Perda financeira, quebra de confiança).
+                            <br><span class="text-sm sm:text-base text-blue-600">→ Testar exaustivamente: automação, segurança, performance.</span></li>
+                        <li><b>Risco Médio:</b> Filtro do extrato não funciona. (Impacto: Frustração do utilizador).
+                            <br><span class="text-sm sm:text-base text-blue-600">→ Testar fluxos principais e cenários de erro comuns.</span></li>
+                        <li><b>Risco Baixo:</b> Erro de ortografia na página "Sobre Nós". (Impacto: Quase nulo).
+                            <br><span class="text-sm sm:text-base text-blue-600">→ Testar "caminho feliz" ou deixar para o fim.</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Gestão de Defeitos (Bugs) (Escuro) -->
+        <div class="slide dark flex justify-center items-center p-4 sm:p-6 md:p-8">
+            <div class="slide-content">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 sm:mb-6 md:mb-8">Gestão de Defeitos (Bugs)</h2>
+                <div class="card max-w-4xl w-full">
+                    <p class="text-sm sm:text-base md:text-lg">O processo de <b class="highlight">identificar, registar, classificar, priorizar e resolver</b> defeitos. É o coração da comunicação entre QA e Devs.</p>
+                    <p class="text-sm sm:text-base md:text-lg mt-3 sm:mt-4">O objetivo não é apenas "encontrar bugs", mas garantir que eles sejam corrigidos e que a correção não introduza novos problemas (regressão).</p>
+                    <p class="text-sm sm:text-base md:text-lg mt-3 sm:mt-4 font-bold text-center">A ferramenta central disto é o <b class="highlight">Relatório de Defeito</b>.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Anatomia de um Bug Report Perfeito (1/2) (Claro) (NOVO) -->
+        <div class="slide flex justify-center items-center p-4 sm:p-6 md:p-8">
+            <div class="slide-content">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 sm:mb-6 md:mb-8">Anatomia de um Bug Report Perfeito (1/2)</h2>
+                <div class="card max-w-4xl w-full">
+                    <p class="text-sm sm:text-base md:text-lg">Um bom bug report é aquele que o dev consegue reproduzir em 30 segundos.</p>
+                    <ul class="list-disc list-inside mt-2 ml-2 sm:ml-4 space-y-2 sm:space-y-3 text-xs sm:text-sm md:text-base">
+                        <li><b>Título Claro e Conciso:</b>
+                            <ul class="list-[circle] list-inside ml-4 sm:ml-6 text-xs sm:text-sm">
+                                <li><span class="text-red-600">Mau:</span> "Bug no botão"</li>
+                                <li><span class="text-green-600">Bom:</span> "App quebra ao clicar em 'Pagar' com carrinho vazio"</li>
+                            </ul>
+                        </li>
+                        <li><b>Passos para Reproduzir (1, 2, 3...):</b> A parte mais importante!
+                            <ul class="list-[circle] list-inside ml-4 sm:ml-6 text-xs sm:text-sm">
+                                <li>1. Ir para a página "Carrinho"</li>
+                                <li>2. Garantir que o carrinho está vazio</li>
+                                <li>3. Clicar no botão "Finalizar Pagamento"</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11: Anatomia de um Bug Report Perfeito (2/2) (Claro) (NOVO) -->
+        <div class="slide flex justify-center items-center p-4 sm:p-6 md:p-8">
+            <div class="slide-content">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 sm:mb-6 md:mb-8">Anatomia de um Bug Report Perfeito (2/2)</h2>
+                <div class="card max-w-4xl w-full">
+                    <ul class="list-disc list-inside mt-2 ml-2 sm:ml-4 space-y-2 sm:space-y-3 text-xs sm:text-sm md:text-base">
+                        <li><b>Resultado Esperado:</b>
+                            <ul class="list-[circle] list-inside ml-4 sm:ml-6 text-xs sm:text-sm">
+                                <li>"Uma mensagem de erro 'O seu carrinho está vazio' deveria ser exibida."</li>
+                            </ul>
+                        </li>
+                        <li><b>Resultado Atual:</b>
+                            <ul class="list-[circle] list-inside ml-4 sm:ml-6 text-xs sm:text-sm">
+                                <li>"A aplicação fecha inesperadamente (crash)."</li>
+                            </ul>
+                        </li>
+                        <li><b>Contexto (Anexos):</b> O que ajuda o Dev?
+                            <ul class="list-[circle] list-inside ml-4 sm:ml-6 text-xs sm:text-sm">
+                                <li><i class="fa-solid fa-image text-blue-500"></i> Screenshot da tela antes do crash.</li>
+                                <li><i class="fa-solid fa-video text-blue-500"></i> Gravação de tela (essencial).</li>
+                                <li><i class="fa-solid fa-file-alt text-blue-500"></i> Logs da consola do browser.</li>
+                                <li><i class="fa-solid fa-mobile-alt text-blue-500"></i> Ambiente: (Ex: iOS 17.1, App v2.3, Chrome 119).</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12: Ferramenta Real: Ciclo de Vida do Bug no Jira (Claro) -->
+        <div class="slide flex justify-center items-center p-4 sm:p-6 md:p-8">
+            <div class="slide-content">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 sm:mb-6 md:mb-8">Ferramenta Real: O Ciclo de Vida do Bug no Jira</h2>
+                <div class="card max-w-4xl w-full">
+                    <h3 class="text-base sm:text-lg md:text-xl font-bold text-center mb-3 sm:mb-4">Workflow Típico de um Defeito no <span class="highlight">Jira</span></h3>
+                    <div class="flex flex-wrap justify-center items-center gap-2 p-2 sm:p-4 text-xs sm:text-sm md:text-base">
+                        <span class="font-bold bg-gray-200 text-gray-800 px-2 py-1 rounded-lg">TO DO (NEW)</span>
+                        <i class="fa-solid fa-arrow-right text-gray-400 hidden sm:inline"></i>
+                        <span class="font-bold bg-blue-600 text-white px-2 py-1 rounded-lg">IN PROGRESS</span>
+                        <i class="fa-solid fa-arrow-right text-gray-400 hidden sm:inline"></i>
+                        <span class="font-bold bg-yellow-500 text-black px-2 py-1 rounded-lg">IN REVIEW</span>
+                        <i class="fa-solid fa-arrow-right text-gray-400 hidden sm:inline"></i>
+                        <span class="font-bold bg-purple-500 text-white px-2 py-1 rounded-lg">READY FOR QA</span>
+                        <i class="fa-solid fa-arrow-right text-gray-400 hidden sm:inline"></i>
+                        <span class="font-bold bg-green-600 text-white px-2 py-1 rounded-lg">DONE</span>
+                    </div>
+                    <p class="text-xs sm:text-sm md:text-base mt-3 sm:mt-4">Cada estado representa uma "passagem de testemunho" entre Testadores (QA) e Desenvolvedores (Devs). Esta é a implementação prática da Gestão de Defeitos.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 13: O Conceito: Severidade vs. Prioridade (Claro) -->
+        <div class="slide flex justify-center items-center p-4 sm:p-6 md:p-8">
+            <div class="slide-content">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 sm:mb-6 md:mb-8">O Conceito: Severidade vs. Prioridade</h2>
+                <div class="card max-w-4xl w-full grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
+                    <div>
+                        <h3 class="text-base sm:text-lg font-bold text-center">Severidade (Definida pelo QA)</h3>
+                        <p class="text-xs sm:text-sm md:text-base text-center border-t-4 border-red-500 pt-2">Pergunta: "Qual é o <b class="highlight">impacto técnico</b> do bug no sistema?"</p>
+                        <p class="text-xs sm:text-sm md:text-base mt-2"><b>Foco:</b> Funcionalidade, quebra, perda de dados, crash.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-base sm:text-lg font-bold text-center">Prioridade (Definida pelo PO/PM)</h3>
+                        <p class="text-xs sm:text-sm md:text-base text-center border-t-4 border-blue-500 pt-2">Pergunta: "Qual é a <b class="highlight">urgência de negócio</b> para corrigir este bug?"</p>
+                        <p class="text-xs sm:text-sm md:text-base mt-2"><b>Foco:</b> Receita, imagem da marca, cronograma, visibilidade.</p>
+                    </div>
+                </div>
+                <p class="mt-3 sm:mt-4 text-center text-base sm:text-lg md:text-xl font-bold">Estes dois eixos são <span class="highlight">independentes</span> e não devem ser confundidos!</p>
+            </div>
+        </div>
+
+        <!-- Slide 14: Definições: Níveis de Severidade (1/2) (Claro) (NOVO) -->
+        <div class="slide flex justify-center items-center p-4 sm:p-6 md:p-8">
+            <div class="slide-content">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 sm:mb-6 md:mb-8">Definições de Mercado: Níveis de Severidade (QA)</h2>
+                <div class="card max-w-5xl w-full">
+                    <ul class="space-y-3 sm:space-y-4 text-xs sm:text-sm md:text-base">
+                        <li><b class="text-red-600">S1 - Crítica (Critical / Blocker):</b>
+                            <ul class="list-disc list-inside ml-2 sm:ml-4">
+                                <li><b>Definição:</b> Impede a funcionalidade principal, causa <b>crash</b>, perda ou corrupção de dados. Não existe solução de contorno (<em>workaround</em>).</li>
+                                <li><b>Exemplo:</b> Clicar em "Finalizar Compra" num e-commerce resulta numa página de erro 500, impedindo qualquer venda.</li>
+                            </ul>
+                        </li>
+                        <li><b class="text-orange-500">S2 - Alta (Major):</b>
+                            <ul class="list-disc list-inside ml-2 sm:ml-4">
+                                <li><b>Definição:</b> Uma funcionalidade principal não funciona como esperado, mas existe uma solução de contorno difícil.</li>
+                                <li><b>Exemplo:</b> A transferência PIX falha na primeira tentativa, mas funciona na segunda. É grave, mas não bloqueia totalmente.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 15: Definições: Níveis de Severidade (2/2) (Claro) (NOVO) -->
+        <div class="slide flex justify-center items-center p-4 sm:p-6 md:p-8">
+            <div class="slide-content">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 sm:mb-6 md:mb-8">Definições de Mercado: Níveis de Severidade (QA)</h2>
+                <div class="card max-w-5xl w-full">
+                    <ul class="space-y-3 sm:space-y-4 text-xs sm:text-sm md:text-base">
+                        <li><b class="text-yellow-500">S3 - Média (Medium / Minor):</b>
+                            <ul class="list-disc list-inside ml-2 sm:ml-4">
+                                <li><b>Definição:</b> Comportamento inesperado ou inconveniente, mas a funcionalidade principal está operacional. Defeitos de UI que afetam o uso.</li>
+                                <li><b>Exemplo:</b> O filtro "Ordernar por Preço" num e-commerce lista os produtos de forma aleatória.</li>
+                            </ul>
+                        </li>
+                        <li><b class="text-gray-500">S4 - Baixa (Low / Trivial):</b>
+                            <ul class="list-disc list-inside ml-2 sm:ml-4">
+                                <li><b>Definição:</b> Defeito cosmético, erro de ortografia, desalinhamento de UI que não afeta a funcionalidade.</li>
+                                <li><b>Exemplo:</b> O botão "Cancelar" está 2 pixels desalinhado na página "Fale Conosco".</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 16: Definições: Níveis de Prioridade (1/2) (Claro) (NOVO) -->
+        <div class="slide flex justify-center items-center p-4 sm:p-6 md:p-8">
+            <div class="slide-content">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 sm:mb-6 md:mb-8">Definições de Mercado: Níveis de Prioridade (PO/PM)</h2>
+                <div class="card max-w-5xl w-full">
+                    <ul class="space-y-3 sm:space-y-4 text-xs sm:text-sm md:text-base">
+                        <li><b class="text-red-600">P1 - Altíssima (Highest / Blocker):</b>
+                            <ul class="list-disc list-inside ml-2 sm:ml-4">
+                                <li><b>Definição:</b> Corrigir <b>imediatamente</b> (Ex: "Pare tudo o que está a fazer"). Impede o lançamento ou bloqueia todos os outros testes.</li>
+                                <li><b>Exemplo:</b> O ambiente de QA está offline; Ninguém consegue fazer login na aplicação.</li>
+                            </ul>
+                        </li>
+                        <li><b class="text-orange-500">P2 - Alta (High):</b>
+                            <ul class="list-disc list-inside ml-2 sm:ml-4">
+                                <li><b>Definição:</b> Deve ser corrigido antes do próximo <b>deploy</b>. É crucial para o negócio e visível para o cliente.</li>
+                                <li><b>Exemplo:</b> O bug do "Finalizar Compra" (Severidade Crítica) ou o logo da empresa estar errado na página inicial.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 17: Definições: Níveis de Prioridade (2/2) (Claro) (NOVO) -->
+        <div class="slide flex justify-center items-center p-4 sm:p-6 md:p-8">
+            <div class="slide-content">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 sm:mb-6 md:mb-8">Definições de Mercado: Níveis de Prioridade (PO/PM)</h2>
+                <div class="card max-w-5xl w-full">
+                    <ul class="space-y-3 sm:space-y-4 text-xs sm:text-sm md:text-base">
+                        <li><b class="text-yellow-500">P3 - Média (Medium):</b>
+                            <ul class="list-disc list-inside ml-2 sm:ml-4">
+                                <li><b>Definição:</b> Deve ser corrigido, mas pode esperar para um <b>release</b> futuro ou <b>hotfix</b> se o tempo for curto.</li>
+                                <li><b>Exemplo:</b> O bug do filtro de preço (Severidade Média).</li>
+                            </ul>
+                        </li>
+                        <li><b class="text-gray-500">P4 - Baixa (Low):</b>
+                            <ul class="list-disc list-inside ml-2 sm:ml-4">
+                                <li><b>Definição:</b> Corrigir "quando der tempo". Entra no <b>backlog</b> geral para ser priorizado no futuro.</li>
+                                <li><b>Exemplo:</b> O bug do botão desalinhado (Severidade Baixa).</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 18: O Duelo na Prática (Exemplos) (Claro) -->
+        <div class="slide flex justify-center items-center p-4 sm:p-6 md:p-8">
+            <div class="slide-content">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 sm:mb-6 md:mb-8">O Duelo na Prática (Exemplos)</h2>
+                <div class="card max-w-4xl w-full grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
+                    <div>
+                        <h3 class="text-sm sm:text-base md:text-lg text-center font-bold">Alta Prioridade, Baixa Severidade</h3>
+                        <p class="text-xs sm:text-sm md:text-base text-center border-t-4 border-blue-500 pt-2">O "Bug do Logo"</p>
+                        <p class="text-xs sm:text-sm md:text-base mt-2"><b>Bug:</b> O logo da empresa está com a cor errada na página inicial.</p>
+                        <p class="text-xs sm:text-sm md:text-base mt-2"><b>Análise:</b> O sistema funciona perfeitamente (<b>Baixa Severidade</b>), mas é um desastre de <b>branding</b> e o CEO quer corrigido <b>ontem</b> (<b>Alta Prioridade</b>).</p>
+                    </div>
+                    <div>
+                        <h3 class="text-sm sm:text-base md:text-lg text-center font-bold">Baixa Prioridade, Alta Severidade</h3>
+                        <p class="text-xs sm:text-sm md:text-base text-center border-t-4 border-red-500 pt-2">O "Bug da Meia-Noite"</p>
+                        <p class="text-xs sm:text-sm md:text-base mt-2"><b>Bug:</b> Se um admin e um user clicarem em "Salvar" ao mesmo tempo, num ano bissexto, a base de dados corrompe.</p>
+                        <p class="text-xs sm:text-sm md:text-base mt-2"><b>Análise:</b> Corrupção de dados é (<b>Alta Severidade</b>), mas o cenário é raríssimo e afeta 0.01% dos casos (<b>Baixa Prioridade</b>).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 19: Cap 6 - Por que Ferramentas? (Escuro) -->
+        <div class="slide dark flex justify-center items-center p-4 sm:p-6 md:p-8">
+            <div class="slide-content">
+                <p class="text-sm sm:text-base md:text-lg font-bold text-gray-400">Capítulo 6</p>
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 sm:mb-6 md:mb-8">Por que Ferramentas de Teste?</h2>
+                <div class="card max-w-4xl w-full">
+                    <p class="text-sm sm:text-base md:text-lg">Porque humanos são <b class="highlight">lentos, caros e inconsistentes</b> em tarefas repetitivas.</p>
+                    <p class="text-sm sm:text-base md:text-lg mt-3 sm:mt-4">Ferramentas de teste ajudam a:</p>
+                    <ul class="list-disc list-inside mt-2 ml-2 sm:ml-4 text-xs sm:text-sm md:text-base space-y-2">
+                        <li><b class="highlight">Aumentar a eficiência:</b> Executar 5.000 testes de regressão durante a noite.</li>
+                        <li><b class="highlight">Aumentar a consistência:</b> Um script faz exatamente a mesma coisa todas as vezes.</li>
+                        <li><b class="highlight">Permitir o impossível:</b> Simular 10.000 utilizadores num teste de performance (JMeter).</li>
+                        <li><b class="highlight">Melhorar a objetividade:</b> Métricas de cobertura de código (SonarQube).</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 20: O Ecossistema de Ferramentas (Claro) -->
+        <div class="slide flex justify-center items-center p-4 sm:p-6 md:p-8">
+            <div class="slide-content">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 sm:mb-6 md:mb-8">O Ecossistema de Ferramentas (Cap. 6)</h2>
+                <div class="card max-w-4xl w-full text-center">
+                    <p class="text-sm sm:text-base md:text-lg">Nenhuma ferramenta faz tudo. Precisamos de uma "caixa de ferramentas".</p>
+                    <img src="figures/ferramentas_teste.png" alt="Ecossistema de Ferramentas de Teste" class="mx-auto my-3 sm:my-4 max-h-60 sm:max-h-80 rounded-lg">
+                    <p class="text-sm sm:text-base md:text-lg">As ferramentas apoiam todo o ciclo de vida, desde o Planejamento até à execução.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 21: Ferramentas de Gestão de Teste (Claro) -->
+        <div class="slide flex justify-center items-center p-4 sm:p-6 md:p-8">
+            <div class="slide-content">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 sm:mb-6 md:mb-8">Ferramentas de Gestão de Teste (Jira, TestRail)</h2>
+                <div class="card max-w-4xl w-full">
+                    <p class="text-sm sm:text-base md:text-lg">Implementam o <b class="highlight">Capítulo 5 (Gestão)</b>.</p>
+                    <ul class="list-disc list-inside mt-2 ml-2 sm:ml-4 text-xs sm:text-sm md:text-base space-y-2">
+                        <li><b>Jira:</b> O padrão de mercado para rastrear <em>Issues</em> (Requisitos, Bugs, Tarefas).</li>
+                        <li><b>TestRail / Zephyr / Xray:</b> Plugins ou ferramentas que se integram ao Jira para <b class="highlight">Gestão de Casos de Teste</b>.</li>
+                    </ul>
+                    <p class="text-sm sm:text-base md:text-lg mt-3 sm:mt-4"><b>Função:</b> Permitem ligar o Requisito (User Story) ao Caso de Teste (Plano) e ao Defeito (Bug). Criam rastreabilidade.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 22: Ferramentas de Análise Estática (SonarQube) (Escuro) -->
+        <div class="slide dark flex justify-center items-center p-4 sm:p-6 md:p-8">
+            <div class="slide-content">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 sm:mb-6 md:mb-8">Ferramentas de Análise Estática (SonarQube, ESLint)</h2>
+                <div class="card max-w-4xl w-full">
+                    <p class="text-sm sm:text-base md:text-lg">Estas ferramentas "leem" o código-fonte <b class="highlight">sem executá-lo</b>.</p>
+                    <p class="text-sm sm:text-base md:text-lg mt-3 sm:mt-4">O <b class="highlight">SonarQube</b> é como um "revisor de código" automatizado que encontra:</p>
+                    <ul class="list-disc list-inside mt-2 ml-2 sm:ml-4 text-xs sm:text-sm md:text-base space-y-2">
+                        <li><b>Bugs Óbvios:</b> (Ex: `if (x = 5)` em vez de `if (x == 5)`).</li>
+                        <li><b>Vulnerabilidades:</b> (Ex: Senhas "hardcoded" no código, risco de Injeção de SQL).</li>
+                        <li><b>"Code Smells" (Mau Cheiro):</b> (Ex: Código duplicado, funções muito longas).</li>
+                    </ul>
+                    <p class="text-sm sm:text-base md:text-lg mt-3 sm:mt-4">Isto é "Shift-Left": encontrar bugs antes mesmo do QA começar.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 23: Exemplo de Código: Análise Estática (Claro) -->
+        <div class="slide flex justify-center items-center p-4 sm:p-6 md:p-8">
+            <div class="slide-content">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 sm:mb-6 md:mb-8">Exemplo Real: O que o SonarQube Encontra</h2>
+                <div class="card max-w-4xl w-full">
+                    <div class="overflow-x-auto">
+                        <pre class="code text-xs sm:text-sm md:text-base"><span class="text-gray-400">// O Dev escreve este código</span>
+function calcularDesconto(preco, ehVip) {
+  var desconto = 0; <span class="text-yellow-400">// SonarQube: "Use 'let' ou 'const', não 'var'." (Code Smell)</span>
+  
+  if (ehVip = true) { <span class="text-red-500 font-bold">// SonarQube: "BUG! Isto é uma atribuição, não uma comparação."</span>
+    desconto = preco * 0.1;
+  }
+  
+  if (preco > 100) {
+    desconto = preco * 0.05; <span class="text-yellow-400">// SonarQube: "Este 'if' sobrescreve o desconto 'Vip'." (Bug Lógico)</span>
+  }
+  return desconto;
+}</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 24: Ferramentas de Execução (Unitários) (Claro) -->
+        <div class="slide flex justify-center items-center p-4 sm:p-6 md:p-8">
+            <div class="slide-content">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 sm:mb-6 md:mb-8">Ferramentas de Execução: Testes Unitários</h2>
+                <div class="card max-w-4xl w-full">
+                    <p class="text-sm sm:text-base md:text-lg">Focados em testar a <b class="highlight">menor peça de código</b> (uma função, um método). São testes de Caixa-Branca, escritos por Devs.</p>
+                    <ul class="list-disc list-inside mt-2 ml-2 sm:ml-4 text-xs sm:text-sm md:text-base space-y-2">
+                        <li><b>JUnit:</b> Padrão para Java.</li>
+                        <li><b>Pytest:</b> Padrão para Python.</li>
+                        <li><b>Jest:</b> Padrão para JavaScript (React).</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 25: Ferramentas de Execução (Funcional Web) (Escuro) -->
+        <div class="slide dark flex justify-center items-center p-4 sm:p-6 md:p-8">
+            <div class="slide-content">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 sm:mb-6 md:mb-8">Ferramentas de Execução: Funcional (Web)</h2>
+                <div class="card max-w-4xl w-full">
+                    <p class="text-sm sm:text-base md:text-lg">Simulam um utilizador real no <b>browser</b>. São testes de Caixa-Preta automatizados.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 mt-3 sm:mt-4">
+                        <div>
+                            <h3 class="text-base sm:text-lg md:text-xl text-center font-bold">Selenium</h3>
+                            <p class="text-center text-xs sm:text-sm">O "Padrão Industrial". Robusto, suporta todas as linguagens (Java, Python, C#), mas pode ser lento e complexo.</p>
+                        </div>
+                        <div>
+                            <h3 class="text-base sm:text-lg md:text-xl text-center font-bold">Cypress</h3>
+                            <p class="text-center text-xs sm:text-sm">O "Moderno". Rápido, fácil de usar, focado em JavaScript, excelente para Devs e QAs modernos.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 26: Exemplo de Código: Cypress (Claro) -->
+        <div class="slide flex justify-center items-center p-4 sm:p-6 md:p-8">
+            <div class="slide-content">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 sm:mb-6 md:mb-8">Exemplo Real: Teste de Login (com Cypress)</h2>
+                <div class="card max-w-4xl w-full">
+                    <p class="text-xs sm:text-sm md:text-base mb-2 sm:mb-3">Este script automatiza o teste do "Caminho Feliz" de um login num site de e-commerce.</p>
+                    <div class="overflow-x-auto">
+                        <pre class="code text-xs sm:text-sm md:text-base"><span class="text-green-400">// Teste: "Deve permitir o login de um utilizador válido"</span>
+it('allows a valid user to log in', () => {
+  
+  <span class="text-gray-400">// 1. Visita a página de login</span>
+  cy.visit('https://loja-exemplo.com/login');
+
+  <span class="text-gray-400">// 2. Preenche os campos</span>
+  cy.get('#email').type('cliente@teste.com');
+  cy.get('#password').type('senha123');
+
+  <span class="text-gray-400">// 3. Clica no botão de entrar</span>
+  cy.get('.btn-login').click();
+
+  <span class="text-gray-400">// 4. Verifica o resultado esperado</span>
+  cy.url().should('include', '/minha-conta');
+  cy.get('.welcome-message').should('contain', 'Olá, Cliente');
+});</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 27: Ferramentas de Execução (Mobile) (Claro) -->
+        <div class="slide flex justify-center items-center p-4 sm:p-6 md:p-8">
+            <div class="slide-content">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 sm:mb-6 md:mb-8">Ferramentas de Execução: Funcional (Mobile)</h2>
+                <div class="card max-w-4xl w-full">
+                    <h3 class="text-base sm:text-lg md:text-xl font-bold">Appium: O "Selenium" para Mobile</h3>
+                    <p class="text-xs sm:text-sm md:text-base">Usado para automatizar testes em aplicações nativas (iOS e Android).</p>
+                    <p class="text-xs sm:text-sm md:text-base mt-3 sm:mt-4 font-bold">Exemplo Real: Testar o <span class="highlight">Instagram</span></p>
+                    <p class="text-xs sm:text-sm md:text-base">O Appium permite que um único script de teste execute a mesma ação (Ex: "Fazer upload de uma foto") em múltiplos dispositivos:</p>
+                    <ul class="list-disc list-inside mt-2 ml-2 sm:ml-4 text-xs sm:text-sm">
+                        <li>iPhone 15 (iOS 17)</li>
+                        <li>Samsung Galaxy S23 (Android 14)</li>
+                        <li>Google Pixel 7 (Android 14)</li>
+                    </ul>
+                    <p class="text-xs sm:text-sm md:text-base mt-2">Isto é crucial para o <b class="highlight">Teste de Compatibilidade</b>.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 28: Ferramentas de Teste Não-Funcional (Escuro) -->
+        <div class="slide dark flex justify-center items-center p-4 sm:p-6 md:p-8">
+            <div class="slide-content">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 sm:mb-6 md:mb-8">Ferramentas de Teste Não-Funcional (Performance)</h2>
+                <div class="card max-w-4xl w-full">
+                    <h3 class="text-base sm:text-lg md:text-xl font-bold">JMeter / Gatling</h3>
+                    <p class="text-xs sm:text-sm md:text-base">Usadas para testar o desempenho e a carga do sistema. Simulam cenários impossíveis de testar manualmente.</p>
+                    <p class="text-xs sm:text-sm md:text-base mt-3 sm:mt-4 font-bold">Exemplo Real: A <span class="highlight">Black Friday</span> num E-Commerce</p>
+                    <p class="text-xs sm:text-sm md:text-base"><b>Pergunta:</b> "O nosso site (Ex: <b class="highlight">Amazon</b>) aguenta 50.000 utilizadores a adicionar produtos ao carrinho ao mesmo tempo?"</p>
+                    <p class="text-xs sm:text-sm md:text-base mt-2">O JMeter simula esses 50.000 "utilizadores virtuais" e mede:</p>
+                    <ul class="list-disc list-inside mt-2 ml-2 sm:ml-4 text-xs sm:text-sm space-y-1">
+                        <li>Tempo de Resposta (Ficou lento?)</li>
+                        <li>Taxa de Erro (Quantos falharam?)</li>
+                        <li>Ponto de Saturação (Quando o servidor "quebra"?)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 29: Benefícios da Automação (Claro) -->
+        <div class="slide flex justify-center items-center p-4 sm:p-6 md:p-8">
+            <div class="slide-content">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 sm:mb-6 md:mb-8">Benefícios da Automação (O Sonho)</h2>
+                <div class="card max-w-4xl w-full">
+                    <ul class="list-disc list-inside mt-2 ml-2 sm:ml-4 space-y-2 text-xs sm:text-sm md:text-base">
+                        <li><i class="fa-solid fa-rocket text-green-500 mr-1 sm:mr-2"></i><b>Feedback Rápido (CI/CD):</b> Devs sabem se quebraram algo (regressão) em minutos, não em dias.</li>
+                        <li><i class="fa-solid fa-calendar-check text-green-500 mr-1 sm:mr-2"></i><b>Confiança na Regressão 24/7:</b> Permite executar a suite de testes inteira todas as noites.</li>
+                        <li><i class="fa-solid fa-brain text-green-500 mr-1 sm:mr-2"></i><b>Liberta Humanos:</b> Permite que QAs foquem em tarefas de maior valor (Teste Exploratório, Risco, Usabilidade).</li>
+                        <li><i class="fa-solid fa-repeat text-green-500 mr-1 sm:mr-2"></i><b>Repetibilidade:</b> Scripts não se cansam nem se esquecem de passos.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 30: Riscos da Automação (1/2) (Claro) (NOVO) -->
+        <div class="slide flex justify-center items-center p-4 sm:p-6 md:p-8">
+            <div class="slide-content">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 sm:mb-6 md:mb-8">Riscos da Automação (O Pesadelo)</h2>
+                <div class="card max-w-4xl w-full">
+                    <p class="text-sm sm:text-base md:text-lg">Implementar ferramentas não é uma "bala de prata".</p>
+                    <ul class="list-disc list-inside mt-2 ml-2 sm:ml-4 space-y-3 sm:space-y-4 text-xs sm:text-sm md:text-base">
+                        <li><i class="fa-solid fa-wrench text-red-500 mr-1 sm:mr-2"></i><b>Manutenção Elevada:</b>
+                            <ul class="list-[circle] list-inside ml-4 sm:ml-6 text-xs sm:text-sm">
+                                <li>Se a UI muda, os scripts (Cypress) quebram. A automação é um projeto de <b>software</b> em si e precisa de manutenção constante.</li>
+                            </ul>
+                        </li>
+                        <li><i class="fa-solid fa-dollar-sign text-red-500 mr-1 sm:mr-2"></i><b>Altos Custos Iniciais:</b>
+                            <ul class="list-[circle] list-inside ml-4 sm:ml-6 text-xs sm:text-sm">
+                                <li>As ferramentas (licenças) e o treino da equipa para as usar corretamente são caros.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 31: Riscos da Automação (2/2) (Claro) (NOVO) -->
+        <div class="slide flex justify-center items-center p-4 sm:p-6 md:p-8">
+            <div class="slide-content">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 sm:mb-6 md:mb-8">Riscos da Automação (O Pesadelo)</h2>
+                <div class="card max-w-4xl w-full">
+                    <ul class="list-disc list-inside mt-2 ml-2 sm:ml-4 space-y-3 sm:space-y-4 text-xs sm:text-sm md:text-base">
+                        <li><i class="fa-solid fa-eye-slash text-red-500 mr-1 sm:mr-2"></i><b>Falsa Sensação de Segurança:</b>
+                            <ul class="list-[circle] list-inside ml-4 sm:ml-6 text-xs sm:text-sm">
+                                <li>"Temos 1000 testes automatizados!" - mas podem ser 1000 testes inúteis que não verificam o comportamento correto.</li>
+                            </ul>
+                        </li>
+                        <li><i class="fa-solid fa-bug text-red-500 mr-1 sm:mr-2"></i><b>Paradoxo do Pesticida:</b>
+                            <ul class="list-[circle] list-inside ml-4 sm:ml-6 text-xs sm:text-sm">
+                                <li>Os mesmos testes executados repetidamente deixam de encontrar novos bugs. A automação é excelente para regressão, não para encontrar bugs <b>novos</b>.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 32: Exemplo Real: Testes Frágeis (Flaky Tests) (Claro) -->
+        <div class="slide flex justify-center items-center p-4 sm:p-6 md:p-8">
+            <div class="slide-content">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 sm:mb-6 md:mb-8">Risco Real: Testes "Frágeis" (Flaky Tests)</h2>
+                <div class="card max-w-4xl w-full">
+                    <p class="text-sm sm:text-base md:text-lg">É o maior inimigo da automação. É um teste que <b class="highlight">passa 9 vezes e falha 1</b>, sem qualquer mudança no código.</p>
+                    <p class="text-sm sm:text-base md:text-lg mt-3 sm:mt-4"><b>Causas Comuns:</b>
+                        <ul class="list-disc list-inside mt-2 ml-2 sm:ml-4 text-xs sm:text-sm">
+                            <li>Problemas de <b>timing</b> (Ex: o script clicou no botão antes de ele estar pronto).</li>
+                            <li>Dependência de dados externos (Ex: o teste assume que o "Produto X" existe, mas ele foi apagado).</li>
+                            <li>Infraestrutura instável (Ex: a rede estava lenta).</li>
+                        </ul>
+                    </p>
+                    <p class="text-sm sm:text-base md:text-lg mt-3 sm:mt-4">Testes frágeis <b class="highlight">destroem a confiança</b> na suite de automação. A equipa começa a ignorar as falhas.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 33: Como Implementar Ferramentas (O Alerta) (Escuro) (NOVO) -->
+        <div class="slide dark flex justify-center items-center p-4 sm:p-6 md:p-8">
+            <div class="slide-content">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 sm:mb-6 md:mb-8">Como Implementar Ferramentas (Cap. 6.3)</h2>
+                <div class="card max-w-4xl w-full text-center">
+                    <h3 class="text-center text-red-500 font-bold text-2xl sm:text-3xl md:text-4xl">ERRO COMUM:<br/>Automatizar o Caos!</h3>
+                    <p class="text-center text-sm sm:text-base md:text-xl mt-3 sm:mt-4">(Comprar uma ferramenta de automação cara para resolver um problema de processo).</p>
+                    
+                    <p class="mt-6 sm:mt-8 text-base sm:text-xl md:text-2xl font-bold">A automação de um processo caótico apenas gera um <b class="highlight">caos mais rápido</b>.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 34: Como Implementar (Passo 1 e 2) (Escuro) (NOVO) -->
+        <div class="slide dark flex justify-center items-center p-4 sm:p-6 md:p-8">
+            <div class="slide-content">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 sm:mb-6 md:mb-8">A Ordem Correta da Implementação</h2>
+                <div class="card max-w-4xl w-full">
+                    <ol class="list-decimal list-inside space-y-3 sm:space-y-4 text-sm sm:text-base md:text-lg">
+                        <li><b>Arrumar o Processo (Cap. 5):</b>
+                            <ul class="list-[circle] list-inside ml-4 sm:ml-6 text-xs sm:text-sm md:text-base font-normal">
+                                <li>Implementar <b class="highlight">Jira</b> ou similar.</li>
+                                <li>Definir o ciclo de vida do bug (Workflow).</li>
+                                <li>Começar a escrever Planos de Teste simples.</li>
+                            </ul>
+                        </li>
+                        <li><b>Fazer um Piloto (PoC - Prova de Conceito):</b>
+                             <ul class="list-[circle] list-inside ml-4 sm:ml-6 text-xs sm:text-sm md:text-base font-normal">
+                                <li>Escolher <b class="highlight">UMA</b> ferramenta (Ex: Cypress) e <b class="highlight">UMA</b> funcionalidade crítica (Ex: Login).</li>
+                                <li>Automatizar apenas os 5 cenários mais importantes.</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 35: Como Implementar (Passo 3 e 4) (Escuro) (NOVO) -->
+        <div class="slide dark flex justify-center items-center p-4 sm:p-6 md:p-8">
+            <div class="slide-content">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 sm:mb-6 md:mb-8">A Ordem Correta da Implementação</h2>
+                <div class="card max-w-4xl w-full">
+                    <ol class="list-decimal list-inside space-y-3 sm:space-y-4 text-sm sm:text-base md:text-lg" start="3">
+                        <li><b>Medir o ROI (Retorno do Investimento):</b>
+                            <ul class="list-[circle] list-inside ml-4 sm:ml-6 text-xs sm:text-sm md:text-base font-normal">
+                                <li>O piloto poupou tempo? Encontrou bugs de regressão?</li>
+                                <li>A equipa conseguiu manter os scripts?</li>
+                                <li>Usar estes dados para justificar a expansão.</li>
+                            </ul>
+                        </li>
+                        <li><b>Implementar Gradualmente (e Treinar):</b>
+                             <ul class="list-[circle] list-inside ml-4 sm:ml-6 text-xs sm:text-sm md:text-base font-normal">
+                                <li>Expandir a automação para outras áreas.</li>
+                                <li>Treinar a equipa (Devs e QAs) nas ferramentas.</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 36: Implementação Real: SonarQube (Ganho Rápido) (Claro) -->
+        <div class="slide flex justify-center items-center p-4 sm:p-6 md:p-8">
+            <div class="slide-content">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 sm:mb-6 md:mb-8">Implementação Real: SonarQube (Ganho Rápido)</h2>
+                <div class="card max-w-4xl w-full">
+                    <p class="text-sm sm:text-base md:text-lg">Uma das melhores formas de começar a automação é com a <b class="highlight">Análise Estática</b>.</p>
+                    <p class="text-sm sm:text-base md:text-lg mt-3 sm:mt-4"><b>Implementação (Ex: <span class="highlight">Slack</span> ou <span class="highlight">Trello</span>):</b>
+                        <ul class="list-disc list-inside mt-2 ml-2 sm:ml-4 text-xs sm:text-sm md:text-base">
+                            <li><b>Passo 1:</b> Instalar o <b class="highlight">SonarQube</b> no pipeline de CI/CD (Ex: Jenkins, GitLab CI).</li>
+                            <li><b>Passo 2:</b> Configurar a "Gate de Qualidade" (Quality Gate).
+                                <ul class="ml-4 sm:ml-6 list-[circle] text-xs sm:text-sm">
+                                    <li>Ex: "A <b>build</b> deve falhar se houver 1 Bug ou Vulnerabilidade nova."</li>
+                                    <li>Ex: "A cobertura de código novo deve ser > 80%."</li>
+                                </ul>
+                        </li>
+                        <li><b>Passo 3:</b> O Dev faz um <b>commit</b>. O SonarQube analisa. Se falhar, o Dev é notificado <b class="highlight">antes</b> de o código chegar ao QA.</li>
+                    </ul>
+                </p>
+                <p class="text-xs sm:text-sm md:text-base mt-3 sm:mt-4">Isto implementa a <b class="highlight">prevenção de defeitos</b> de forma automática.</p>
+            </div>
+        </div>
+    </div>
+
+        <!-- Slide 37: A Equipa de Teste Moderna (Claro) -->
+        <div class="slide flex justify-center items-center p-4 sm:p-6 md:p-8">
+            <div class="slide-content">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 sm:mb-6 md:mb-8">A Equipa de Teste Moderna</h2>
+                <div class="card max-w-4xl w-full">
+                    <p class="text-sm sm:text-base md:text-lg">Com tantas ferramentas, o papel do QA mudou:</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 mt-3 sm:mt-4">
+                        <div>
+                            <h3 class="text-sm sm:text-base md:text-lg text-center font-bold">QA "Tradicional"</h3>
+                            <p class="text-center text-xs sm:text-sm">Focado em execução manual de casos de teste no final do ciclo.</p>
+                        </div>
+                        <div>
+                            <h3 class="text-sm sm:text-base md:text-lg text-center font-bold">QA "Moderno" (Analista de Qualidade)</h3>
+                            <p class="text-center text-xs sm:text-sm">Focado em <b class="highlight">prevenção</b>, <b class="highlight">automação</b> e <b class="highlight">estratégia</b>. Sabe programar (Ex: Python, JS) e entende de ferramentas.</p>
+                        </div>
+                    </div>
+                    <p class="text-xs sm:text-sm md:text-base mt-3 sm:mt-4 text-center">As ferramentas não substituem os testadores; elas <b class="highlight">capacitam</b> os testadores a focar em problemas mais complexos.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 38: Conclusão (Escuro) -->
+        <div class="slide dark flex justify-center items-center p-4 sm:p-6 md:p-8">
+            <div class="slide-content">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 sm:mb-6 md:mb-8">Conclusão da Aula</h2>
+                <div class="card max-w-4xl w-full">
+                    <div class="max-w-4xl mx-auto text-left text-sm sm:text-base md:text-xl space-y-3 sm:space-y-4">
+                        <p>✅ <b class="highlight">Gestão de Teste (Cap. 5)</b> é o <b class="highlight">processo</b> que organiza o caos. É o nosso mapa e bússola (Plano, Risco, Bugs).</p>
+                        <p>✅ <b class="highlight">Ferramentas (Cap. 6)</b> são os <b class="highlight">músculos</b> que escalam o processo. Elas dão-nos velocidade, repetibilidade e poder (Jira, Cypress, JMeter).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 39: Conclusão (Escuro) -->
+        <div class="slide dark flex justify-center items-center p-4 sm:p-6 md:p-8">
+            <div class="slide-content">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 sm:mb-6 md:mb-8">Conclusão da Aula</h2>
+                <div class="card max-w-4xl w-full">
+                    <div class="max-w-4xl mx-auto text-left text-sm sm:text-base md:text-xl space-y-3 sm:space-y-4">
+                        <p>✅ <b class="highlight">Não automatize o caos.</b> O sucesso está em usar as ferramentas certas para apoiar um processo de gestão bem definido.</p>
+                        <p>✅ Em software real (bancos, e-commerce, redes sociais), a qualidade é uma engenharia que combina <b class="highlight">Processo + Ferramentas + Pessoas</b>.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 40: Perguntas (Claro) -->
+        <div class="slide flex justify-center items-center p-4 sm:p-6 md:p-8">
+            <div class="slide-content">
+                <h1 class="!text-4xl sm:!text-5xl md:!text-6xl"><span class="highlight">Perguntas?</span></h1>
+                <p class="subtitle mt-3 sm:mt-4 text-base sm:text-lg md:text-xl">Obrigada!</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Navegação -->
+    <div class="fixed bottom-0 left-0 right-0 p-4 bg-white/80 backdrop-blur-lg flex justify-between items-center shadow-t-lg border-t border-gray-200">
+        <button id="prevBtn" class="bg-[#34495e] hover:bg-[#2c3e50] text-white font-bold py-2 px-6 rounded-lg transition-all">Anterior</button>
+        <div id="slide-counter" class="text-lg font-semibold text-gray-700"></div>
+        <button id="nextBtn" class="bg-[#34495e] hover:bg-[#2c3e50] text-white font-bold py-2 px-6 rounded-lg transition-all">Próximo</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const slideCounter = document.getElementById('slide-counter');
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+
+            function showSlide(index) {
+                slides.forEach((slide, i) => {
+                    slide.classList.toggle('active', i === index);
+                });
+                // Atualiza o contador de slides
+                slideCounter.textContent = `Slide ${index + 1} de ${totalSlides}`;
+                
+                // Controla a opacidade dos botões
+                prevBtn.disabled = index === 0;
+                prevBtn.classList.toggle('opacity-50', index === 0);
+                nextBtn.disabled = index === totalSlides - 1;
+                nextBtn.classList.toggle('opacity-50', index === totalSlides - 1);
+            }
+
+            function changeSlide(direction) {
+                currentSlide += direction;
+                if (currentSlide < 0) currentSlide = 0;
+                if (currentSlide >= totalSlides) currentSlide = totalSlides - 1;
+                showSlide(currentSlide);
+            }
+
+            prevBtn.addEventListener('click', () => changeSlide(-1));
+            nextBtn.addEventListener('click', () => changeSlide(1));
+            
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight' && !nextBtn.disabled) nextBtn.click();
+                else if (e.key === 'ArrowLeft' && !prevBtn.disabled) prevBtn.click();
+            });
+
+            // Mostra o primeiro slide ao carregar
+            showSlide(currentSlide);
+        });
+    </script>
+</body>
+</html>
